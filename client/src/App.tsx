@@ -17,6 +17,8 @@ import Register from "@/pages/register";
 import Help from "@/pages/help";
 import Referrals from "@/pages/referrals";
 import News from "@/pages/news";
+import { WordPressIntegrationProvider } from "@/components/wordpress/WordPressShortcodes";
+import Environment from "@/utils/environment";
 
 function Router() {
   return (
@@ -41,12 +43,23 @@ function Router() {
 }
 
 function App() {
+  // Initialize environment configuration
+  const envConfig = Environment.initializeEnvironment();
+  
   return (
-    <div className="dark min-h-screen bg-[var(--dark-bg)] text-[var(--text-primary)]">
+    <div className={`dark min-h-screen bg-[var(--dark-bg)] text-[var(--text-primary)] ${Environment.getPlatformClasses()}`}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Toaster />
-          <Router />
+          <WordPressIntegrationProvider>
+            {/* Add environment indicator for development */}
+            {process.env.NODE_ENV === 'development' && (
+              <div className="fixed top-0 right-0 z-50 bg-yellow-500 text-black px-2 py-1 text-xs">
+                {envConfig.isWordPress ? 'WordPress' : 'React'} Mode
+              </div>
+            )}
+            <Toaster />
+            <Router />
+          </WordPressIntegrationProvider>
         </TooltipProvider>
       </QueryClientProvider>
     </div>
