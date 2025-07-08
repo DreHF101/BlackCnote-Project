@@ -1,4 +1,5 @@
 import { pgTable, text, serial, integer, boolean, decimal, timestamp } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -83,6 +84,42 @@ export const insertTransactionSchema = createInsertSchema(transactions).omit({
 export const insertPortfolioHistorySchema = createInsertSchema(portfolioHistory).omit({
   id: true,
 });
+
+// Relations
+export const usersRelations = relations(users, ({ many }) => ({
+  investments: many(investments),
+  transactions: many(transactions),
+  portfolioHistory: many(portfolioHistory),
+}));
+
+export const investmentPlansRelations = relations(investmentPlans, ({ many }) => ({
+  investments: many(investments),
+}));
+
+export const investmentsRelations = relations(investments, ({ one }) => ({
+  user: one(users, {
+    fields: [investments.userId],
+    references: [users.id],
+  }),
+  plan: one(investmentPlans, {
+    fields: [investments.planId],
+    references: [investmentPlans.id],
+  }),
+}));
+
+export const transactionsRelations = relations(transactions, ({ one }) => ({
+  user: one(users, {
+    fields: [transactions.userId],
+    references: [users.id],
+  }),
+}));
+
+export const portfolioHistoryRelations = relations(portfolioHistory, ({ one }) => ({
+  user: one(users, {
+    fields: [portfolioHistory.userId],
+    references: [users.id],
+  }),
+}));
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;

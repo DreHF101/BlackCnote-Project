@@ -15,6 +15,8 @@ import {
   type PortfolioHistory,
   type InsertPortfolioHistory
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // User methods
@@ -325,4 +327,105 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async getUserByEmail(email: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.email, email));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async updateUserBalance(userId: number, balance: string): Promise<User | undefined> {
+    const [user] = await db
+      .update(users)
+      .set({ balance })
+      .where(eq(users.id, userId))
+      .returning();
+    return user || undefined;
+  }
+
+  async getInvestmentPlans(): Promise<InvestmentPlan[]> {
+    return await db.select().from(investmentPlans);
+  }
+
+  async getInvestmentPlan(id: number): Promise<InvestmentPlan | undefined> {
+    const [plan] = await db.select().from(investmentPlans).where(eq(investmentPlans.id, id));
+    return plan || undefined;
+  }
+
+  async createInvestmentPlan(insertPlan: InsertInvestmentPlan): Promise<InvestmentPlan> {
+    const [plan] = await db
+      .insert(investmentPlans)
+      .values(insertPlan)
+      .returning();
+    return plan;
+  }
+
+  async getUserInvestments(userId: number): Promise<Investment[]> {
+    return await db.select().from(investments).where(eq(investments.userId, userId));
+  }
+
+  async getInvestment(id: number): Promise<Investment | undefined> {
+    const [investment] = await db.select().from(investments).where(eq(investments.id, id));
+    return investment || undefined;
+  }
+
+  async createInvestment(insertInvestment: InsertInvestment): Promise<Investment> {
+    const [investment] = await db
+      .insert(investments)
+      .values(insertInvestment)
+      .returning();
+    return investment;
+  }
+
+  async updateInvestmentReturns(id: number, returns: string): Promise<Investment | undefined> {
+    const [investment] = await db
+      .update(investments)
+      .set({ currentReturns: returns })
+      .where(eq(investments.id, id))
+      .returning();
+    return investment || undefined;
+  }
+
+  async getUserTransactions(userId: number): Promise<Transaction[]> {
+    return await db.select().from(transactions).where(eq(transactions.userId, userId));
+  }
+
+  async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
+    const [transaction] = await db
+      .insert(transactions)
+      .values(insertTransaction)
+      .returning();
+    return transaction;
+  }
+
+  async getUserPortfolioHistory(userId: number): Promise<PortfolioHistory[]> {
+    return await db.select().from(portfolioHistory).where(eq(portfolioHistory.userId, userId));
+  }
+
+  async addPortfolioHistory(insertHistory: InsertPortfolioHistory): Promise<PortfolioHistory> {
+    const [history] = await db
+      .insert(portfolioHistory)
+      .values(insertHistory)
+      .returning();
+    return history;
+  }
+}
+
+export const storage = new DatabaseStorage();
