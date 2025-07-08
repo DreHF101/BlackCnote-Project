@@ -1,8 +1,12 @@
+import React, { useState, useEffect } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Header } from "@/components/ui/header";
+import { Footer } from "@/components/ui/footer";
+import { OnboardingTutorial } from "@/components/onboarding/onboarding-tutorial";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Dashboard from "@/pages/dashboard";
@@ -24,7 +28,6 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/home" component={Home} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/investments" component={Investments} />
       <Route path="/analytics" component={Analytics} />
@@ -36,7 +39,6 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/help" component={Help} />
       <Route path="/referrals" component={Referrals} />
-      <Route path="/news" component={News} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -45,6 +47,46 @@ function Router() {
 function App() {
   // Initialize environment configuration
   const envConfig = Environment.initializeEnvironment();
+  
+  // State for authentication and onboarding
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
+  const [user, setUser] = useState<{
+    name: string;
+    email: string;
+    avatar?: string;
+  } | null>(null);
+
+  // Check if user is new and should see onboarding
+  useEffect(() => {
+    const hasSeenOnboarding = localStorage.getItem('blackcnote_onboarding_completed');
+    const isLoggedIn = localStorage.getItem('blackcnote_user');
+    
+    if (isLoggedIn && !hasSeenOnboarding) {
+      setShowOnboarding(true);
+    }
+    
+    if (isLoggedIn) {
+      setIsAuthenticated(true);
+      setUser({
+        name: 'John Doe',
+        email: 'john@example.com',
+        avatar: undefined
+      });
+    }
+  }, []);
+
+  const handleOnboardingComplete = () => {
+    localStorage.setItem('blackcnote_onboarding_completed', 'true');
+    setShowOnboarding(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('blackcnote_user');
+    localStorage.removeItem('blackcnote_onboarding_completed');
+    setIsAuthenticated(false);
+    setUser(null);
+  };
   
   return (
     <div className={`dark min-h-screen bg-[var(--dark-bg)] text-[var(--text-primary)] ${Environment.getPlatformClasses()}`}>
@@ -57,8 +99,29 @@ function App() {
                 {envConfig.isWordPress ? 'WordPress' : 'React'} Mode
               </div>
             )}
+            
+            <div className="min-h-screen flex flex-col">
+              <Header 
+                isAuthenticated={isAuthenticated}
+                user={user}
+                onLogout={handleLogout}
+              />
+              
+              <main className="flex-1">
+                <Router />
+              </main>
+              
+              <Footer />
+            </div>
+            
+            <OnboardingTutorial
+              isOpen={showOnboarding}
+              onClose={() => setShowOnboarding(false)}
+              onComplete={handleOnboardingComplete}
+              userType="new"
+            />
+            
             <Toaster />
-            <Router />
           </WordPressIntegrationProvider>
         </TooltipProvider>
       </QueryClientProvider>
