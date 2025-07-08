@@ -10,6 +10,7 @@ export function Footer() {
     { name: 'Profit Calculator', href: '/calculator' },
     { name: 'About Us', href: '/about' },
     { name: 'Contact', href: '/contact' },
+    { name: 'News & Updates', href: '/news' },
   ];
 
   const services = [
