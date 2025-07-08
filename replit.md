@@ -85,6 +85,7 @@ The application uses a comprehensive financial data model:
 - **Environment**: Expects `DATABASE_URL` for PostgreSQL connection
 
 ### Key Features
+- **Homepage**: BlackCnote-inspired landing page with hero section, stats, features, investment plans preview, testimonials, and call-to-action
 - **Authentication**: Simplified user system (expandable)
 - **Investment Management**: Create and track investments with different plans
 - **Portfolio Analytics**: Visual representation of investment performance
