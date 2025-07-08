@@ -24,7 +24,14 @@ class BlackCnoteHYIPLabIntegration {
     public function init() {
         // Check if we should use demo mode or real HYIPLab plugin
         $this->demo_mode = !function_exists('hyiplab_system_instance') || 
-                          (defined('BLACKCNOTE_DEMO_MODE') && BLACKCNOTE_DEMO_MODE);
+                          (defined('BLACKCNOTE_DEMO_MODE') && BLACKCNOTE_DEMO_MODE) ||
+                          !get_option('blackcnote_hyiplab_integration', false);
+        
+        // Auto-enable integration if license is properly configured
+        if (get_option('hyiplab_license_code') === 'e6946909-2c55-4f33-b8e6-aad14ec34bc5') {
+            update_option('blackcnote_hyiplab_integration', true);
+            $this->demo_mode = false;
+        }
 
         // Add hooks
         add_action('init', [$this, 'register_shortcodes']);
