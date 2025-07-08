@@ -1,10 +1,9 @@
-import Header from "@/components/layout/header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function Analytics() {
   return (
     <div className="min-h-screen bg-[var(--dark-bg)]">
-      <Header />
+
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">

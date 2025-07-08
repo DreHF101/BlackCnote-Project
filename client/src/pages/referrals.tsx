@@ -1,4 +1,3 @@
-import Header from "@/components/layout/header";
 import { Users, Share2, Gift, DollarSign, TrendingUp, Copy, Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -112,7 +111,7 @@ export default function Referrals() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <Header />
+
       
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}

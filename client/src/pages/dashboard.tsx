@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import Header from "@/components/layout/header";
 import PortfolioOverview from "@/components/dashboard/portfolio-overview";
 import PortfolioChart from "@/components/dashboard/portfolio-chart";
 import InvestmentPlans from "@/components/dashboard/investment-plans";
@@ -32,7 +31,6 @@ export default function Dashboard() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[var(--dark-bg)]">
-        <Header />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="animate-pulse space-y-8">
             <div className="h-8 bg-[var(--dark-card)] rounded w-1/3"></div>
@@ -49,7 +47,6 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[var(--dark-bg)]">
-      <Header />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}

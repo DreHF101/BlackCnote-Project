@@ -4,13 +4,11 @@ export default function Header() {
   const [location] = useLocation();
 
   const navigation = [
-    { name: "Home", href: "/", icon: "fas fa-home" },
-    { name: "About", href: "/about", icon: "fas fa-info-circle" },
     { name: "Dashboard", href: "/dashboard", icon: "fas fa-tachometer-alt" },
     { name: "Investments", href: "/investments", icon: "fas fa-chart-line" },
-    { name: "Calculator", href: "/calculator", icon: "fas fa-calculator" },
     { name: "Referrals", href: "/referrals", icon: "fas fa-users" },
-    { name: "News", href: "/news", icon: "fas fa-newspaper" },
+    { name: "About", href: "/about", icon: "fas fa-info-circle" },
+    { name: "Calculator", href: "/calculator", icon: "fas fa-calculator" },
     { name: "Contact", href: "/contact", icon: "fas fa-envelope" },
   ];
 
