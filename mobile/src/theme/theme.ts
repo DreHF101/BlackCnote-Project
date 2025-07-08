@@ -1,0 +1,227 @@
+import { MD3Theme } from 'react-native-paper';
+
+export const blackcnoteTheme: MD3Theme = {
+  version: 3,
+  dark: true,
+  colors: {
+    primary: '#F59E0B', // Yellow/Orange accent
+    onPrimary: '#000000',
+    primaryContainer: '#F59E0B',
+    onPrimaryContainer: '#000000',
+    secondary: '#10B981', // Green accent
+    onSecondary: '#000000',
+    secondaryContainer: '#10B981',
+    onSecondaryContainer: '#000000',
+    tertiary: '#3B82F6', // Blue accent
+    onTertiary: '#FFFFFF',
+    tertiaryContainer: '#3B82F6',
+    onTertiaryContainer: '#FFFFFF',
+    error: '#EF4444',
+    onError: '#FFFFFF',
+    errorContainer: '#EF4444',
+    onErrorContainer: '#FFFFFF',
+    background: '#1A1A1A', // Dark background
+    onBackground: '#FFFFFF',
+    surface: '#2A2A2A', // Card/surface background
+    onSurface: '#FFFFFF',
+    surfaceVariant: '#3A3A3A',
+    onSurfaceVariant: '#E5E5E5',
+    outline: '#4A4A4A',
+    outlineVariant: '#5A5A5A',
+    shadow: '#000000',
+    scrim: '#000000',
+    inverseSurface: '#FFFFFF',
+    inverseOnSurface: '#000000',
+    inversePrimary: '#B45309',
+    elevation: {
+      level0: 'transparent',
+      level1: '#2A2A2A',
+      level2: '#2F2F2F',
+      level3: '#343434',
+      level4: '#363636',
+      level5: '#3A3A3A',
+    },
+    surfaceDisabled: '#1F1F1F',
+    onSurfaceDisabled: '#666666',
+    backdrop: '#00000080',
+  },
+  roundness: 12,
+  fonts: {
+    default: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 14,
+      lineHeight: 20,
+      letterSpacing: 0.5,
+    },
+    displayLarge: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 57,
+      lineHeight: 64,
+      letterSpacing: -0.25,
+    },
+    displayMedium: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 45,
+      lineHeight: 52,
+      letterSpacing: 0,
+    },
+    displaySmall: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 36,
+      lineHeight: 44,
+      letterSpacing: 0,
+    },
+    headlineLarge: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 32,
+      lineHeight: 40,
+      letterSpacing: 0,
+    },
+    headlineMedium: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 28,
+      lineHeight: 36,
+      letterSpacing: 0,
+    },
+    headlineSmall: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 24,
+      lineHeight: 32,
+      letterSpacing: 0,
+    },
+    titleLarge: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 22,
+      lineHeight: 28,
+      letterSpacing: 0,
+    },
+    titleMedium: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 16,
+      lineHeight: 24,
+      letterSpacing: 0.15,
+    },
+    titleSmall: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 14,
+      lineHeight: 20,
+      letterSpacing: 0.1,
+    },
+    bodyLarge: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 16,
+      lineHeight: 24,
+      letterSpacing: 0.5,
+    },
+    bodyMedium: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 14,
+      lineHeight: 20,
+      letterSpacing: 0.25,
+    },
+    bodySmall: {
+      fontFamily: 'System',
+      fontWeight: '400',
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.4,
+    },
+    labelLarge: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 14,
+      lineHeight: 20,
+      letterSpacing: 0.1,
+    },
+    labelMedium: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 12,
+      lineHeight: 16,
+      letterSpacing: 0.5,
+    },
+    labelSmall: {
+      fontFamily: 'System',
+      fontWeight: '500',
+      fontSize: 11,
+      lineHeight: 16,
+      letterSpacing: 0.5,
+    },
+  },
+};
+
+export const colors = {
+  primary: '#F59E0B',
+  secondary: '#10B981',
+  accent: '#3B82F6',
+  background: '#1A1A1A',
+  surface: '#2A2A2A',
+  text: '#FFFFFF',
+  textSecondary: '#B3B3B3',
+  border: '#4A4A4A',
+  error: '#EF4444',
+  warning: '#F59E0B',
+  success: '#10B981',
+  info: '#3B82F6',
+  card: '#2A2A2A',
+  modalBackground: '#00000080',
+  gradient: {
+    primary: ['#F59E0B', '#EAB308'],
+    secondary: ['#10B981', '#059669'],
+    accent: ['#3B82F6', '#2563EB'],
+    dark: ['#1A1A1A', '#2A2A2A'],
+  },
+};
+
+export const spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 48,
+};
+
+export const borderRadius = {
+  small: 4,
+  medium: 8,
+  large: 12,
+  xl: 16,
+  full: 9999,
+};
+
+export const shadows = {
+  small: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 2,
+  },
+  medium: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 4,
+  },
+  large: {
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+};
