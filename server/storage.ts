@@ -329,102 +329,182 @@ export class MemStorage implements IStorage {
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.id, id));
+      return user || undefined;
+    } catch (error) {
+      console.error('Database error in getUser:', error);
+      throw new Error('Failed to fetch user');
+    }
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.username, username));
+      return user || undefined;
+    } catch (error) {
+      console.error('Database error in getUserByUsername:', error);
+      throw new Error('Failed to fetch user by username');
+    }
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.email, email));
-    return user || undefined;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.email, email));
+      return user || undefined;
+    } catch (error) {
+      console.error('Database error in getUserByEmail:', error);
+      throw new Error('Failed to fetch user by email');
+    }
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
-    return user;
+    try {
+      const [user] = await db
+        .insert(users)
+        .values(insertUser)
+        .returning();
+      return user;
+    } catch (error) {
+      console.error('Database error in createUser:', error);
+      throw new Error('Failed to create user');
+    }
   }
 
   async updateUserBalance(userId: number, balance: string): Promise<User | undefined> {
-    const [user] = await db
-      .update(users)
-      .set({ balance })
-      .where(eq(users.id, userId))
-      .returning();
-    return user || undefined;
+    try {
+      const [user] = await db
+        .update(users)
+        .set({ balance })
+        .where(eq(users.id, userId))
+        .returning();
+      return user || undefined;
+    } catch (error) {
+      console.error('Database error in updateUserBalance:', error);
+      throw new Error('Failed to update user balance');
+    }
   }
 
   async getInvestmentPlans(): Promise<InvestmentPlan[]> {
-    return await db.select().from(investmentPlans);
+    try {
+      return await db.select().from(investmentPlans);
+    } catch (error) {
+      console.error('Database error in getInvestmentPlans:', error);
+      throw new Error('Failed to fetch investment plans');
+    }
   }
 
   async getInvestmentPlan(id: number): Promise<InvestmentPlan | undefined> {
-    const [plan] = await db.select().from(investmentPlans).where(eq(investmentPlans.id, id));
-    return plan || undefined;
+    try {
+      const [plan] = await db.select().from(investmentPlans).where(eq(investmentPlans.id, id));
+      return plan || undefined;
+    } catch (error) {
+      console.error('Database error in getInvestmentPlan:', error);
+      throw new Error('Failed to fetch investment plan');
+    }
   }
 
   async createInvestmentPlan(insertPlan: InsertInvestmentPlan): Promise<InvestmentPlan> {
-    const [plan] = await db
-      .insert(investmentPlans)
-      .values(insertPlan)
-      .returning();
-    return plan;
+    try {
+      const [plan] = await db
+        .insert(investmentPlans)
+        .values(insertPlan)
+        .returning();
+      return plan;
+    } catch (error) {
+      console.error('Database error in createInvestmentPlan:', error);
+      throw new Error('Failed to create investment plan');
+    }
   }
 
   async getUserInvestments(userId: number): Promise<Investment[]> {
-    return await db.select().from(investments).where(eq(investments.userId, userId));
+    try {
+      return await db.select().from(investments).where(eq(investments.userId, userId));
+    } catch (error) {
+      console.error('Database error in getUserInvestments:', error);
+      throw new Error('Failed to fetch user investments');
+    }
   }
 
   async getInvestment(id: number): Promise<Investment | undefined> {
-    const [investment] = await db.select().from(investments).where(eq(investments.id, id));
-    return investment || undefined;
+    try {
+      const [investment] = await db.select().from(investments).where(eq(investments.id, id));
+      return investment || undefined;
+    } catch (error) {
+      console.error('Database error in getInvestment:', error);
+      throw new Error('Failed to fetch investment');
+    }
   }
 
   async createInvestment(insertInvestment: InsertInvestment): Promise<Investment> {
-    const [investment] = await db
-      .insert(investments)
-      .values(insertInvestment)
-      .returning();
-    return investment;
+    try {
+      const [investment] = await db
+        .insert(investments)
+        .values(insertInvestment)
+        .returning();
+      return investment;
+    } catch (error) {
+      console.error('Database error in createInvestment:', error);
+      throw new Error('Failed to create investment');
+    }
   }
 
   async updateInvestmentReturns(id: number, returns: string): Promise<Investment | undefined> {
-    const [investment] = await db
-      .update(investments)
-      .set({ currentReturns: returns })
-      .where(eq(investments.id, id))
-      .returning();
-    return investment || undefined;
+    try {
+      const [investment] = await db
+        .update(investments)
+        .set({ currentReturns: returns })
+        .where(eq(investments.id, id))
+        .returning();
+      return investment || undefined;
+    } catch (error) {
+      console.error('Database error in updateInvestmentReturns:', error);
+      throw new Error('Failed to update investment returns');
+    }
   }
 
   async getUserTransactions(userId: number): Promise<Transaction[]> {
-    return await db.select().from(transactions).where(eq(transactions.userId, userId));
+    try {
+      return await db.select().from(transactions).where(eq(transactions.userId, userId));
+    } catch (error) {
+      console.error('Database error in getUserTransactions:', error);
+      throw new Error('Failed to fetch user transactions');
+    }
   }
 
   async createTransaction(insertTransaction: InsertTransaction): Promise<Transaction> {
-    const [transaction] = await db
-      .insert(transactions)
-      .values(insertTransaction)
-      .returning();
-    return transaction;
+    try {
+      const [transaction] = await db
+        .insert(transactions)
+        .values(insertTransaction)
+        .returning();
+      return transaction;
+    } catch (error) {
+      console.error('Database error in createTransaction:', error);
+      throw new Error('Failed to create transaction');
+    }
   }
 
   async getUserPortfolioHistory(userId: number): Promise<PortfolioHistory[]> {
-    return await db.select().from(portfolioHistory).where(eq(portfolioHistory.userId, userId));
+    try {
+      return await db.select().from(portfolioHistory).where(eq(portfolioHistory.userId, userId));
+    } catch (error) {
+      console.error('Database error in getUserPortfolioHistory:', error);
+      throw new Error('Failed to fetch portfolio history');
+    }
   }
 
   async addPortfolioHistory(insertHistory: InsertPortfolioHistory): Promise<PortfolioHistory> {
-    const [history] = await db
-      .insert(portfolioHistory)
-      .values(insertHistory)
-      .returning();
-    return history;
+    try {
+      const [history] = await db
+        .insert(portfolioHistory)
+        .values(insertHistory)
+        .returning();
+      return history;
+    } catch (error) {
+      console.error('Database error in addPortfolioHistory:', error);
+      throw new Error('Failed to add portfolio history');
+    }
   }
 }
 
