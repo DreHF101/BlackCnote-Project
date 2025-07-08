@@ -32,9 +32,10 @@ The application follows a monorepo structure with clear separation of concerns:
 
 ### Backend Architecture
 - **API Layer**: RESTful endpoints organized in routes module
-- **Data Layer**: Abstracted storage interface with in-memory implementation
+- **Data Layer**: PostgreSQL database with Drizzle ORM and DatabaseStorage implementation
 - **Middleware**: Express middleware for request logging and error handling
 - **Development**: Hot reload with Vite integration
+- **Database**: Automated seeding with sample data for development
 
 ### Database Schema
 The application uses a comprehensive financial data model:
