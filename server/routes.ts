@@ -182,6 +182,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Register HYIPLab integration routes
+  const { registerHYIPLabRoutes } = await import('./hyiplab-integration');
+  registerHYIPLabRoutes(app);
+
   const httpServer = createServer(app);
   return httpServer;
 }
