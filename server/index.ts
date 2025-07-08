@@ -1,5 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { registerWordPressCompatibilityRoutes } from "./wordpress-api";
 import { setupVite, serveStatic, log } from "./vite";
 import { seedDatabase } from "./seed";
 
@@ -40,6 +41,9 @@ app.use((req, res, next) => {
 (async () => {
   // Seed database with initial data
   await seedDatabase();
+  
+  // Register WordPress compatibility routes
+  registerWordPressCompatibilityRoutes(app);
   
   const server = await registerRoutes(app);
 
