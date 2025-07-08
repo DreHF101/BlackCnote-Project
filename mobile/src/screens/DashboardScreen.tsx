@@ -8,6 +8,7 @@ import { LineChart, PieChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../contexts/AuthContext';
 import { ApiService } from '../services/api';
+import { hyipLabApi, type HYIPLabUserStats } from '../services/hyiplab-api';
 import { colors, spacing, borderRadius } from '../theme/theme';
 
 const { width } = Dimensions.get('window');
