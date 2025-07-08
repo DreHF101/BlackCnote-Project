@@ -1,4 +1,3 @@
-import Header from "@/components/layout/header";
 import { Calendar, User, Eye, MessageSquare, TrendingUp, Bell, Filter } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -135,7 +134,7 @@ export default function News() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
-      <Header />
+
       
       <div className="container mx-auto px-4 py-16">
         {/* Hero Section */}

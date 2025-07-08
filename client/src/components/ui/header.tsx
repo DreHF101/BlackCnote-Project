@@ -26,6 +26,9 @@ export function Header({ isAuthenticated = false, user, onLogout }: HeaderProps)
   const [location] = useLocation();
 
   const navigationItems = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Investments', href: '/investments' },
+    { name: 'Referrals', href: '/referrals' },
     { name: 'About', href: '/about' },
     { name: 'Calculator', href: '/calculator' },
     { name: 'Contact', href: '/contact' },
@@ -35,8 +38,8 @@ export function Header({ isAuthenticated = false, user, onLogout }: HeaderProps)
   const authenticatedItems = [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Investments', href: '/investments' },
-    { name: 'Analytics', href: '/analytics' },
     { name: 'Referrals', href: '/referrals' },
+    { name: 'Analytics', href: '/analytics' },
     { name: 'Transactions', href: '/transactions' },
   ];
 
