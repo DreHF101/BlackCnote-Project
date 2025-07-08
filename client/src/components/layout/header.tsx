@@ -4,6 +4,7 @@ export default function Header() {
   const [location] = useLocation();
 
   const navigation = [
+    { name: "Home", href: "/", icon: "fas fa-home" },
     { name: "Dashboard", href: "/dashboard", icon: "fas fa-tachometer-alt" },
     { name: "Investments", href: "/investments", icon: "fas fa-chart-line" },
     { name: "Analytics", href: "/analytics", icon: "fas fa-chart-bar" },
@@ -17,7 +18,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/dashboard" className="flex items-center space-x-2">
+              <Link href="/" className="flex items-center space-x-2">
                 <div className="w-10 h-10 bg-[var(--accent-blue)] rounded-lg flex items-center justify-center">
                   <i className="fas fa-chart-line text-white text-lg"></i>
                 </div>
@@ -28,7 +29,7 @@ export default function Header() {
             {/* Navigation Menu */}
             <nav className="hidden md:ml-8 md:flex md:space-x-8">
               {navigation.map((item) => {
-                const isActive = location === item.href || (location === "/" && item.href === "/dashboard");
+                const isActive = location === item.href;
                 return (
                   <Link
                     key={item.name}

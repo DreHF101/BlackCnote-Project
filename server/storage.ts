@@ -208,6 +208,11 @@ export class MemStorage implements IStorage {
     const user: User = { 
       ...insertUser, 
       id,
+      balance: insertUser.balance || "0.00",
+      totalInvested: insertUser.totalInvested || "0.00",
+      totalReturns: insertUser.totalReturns || "0.00",
+      planType: insertUser.planType || "basic",
+      isActive: insertUser.isActive !== undefined ? insertUser.isActive : true,
       createdAt: new Date(),
     };
     this.users.set(id, user);
@@ -237,6 +242,7 @@ export class MemStorage implements IStorage {
     const plan: InvestmentPlan = { 
       ...insertPlan, 
       id,
+      isActive: insertPlan.isActive !== undefined ? insertPlan.isActive : true,
       createdAt: new Date(),
     };
     this.investmentPlans.set(id, plan);
@@ -262,6 +268,8 @@ export class MemStorage implements IStorage {
     const investment: Investment = { 
       ...insertInvestment, 
       id,
+      status: insertInvestment.status || "active",
+      currentReturns: insertInvestment.currentReturns || "0.00",
       endDate,
       startDate,
       createdAt: new Date(),
@@ -291,6 +299,8 @@ export class MemStorage implements IStorage {
     const transaction: Transaction = { 
       ...insertTransaction, 
       id,
+      status: insertTransaction.status || "completed",
+      investmentId: insertTransaction.investmentId || null,
       createdAt: new Date(),
     };
     this.transactions.set(id, transaction);
