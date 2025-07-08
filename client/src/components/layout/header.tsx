@@ -5,10 +5,13 @@ export default function Header() {
 
   const navigation = [
     { name: "Home", href: "/", icon: "fas fa-home" },
+    { name: "About", href: "/about", icon: "fas fa-info-circle" },
     { name: "Dashboard", href: "/dashboard", icon: "fas fa-tachometer-alt" },
     { name: "Investments", href: "/investments", icon: "fas fa-chart-line" },
-    { name: "Analytics", href: "/analytics", icon: "fas fa-chart-bar" },
-    { name: "Transactions", href: "/transactions", icon: "fas fa-exchange-alt" },
+    { name: "Calculator", href: "/calculator", icon: "fas fa-calculator" },
+    { name: "Referrals", href: "/referrals", icon: "fas fa-users" },
+    { name: "News", href: "/news", icon: "fas fa-newspaper" },
+    { name: "Contact", href: "/contact", icon: "fas fa-envelope" },
   ];
 
   return (
@@ -50,14 +53,39 @@ export default function Header() {
 
           {/* Right side */}
           <div className="flex items-center space-x-4">
+            {/* Help Link */}
+            <Link 
+              href="/help" 
+              className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] p-2 rounded-lg hover:bg-[var(--dark-bg)] transition-colors"
+              title="Help & Support"
+            >
+              <i className="fas fa-question-circle text-lg"></i>
+            </Link>
+            
             {/* Notifications */}
             <button className="text-[var(--text-secondary)] hover:text-[var(--text-primary)] p-2 rounded-lg hover:bg-[var(--dark-bg)] transition-colors relative">
               <i className="fas fa-bell text-lg"></i>
               <span className="absolute -top-1 -right-1 w-3 h-3 bg-[var(--loss-red)] rounded-full"></span>
             </button>
             
-            {/* User Profile */}
-            <div className="flex items-center space-x-3">
+            {/* Authentication Links */}
+            <div className="hidden md:flex items-center space-x-2">
+              <Link 
+                href="/login"
+                className="px-4 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                Sign In
+              </Link>
+              <Link 
+                href="/register"
+                className="px-4 py-2 text-sm font-medium bg-[var(--accent-blue)] text-white rounded-lg hover:bg-blue-600 transition-colors"
+              >
+                Get Started
+              </Link>
+            </div>
+            
+            {/* User Profile (shown when logged in) */}
+            <div className="hidden items-center space-x-3">
               <div className="text-right hidden sm:block">
                 <div className="text-sm font-medium text-[var(--text-primary)]">John Investor</div>
                 <div className="text-xs text-[var(--text-secondary)]">Premium Plan</div>
