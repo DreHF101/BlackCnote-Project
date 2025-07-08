@@ -10,9 +10,12 @@ import ActiveInvestmentsTable from "@/components/dashboard/active-investments-ta
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import InvestmentModal from "@/components/modals/investment-modal";
+import { OnboardingTutorial } from "@/components/onboarding/onboarding-tutorial";
+import { OnboardingTrigger } from "@/components/ui/onboarding-trigger";
 
 export default function Dashboard() {
   const [isInvestmentModalOpen, setIsInvestmentModalOpen] = useState(false);
+  const [showOnboarding, setShowOnboarding] = useState(false);
   
   const { data: portfolioData, isLoading } = useQuery({
     queryKey: ["/api/users/1/portfolio"],
@@ -112,6 +115,22 @@ export default function Dashboard() {
         isOpen={isInvestmentModalOpen}
         onClose={() => setIsInvestmentModalOpen(false)}
         plans={investmentPlans || []}
+      />
+      
+      {/* Onboarding Components */}
+      <OnboardingTrigger 
+        onStartTutorial={() => setShowOnboarding(true)}
+        variant="fab"
+      />
+      
+      <OnboardingTutorial
+        isOpen={showOnboarding}
+        onClose={() => setShowOnboarding(false)}
+        onComplete={() => {
+          localStorage.setItem('blackcnote_onboarding_completed', 'true');
+          setShowOnboarding(false);
+        }}
+        userType="returning"
       />
     </div>
   );
