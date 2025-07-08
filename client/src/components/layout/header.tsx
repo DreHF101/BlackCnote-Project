@@ -21,11 +21,12 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-[var(--accent-blue)] rounded-lg flex items-center justify-center">
-                  <i className="fas fa-chart-line text-white text-lg"></i>
-                </div>
-                <span className="text-xl font-bold text-[var(--text-primary)]">BlackCnote</span>
+              <Link href="/" className="flex items-center">
+                <img 
+                  src="/assets/img/header-logo.png" 
+                  alt="BlackCnote Investment Platform" 
+                  className="h-10 w-auto"
+                />
               </Link>
             </div>
             
