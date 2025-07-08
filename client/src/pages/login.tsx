@@ -39,8 +39,12 @@ export default function Login() {
       <div className="w-full max-w-md">
         {/* Logo and Title */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Lock className="h-8 w-8 text-white" />
+          <div className="mb-4">
+            <img 
+              src="/assets/img/hero-logo.png" 
+              alt="BlackCnote Investment Platform" 
+              className="h-16 w-auto mx-auto"
+            />
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Welcome Back</h1>
           <p className="text-gray-300">Sign in to your BlackCnote account</p>

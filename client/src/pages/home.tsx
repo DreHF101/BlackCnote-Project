@@ -148,6 +148,13 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            <div className="mb-8">
+              <img 
+                src="/assets/img/hero-logo.png" 
+                alt="BlackCnote Investment Platform" 
+                className="h-20 lg:h-24 w-auto mx-auto"
+              />
+            </div>
             <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-6">
               Welcome to{" "}
               <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
