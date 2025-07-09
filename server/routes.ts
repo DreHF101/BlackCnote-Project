@@ -280,6 +280,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Register AI routes
+  const { registerAIRoutes } = await import('./ai-routes');
+  registerAIRoutes(app);
+  
+  // Register Security routes
+  const { registerSecurityRoutes } = await import('./security-routes');
+  registerSecurityRoutes(app);
+
   const httpServer = createServer(app);
   return httpServer;
 }

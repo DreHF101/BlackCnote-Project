@@ -3,13 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
-    <title>BlackCnote - Premium Investment Platform</title>
+    <title>BlackCnote - AI-Powered Investment Platform</title>
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <meta name="description" content="BlackCnote - Your premium investment platform offering consistent daily returns with bank-level security. Join thousands of successful investors building wealth with confidence." />
+    <meta name="description" content="BlackCnote - AI-powered investment platform with advanced portfolio management, dynamic APY rates, and comprehensive security features. Start investing with BlackCnote today." />
+    
+    <!-- PWA Meta Tags -->
+    <meta name="keywords" content="investment, HYIP, AI, portfolio management, dynamic APY, cryptocurrency, fintech, BlackCnote" />
+    <meta name="author" content="BlackCnote Investment Platform" />
+    <meta name="theme-color" content="#1e293b" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="BlackCnote" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="BlackCnote Investment Platform" />
+    <meta property="og:description" content="AI-powered investment platform with advanced portfolio management and dynamic APY rates" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://blackcnote.com" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:site_name" content="BlackCnote" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- PWA Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
     <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
     <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>
