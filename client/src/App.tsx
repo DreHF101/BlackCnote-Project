@@ -6,6 +6,7 @@ import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
 import ComprehensiveHome from "./pages/comprehensive-home";
 import UltimateHome from "./pages/ultimate-home";
+import UltimateHomeFixed from "./pages/ultimate-home-fixed";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
@@ -238,7 +239,7 @@ function App() {
       
       <Switch>
         {/* Core Working Pages */}
-        <Route path="/" component={UltimateHome} />
+        <Route path="/" component={UltimateHomeFixed} />
         <Route path="/home" component={Home} />
         <Route path="/simple-home" component={SimpleHome} />
         <Route path="/enhanced-home" component={EnhancedHome} />
