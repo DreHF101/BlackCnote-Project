@@ -75,7 +75,7 @@ export default function PaymentGatewaySelector({
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-800">Select Payment Method</h3>
+        <h3 className="text-lg font-semibold text-[var(--text-primary)]">Select Payment Method</h3>
         <div className="grid gap-3">
           {[1, 2, 3].map((i) => (
             <Card key={i} className="animate-pulse">
@@ -135,8 +135,8 @@ export default function PaymentGatewaySelector({
                     </div>
                     
                     <div>
-                      <h4 className="font-medium text-gray-900">{gateway.displayName}</h4>
-                      <p className="text-sm text-gray-600">{gateway.description}</p>
+                      <h4 className="font-medium text-[var(--text-primary)]">{gateway.displayName}</h4>
+                      <p className="text-sm text-[var(--text-secondary)]">{gateway.description}</p>
                       
                       <div className="flex items-center gap-2 mt-1">
                         <span className="text-xs text-gray-500">
