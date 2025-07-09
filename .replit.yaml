@@ -1,5 +1,5 @@
 run:
-  command: "node start-server.js"
+  command: "node simple-server.js"
   
 deployment:
   build:
