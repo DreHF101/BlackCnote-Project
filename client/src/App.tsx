@@ -21,6 +21,8 @@ import Register from "@/pages/register";
 import Help from "@/pages/help";
 import Referrals from "@/pages/referrals";
 import News from "@/pages/news";
+import AIAssistant from "@/pages/ai-assistant";
+import Security from "@/pages/security";
 import { WordPressIntegrationProvider } from "@/components/wordpress/WordPressShortcodes";
 import Environment from "@/utils/environment";
 
@@ -39,6 +41,8 @@ function Router() {
       <Route path="/register" component={Register} />
       <Route path="/help" component={Help} />
       <Route path="/referrals" component={Referrals} />
+      <Route path="/ai-assistant" component={AIAssistant} />
+      <Route path="/security" component={Security} />
       <Route component={NotFound} />
     </Switch>
   );
