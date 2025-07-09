@@ -73,23 +73,23 @@ export default function EnhancedHome() {
             marginBottom: '40px'
           }}>
             <div style={{
-              width: '120px',
-              height: '120px',
-              background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #dc2626 100%)',
+              padding: '20px',
               borderRadius: '30px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 20px 50px rgba(245, 158, 11, 0.4)',
+              background: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(10px)',
               border: '3px solid rgba(255, 255, 255, 0.1)',
+              boxShadow: '0 20px 50px rgba(245, 158, 11, 0.4)',
               position: 'relative'
             }}>
-              <span style={{ 
-                fontSize: '48px', 
-                fontWeight: 'bold', 
-                color: 'white',
-                textShadow: '0 4px 8px rgba(0,0,0,0.3)'
-              }}>BC</span>
+              <img 
+                src="/assets/img/hero-logo.png" 
+                alt="BlackCnote Investment Platform" 
+                style={{
+                  height: '120px',
+                  width: 'auto',
+                  filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+                }}
+              />
               <div style={{
                 position: 'absolute',
                 inset: '-2px',

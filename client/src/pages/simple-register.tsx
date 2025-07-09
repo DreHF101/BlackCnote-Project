@@ -12,16 +12,19 @@ export default function SimpleRegister() {
       <div style={{ width: '100%', maxWidth: '500px' }}>
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{
-            width: '60px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
-            borderRadius: '15px',
+            margin: '0 auto 20px',
             display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 20px'
+            justifyContent: 'center'
           }}>
-            <span style={{ fontSize: '24px', fontWeight: 'bold', color: 'white' }}>BC</span>
+            <img 
+              src="/assets/img/hero-logo.png" 
+              alt="BlackCnote Investment Platform" 
+              style={{
+                height: '60px',
+                width: 'auto',
+                filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+              }}
+            />
           </div>
           
           <h1 style={{ 
