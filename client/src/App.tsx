@@ -34,6 +34,7 @@ import SimpleSecurityPage from "./pages/simple-security";
 import SimpleNews from "./pages/simple-news";
 import Analytics from "./pages/analytics";
 import SimpleAIAssistant from "./pages/simple-ai-assistant";
+import AIFinancialAssistant from "./pages/ai-financial-assistant";
 
 // Import payment completion pages
 import Checkout from "./pages/checkout";
@@ -143,6 +144,9 @@ function Header() {
             <a href="/ai-assistant" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
+            <a href="/ai-financial-assistant" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🧠 AI Financial Engine</a>
             <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>❓ Help</a>
@@ -383,6 +387,7 @@ function App() {
         <Route path="/news" component={SimpleNews} />
         <Route path="/analytics" component={Analytics} />
         <Route path="/ai-assistant" component={SimpleAIAssistant} />
+        <Route path="/ai-financial-assistant" component={AIFinancialAssistant} />
         
         {/* Payment Completion Pages */}
         <Route path="/checkout" component={Checkout} />
