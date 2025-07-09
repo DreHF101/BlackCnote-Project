@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { LiveChatWidget } from "../components/live-chat-widget";
 
 interface Stats {
   totalUsers: number;
@@ -161,6 +162,9 @@ export default function UltimateHome() {
 
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
 
   // Fetch live stats
   const { data: statsData, isLoading: statsLoading } = useQuery({
@@ -204,6 +208,44 @@ export default function UltimateHome() {
     return () => clearInterval(interval);
   }, []);
 
+  // Mouse position tracking for parallax effects
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Intersection Observer for animations on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, []);
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -224,17 +266,18 @@ export default function UltimateHome() {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Animated Background Elements */}
+      {/* Enhanced Animated Background Elements with Parallax */}
       <div style={{
         position: 'absolute',
         top: '10%',
         left: '5%',
         width: '500px',
         height: '500px',
-        background: 'radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(140px)',
-        animation: 'float 8s ease-in-out infinite'
+        animation: 'float 8s ease-in-out infinite',
+        transform: `translate(${mousePosition.x * 0.02}px, ${mousePosition.y * 0.02}px)`
       }}></div>
       <div style={{
         position: 'absolute',
@@ -242,10 +285,11 @@ export default function UltimateHome() {
         right: '5%',
         width: '400px',
         height: '400px',
-        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(120px)',
-        animation: 'float 10s ease-in-out infinite reverse'
+        animation: 'float 10s ease-in-out infinite reverse',
+        transform: `translate(${mousePosition.x * -0.015}px, ${mousePosition.y * -0.015}px)`
       }}></div>
       <div style={{
         position: 'absolute',
@@ -253,11 +297,38 @@ export default function UltimateHome() {
         left: '30%',
         width: '350px',
         height: '350px',
-        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%)',
         borderRadius: '50%',
         filter: 'blur(100px)',
-        animation: 'float 12s ease-in-out infinite'
+        animation: 'float 12s ease-in-out infinite',
+        transform: `translate(${mousePosition.x * 0.01}px, ${mousePosition.y * 0.01}px)`
       }}></div>
+
+      {/* Floating Particles */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        overflow: 'hidden',
+        pointerEvents: 'none'
+      }}>
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            style={{
+              position: 'absolute',
+              width: '4px',
+              height: '4px',
+              background: i % 3 === 0 ? '#f59e0b' : i % 3 === 1 ? '#3b82f6' : '#8b5cf6',
+              borderRadius: '50%',
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animation: `particle-float ${5 + Math.random() * 10}s ease-in-out infinite`,
+              animationDelay: `${Math.random() * 5}s`,
+              opacity: 0.6
+            }}
+          />
+        ))}
+      </div>
 
       {/* Main Content Container */}
       <div style={{
@@ -268,8 +339,16 @@ export default function UltimateHome() {
         zIndex: 1
       }}>
         {/* Hero Section */}
-        <section style={{ textAlign: 'center', marginBottom: '120px', paddingTop: '80px' }}>
-          {/* Premium Logo Container */}
+        <section 
+          ref={heroRef}
+          className="animate-on-scroll"
+          style={{ 
+            textAlign: 'center', 
+            marginBottom: '120px', 
+            paddingTop: '80px',
+            transform: `translateY(${scrollY * 0.1}px)`
+          }}>
+          {/* Premium Logo Container with Enhanced Animations */}
           <div style={{
             display: 'flex',
             justifyContent: 'center',
@@ -281,9 +360,11 @@ export default function UltimateHome() {
               background: 'rgba(255, 255, 255, 0.08)',
               backdropFilter: 'blur(25px)',
               border: '3px solid rgba(255, 255, 255, 0.15)',
-              boxShadow: '0 30px 70px rgba(245, 158, 11, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+              boxShadow: `0 30px 70px rgba(245, 158, 11, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1)`,
               position: 'relative',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              transition: 'all 0.3s ease',
+              transform: `translate(${mousePosition.x * 0.005}px, ${mousePosition.y * 0.005}px) scale(${1 + Math.sin(Date.now() * 0.001) * 0.02})`
             }}>
               <img 
                 src="/assets/img/hero-logo.png" 
@@ -293,17 +374,26 @@ export default function UltimateHome() {
                   width: 'auto',
                   filter: 'drop-shadow(0 15px 40px rgba(245, 158, 11, 0.4))',
                   position: 'relative',
-                  zIndex: 2
+                  zIndex: 2,
+                  animation: 'logoFloat 6s ease-in-out infinite'
                 }}
               />
-              {/* Animated border effect */}
+              {/* Enhanced animated border effect */}
               <div style={{
                 position: 'absolute',
                 inset: '-3px',
-                background: 'linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.4), transparent)',
+                background: 'linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.6), rgba(59, 130, 246, 0.4), transparent)',
                 borderRadius: '43px',
                 opacity: 0.8,
                 animation: 'borderRotate 4s linear infinite'
+              }}></div>
+              {/* Pulsing inner glow */}
+              <div style={{
+                position: 'absolute',
+                inset: '10px',
+                background: 'radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, transparent 70%)',
+                borderRadius: '30px',
+                animation: 'pulse 3s ease-in-out infinite'
               }}></div>
             </div>
           </div>
@@ -432,7 +522,7 @@ export default function UltimateHome() {
         </section>
 
         {/* Enhanced Live Stats Dashboard */}
-        <section style={{ marginBottom: '130px' }}>
+        <section className="animate-on-scroll" style={{ marginBottom: '130px' }}>
           <div style={{
             background: 'rgba(255, 255, 255, 0.06)',
             backdropFilter: 'blur(25px)',
@@ -605,7 +695,7 @@ export default function UltimateHome() {
         </section>
 
         {/* Premium Investment Plans */}
-        <section style={{ marginBottom: '130px' }}>
+        <section className="animate-on-scroll" style={{ marginBottom: '130px' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h2 style={{
               fontSize: '3.5rem',
@@ -813,7 +903,7 @@ export default function UltimateHome() {
         </section>
 
         {/* Enhanced Platform Features */}
-        <section style={{ marginBottom: '130px' }}>
+        <section className="animate-on-scroll" style={{ marginBottom: '130px' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h2 style={{
               fontSize: '3.5rem',
@@ -891,7 +981,7 @@ export default function UltimateHome() {
         </section>
 
         {/* Enhanced Testimonials */}
-        <section style={{ marginBottom: '130px' }}>
+        <section className="animate-on-scroll" style={{ marginBottom: '130px' }}>
           <div style={{ textAlign: 'center', marginBottom: '80px' }}>
             <h2 style={{
               fontSize: '3.5rem',
@@ -1026,7 +1116,7 @@ export default function UltimateHome() {
         </section>
 
         {/* Final Call to Action */}
-        <section style={{ textAlign: 'center', marginBottom: '80px' }}>
+        <section className="animate-on-scroll" style={{ textAlign: 'center', marginBottom: '80px' }}>
           <div style={{
             background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(234, 88, 12, 0.1) 100%)',
             backdropFilter: 'blur(25px)',
@@ -1117,7 +1207,7 @@ export default function UltimateHome() {
         </section>
       </div>
 
-      {/* Enhanced CSS Animations */}
+      {/* Enhanced CSS Animations and Responsive Design */}
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -1134,7 +1224,122 @@ export default function UltimateHome() {
           0%, 100% { opacity: 0.4; transform: scale(1); }
           50% { opacity: 0.8; transform: scale(1.05); }
         }
+
+        @keyframes logoFloat {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        @keyframes particle-float {
+          0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg);
+            opacity: 0.6;
+          }
+          25% { 
+            transform: translateY(-20px) translateX(10px) rotate(90deg);
+            opacity: 1;
+          }
+          50% { 
+            transform: translateY(-40px) translateX(-5px) rotate(180deg);
+            opacity: 0.8;
+          }
+          75% { 
+            transform: translateY(-20px) translateX(-10px) rotate(270deg);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        .animate-on-scroll {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.6s ease-out;
+        }
+
+        .animate-on-scroll.animate-in {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 768px) {
+          .grid-responsive {
+            grid-template-columns: 1fr !important;
+            gap: 20px !important;
+          }
+          
+          .text-responsive {
+            font-size: 2.5rem !important;
+          }
+          
+          .text-large-responsive {
+            font-size: 4rem !important;
+          }
+          
+          .padding-responsive {
+            padding: 20px !important;
+          }
+          
+          .margin-responsive {
+            margin-bottom: 60px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .text-responsive {
+            font-size: 2rem !important;
+          }
+          
+          .text-large-responsive {
+            font-size: 3rem !important;
+          }
+        }
+
+        /* Enhanced Glassmorphism Effects */
+        .glass-enhanced {
+          background: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        /* Performance Optimizations */
+        * {
+          will-change: auto;
+        }
+
+        .no-select {
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+        }
       `}</style>
+
+      {/* Live Chat Widget */}
+      <LiveChatWidget position="bottom-right" />
     </div>
   );
 }

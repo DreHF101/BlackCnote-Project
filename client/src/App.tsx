@@ -5,6 +5,7 @@ import { Switch, Route } from "wouter";
 import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
 import ComprehensiveHome from "./pages/comprehensive-home";
+import UltimateHome from "./pages/ultimate-home";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
@@ -41,6 +42,7 @@ import Checkout from "./pages/checkout";
 import PaymentSuccess from "./pages/payment-success";
 
 // Header Component
+import { EnhancedHeader } from "./components/enhanced-header";
 function Header() {
   return (
     <div style={{
@@ -402,13 +404,18 @@ function App() {
       color: 'white',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <Header />
+      <EnhancedHeader 
+        isAuthenticated={false}
+        user={{ name: "John Investor", email: "john@example.com" }}
+        onLogout={() => console.log("Logout clicked")}
+      />
       
       <Switch>
         {/* Core Working Pages */}
-        <Route path="/" component={ComprehensiveHome} />
+        <Route path="/" component={UltimateHome} />
         <Route path="/simple-home" component={SimpleHome} />
         <Route path="/enhanced-home" component={EnhancedHome} />
+        <Route path="/comprehensive-home" component={ComprehensiveHome} />
         <Route path="/dashboard" component={SimpleDashboard} />
         <Route path="/investments" component={SimpleInvestments} />
         <Route path="/calculator" component={SimpleCalculator} />
