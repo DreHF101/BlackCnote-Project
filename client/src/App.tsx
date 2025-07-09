@@ -55,6 +55,11 @@ import Register from "./pages/register";
 import Deposits from "./pages/deposits";
 import Withdraw from "./pages/withdraw";
 
+// Import admin pages
+import AdminSettings from "./pages/admin-settings";
+import AISettings from "./pages/ai-settings";
+import UserManagement from "./pages/user-management";
+
 // Header Component - Using Enhanced Header Component
 import { EnhancedHeader } from "./components/enhanced-header";
 
@@ -287,6 +292,11 @@ function App() {
         {/* Payment Completion Pages */}
         <Route path="/checkout" component={Checkout} />
         <Route path="/payment-success" component={PaymentSuccess} />
+        
+        {/* Admin Pages */}
+        <Route path="/admin/settings" component={AdminSettings} />
+        <Route path="/admin/ai-settings" component={AISettings} />
+        <Route path="/admin/users" component={UserManagement} />
         
         {/* 404 Page */}
         <Route component={NotFound} />

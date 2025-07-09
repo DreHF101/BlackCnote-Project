@@ -62,6 +62,28 @@ const adminSettings: { [key: string]: AdminSetting[] } = {
       value: false,
       type: 'boolean',
       description: 'Put the platform in maintenance mode'
+    },
+    {
+      id: 'platform_logo_url',
+      label: 'Platform Logo URL',
+      value: '/assets/img/hero-logo.png',
+      type: 'text',
+      description: 'URL to the platform logo image'
+    },
+    {
+      id: 'platform_timezone',
+      label: 'Platform Timezone',
+      value: 'UTC',
+      type: 'select',
+      options: ['UTC', 'America/New_York', 'America/Los_Angeles', 'Europe/London', 'Asia/Tokyo'],
+      description: 'Default timezone for the platform'
+    },
+    {
+      id: 'debug_mode',
+      label: 'Debug Mode',
+      value: false,
+      type: 'boolean',
+      description: 'Enable debug mode for development'
     }
   ],
   security: [
@@ -176,6 +198,152 @@ const adminSettings: { [key: string]: AdminSetting[] } = {
       value: true,
       type: 'boolean',
       description: 'Send push notifications to mobile app users'
+    },
+    {
+      id: 'smtp_host',
+      label: 'SMTP Host',
+      value: 'smtp.gmail.com',
+      type: 'text',
+      description: 'SMTP server hostname for email sending'
+    },
+    {
+      id: 'smtp_port',
+      label: 'SMTP Port',
+      value: 587,
+      type: 'number',
+      description: 'SMTP server port'
+    },
+    {
+      id: 'smtp_user',
+      label: 'SMTP Username',
+      value: '',
+      type: 'text',
+      description: 'SMTP authentication username'
+    },
+    {
+      id: 'smtp_password',
+      label: 'SMTP Password',
+      value: '',
+      type: 'password',
+      description: 'SMTP authentication password'
+    }
+  ],
+  analytics: [
+    {
+      id: 'analytics_enabled',
+      label: 'Platform Analytics',
+      value: true,
+      type: 'boolean',
+      description: 'Enable platform analytics and tracking'
+    },
+    {
+      id: 'analytics_key',
+      label: 'Analytics API Key',
+      value: '',
+      type: 'password',
+      description: 'API key for analytics service'
+    },
+    {
+      id: 'sentry_dsn',
+      label: 'Sentry DSN',
+      value: '',
+      type: 'password',
+      description: 'Sentry DSN for error tracking'
+    },
+    {
+      id: 'user_behavior_tracking',
+      label: 'User Behavior Tracking',
+      value: true,
+      type: 'boolean',
+      description: 'Track user behavior for optimization'
+    }
+  ],
+  wordpress: [
+    {
+      id: 'wp_integration_enabled',
+      label: 'WordPress Integration',
+      value: true,
+      type: 'boolean',
+      description: 'Enable WordPress plugin integration'
+    },
+    {
+      id: 'wp_api_base_url',
+      label: 'WordPress API Base URL',
+      value: '/wp-json/wp/v2/',
+      type: 'text',
+      description: 'Base URL for WordPress REST API'
+    },
+    {
+      id: 'jwt_auth_enabled',
+      label: 'JWT Authentication',
+      value: true,
+      type: 'boolean',
+      description: 'Enable JWT authentication for WordPress'
+    },
+    {
+      id: 'wp_nonce_verification',
+      label: 'WordPress Nonce Verification',
+      value: true,
+      type: 'boolean',
+      description: 'Verify WordPress nonces for security'
+    },
+    {
+      id: 'hyiplab_compatibility',
+      label: 'HYIPLab Plugin Compatibility',
+      value: true,
+      type: 'boolean',
+      description: 'Maintain compatibility with HYIPLab plugin'
+    }
+  ],
+  performance: [
+    {
+      id: 'caching_enabled',
+      label: 'Response Caching',
+      value: true,
+      type: 'boolean',
+      description: 'Enable API response caching'
+    },
+    {
+      id: 'cache_duration',
+      label: 'Cache Duration (minutes)',
+      value: 15,
+      type: 'number',
+      description: 'How long to cache API responses'
+    },
+    {
+      id: 'rate_limit_enabled',
+      label: 'Rate Limiting',
+      value: true,
+      type: 'boolean',
+      description: 'Enable API rate limiting'
+    },
+    {
+      id: 'rate_limit_max',
+      label: 'Rate Limit Max Requests',
+      value: 100,
+      type: 'number',
+      description: 'Maximum requests per rate limit window'
+    },
+    {
+      id: 'rate_limit_window_ms',
+      label: 'Rate Limit Window (ms)',
+      value: 900000,
+      type: 'number',
+      description: 'Rate limit time window in milliseconds'
+    },
+    {
+      id: 'redis_enabled',
+      label: 'Redis Caching',
+      value: false,
+      type: 'boolean',
+      description: 'Enable Redis for advanced caching'
+    },
+    {
+      id: 'redis_url',
+      label: 'Redis URL',
+      value: 'redis://localhost:6379',
+      type: 'text',
+      description: 'Redis connection URL'
     }
   ]
 };
@@ -185,7 +353,10 @@ const categoryIcons: { [key: string]: React.ComponentType } = {
   security: Shield,
   investment: DollarSign,
   payments: CreditCard,
-  notifications: Bell
+  notifications: Bell,
+  analytics: BarChart3,
+  wordpress: Globe,
+  performance: Activity
 };
 
 export default function AdminSettings() {
