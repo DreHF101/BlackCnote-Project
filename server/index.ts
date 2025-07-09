@@ -10,7 +10,7 @@ const app = express();
 // Security and CORS middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'development' 
-    ? ['http://localhost:3000', 'http://localhost:5174', 'http://localhost:5000']
+    ? ['http://localhost:3000', 'http://localhost:5174', 'http://localhost:5000', /\.replit\.dev$/, /\.worf\.replit\.dev$/]
     : true,
   credentials: true
 }));
@@ -22,7 +22,12 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Security headers
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
+  // Allow framing for Replit preview
+  if (process.env.NODE_ENV === 'development') {
+    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  } else {
+    res.setHeader('X-Frame-Options', 'DENY');
+  }
   res.setHeader('X-XSS-Protection', '1; mode=block');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   next();
