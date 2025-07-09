@@ -51,24 +51,15 @@ function Header() {
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #dc2626 100%)',
-            borderRadius: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 8px 25px rgba(245, 158, 11, 0.3)',
-            border: '2px solid rgba(255, 255, 255, 0.1)'
-          }}>
-            <span style={{ 
-              fontSize: '20px', 
-              fontWeight: 'bold', 
-              color: 'white',
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-            }}>BC</span>
-          </div>
+          <img 
+            src="/assets/img/hero-logo.png" 
+            alt="BlackCnote Investment Platform" 
+            style={{
+              height: '48px',
+              width: 'auto',
+              filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+            }}
+          />
           <div>
             <div style={{
               fontSize: '26px',
@@ -218,17 +209,14 @@ function Footer() {
               gap: '12px',
               marginBottom: '16px'
             }}>
-              <div style={{
-                width: '32px',
-                height: '32px',
-                background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}>
-                <span style={{ fontSize: '14px', fontWeight: 'bold', color: 'white' }}>BC</span>
-              </div>
+              <img 
+                src="/assets/img/hero-logo.png" 
+                alt="BlackCnote Investment Platform" 
+                style={{
+                  height: '32px',
+                  width: 'auto'
+                }}
+              />
               <span style={{
                 fontSize: '18px',
                 fontWeight: 'bold',
