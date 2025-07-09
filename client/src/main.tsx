@@ -1,8 +1,8 @@
 import { createRoot } from "react-dom/client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Page Components
-function HomePage() {
+function HomePage({ onLogin }) {
   return (
     <>
       {/* Hero Section */}
@@ -32,16 +32,19 @@ function HomePage() {
           justifyContent: 'center',
           flexWrap: 'wrap'
         }}>
-          <button style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            padding: '0.75rem 2rem',
-            borderRadius: '0.5rem',
-            border: 'none',
-            color: 'white',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer'
-          }}>
+          <button 
+            onClick={onLogin}
+            style={{
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+              padding: '0.75rem 2rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              color: 'white',
+              fontSize: '1rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
             Start Investing Now
           </button>
           <button style={{
@@ -191,7 +194,217 @@ function HomePage() {
   );
 }
 
-function InvestmentsPage() {
+function LoginPage({ onLogin }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(username, password);
+  };
+
+  return (
+    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{
+        fontSize: '2.5rem',
+        marginBottom: '2rem',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        Login to BlackCnote
+      </h1>
+      <form onSubmit={handleSubmit} style={{
+        backgroundColor: '#1e293b',
+        padding: '2rem',
+        borderRadius: '0.75rem',
+        border: '1px solid #475569'
+      }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ color: 'white', marginBottom: '0.5rem', display: 'block' }}>
+            Username
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #475569',
+              backgroundColor: '#0f172a',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: '2rem' }}>
+          <label style={{ color: 'white', marginBottom: '0.5rem', display: 'block' }}>
+            Password
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #475569',
+              backgroundColor: '#0f172a',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            color: 'white',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function RegisterPage({ onLogin }) {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      });
+      
+      if (response.ok) {
+        onLogin(username, password);
+      } else {
+        throw new Error('Registration failed');
+      }
+    } catch (error) {
+      console.error('Registration error:', error);
+      alert('Registration failed. Please try again.');
+    }
+  };
+
+  return (
+    <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{
+        fontSize: '2.5rem',
+        marginBottom: '2rem',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        Join BlackCnote
+      </h1>
+      <form onSubmit={handleSubmit} style={{
+        backgroundColor: '#1e293b',
+        padding: '2rem',
+        borderRadius: '0.75rem',
+        border: '1px solid #475569'
+      }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ color: 'white', marginBottom: '0.5rem', display: 'block' }}>
+            Username
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #475569',
+              backgroundColor: '#0f172a',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <label style={{ color: 'white', marginBottom: '0.5rem', display: 'block' }}>
+            Email
+          </label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #475569',
+              backgroundColor: '#0f172a',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+            required
+          />
+        </div>
+        <div style={{ marginBottom: '2rem' }}>
+          <label style={{ color: 'white', marginBottom: '0.5rem', display: 'block' }}>
+            Password
+          </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #475569',
+              backgroundColor: '#0f172a',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            color: 'white',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  );
+}
+
+function InvestmentsPage({ plans, isAuthenticated }) {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
       <h1 style={{
@@ -207,84 +420,58 @@ function InvestmentsPage() {
         gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
         gap: '2rem'
       }}>
-        <div style={{
-          backgroundColor: '#1e293b',
-          padding: '2rem',
-          borderRadius: '0.75rem',
-          border: '1px solid #475569',
-          textAlign: 'center'
-        }}>
-          <h3 style={{ color: '#10b981', marginBottom: '1rem' }}>Starter Plan</h3>
-          <p style={{ color: '#f59e0b', fontSize: '2rem', marginBottom: '1rem' }}>5.2% APY</p>
-          <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>Minimum: $100</p>
-          <p style={{ color: '#94a3b8', marginBottom: '2rem' }}>Duration: 30 days</p>
-          <button style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            padding: '0.75rem 2rem',
-            borderRadius: '0.5rem',
-            border: 'none',
-            color: 'white',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer'
+        {plans.map((plan, index) => (
+          <div key={plan.id || index} style={{
+            backgroundColor: '#1e293b',
+            padding: '2rem',
+            borderRadius: '0.75rem',
+            border: '1px solid #475569',
+            textAlign: 'center'
           }}>
-            Invest Now
-          </button>
-        </div>
-        <div style={{
-          backgroundColor: '#1e293b',
-          padding: '2rem',
-          borderRadius: '0.75rem',
-          border: '1px solid #475569',
-          textAlign: 'center'
-        }}>
-          <h3 style={{ color: '#3b82f6', marginBottom: '1rem' }}>Pro Plan</h3>
-          <p style={{ color: '#f59e0b', fontSize: '2rem', marginBottom: '1rem' }}>8.7% APY</p>
-          <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>Minimum: $500</p>
-          <p style={{ color: '#94a3b8', marginBottom: '2rem' }}>Duration: 60 days</p>
-          <button style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            padding: '0.75rem 2rem',
-            borderRadius: '0.5rem',
-            border: 'none',
-            color: 'white',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer'
-          }}>
-            Invest Now
-          </button>
-        </div>
-        <div style={{
-          backgroundColor: '#1e293b',
-          padding: '2rem',
-          borderRadius: '0.75rem',
-          border: '1px solid #475569',
-          textAlign: 'center'
-        }}>
-          <h3 style={{ color: '#8b5cf6', marginBottom: '1rem' }}>VIP Plan</h3>
-          <p style={{ color: '#f59e0b', fontSize: '2rem', marginBottom: '1rem' }}>12.4% APY</p>
-          <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>Minimum: $1,000</p>
-          <p style={{ color: '#94a3b8', marginBottom: '2rem' }}>Duration: 90 days</p>
-          <button style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            padding: '0.75rem 2rem',
-            borderRadius: '0.5rem',
-            border: 'none',
-            color: 'white',
-            fontSize: '1rem',
-            fontWeight: '600',
-            cursor: 'pointer'
-          }}>
-            Invest Now
-          </button>
-        </div>
+            <h3 style={{ 
+              color: index === 0 ? '#10b981' : index === 1 ? '#3b82f6' : '#8b5cf6', 
+              marginBottom: '1rem' 
+            }}>
+              {plan.name}
+            </h3>
+            <p style={{ color: '#f59e0b', fontSize: '2rem', marginBottom: '1rem' }}>
+              {plan.apy}% APY
+            </p>
+            <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>
+              Minimum: ${plan.minAmount}
+            </p>
+            <p style={{ color: '#94a3b8', marginBottom: '2rem' }}>
+              Duration: {plan.duration} days
+            </p>
+            <button 
+              onClick={() => {
+                if (isAuthenticated) {
+                  alert(`Investing in ${plan.name}...`);
+                } else {
+                  alert('Please login to invest');
+                }
+              }}
+              style={{
+                background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+                padding: '0.75rem 2rem',
+                borderRadius: '0.5rem',
+                border: 'none',
+                color: 'white',
+                fontSize: '1rem',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}
+            >
+              Invest Now
+            </button>
+          </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function DashboardPage() {
+function DashboardPage({ user, stats }) {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
       <h1 style={{
@@ -309,7 +496,7 @@ function DashboardPage() {
           textAlign: 'center'
         }}>
           <h3 style={{ color: '#10b981', marginBottom: '1rem' }}>Total Balance</h3>
-          <p style={{ color: 'white', fontSize: '2rem' }}>$2,450.00</p>
+          <p style={{ color: 'white', fontSize: '2rem' }}>${stats.totalBalance.toFixed(2)}</p>
         </div>
         <div style={{
           backgroundColor: '#1e293b',
@@ -319,7 +506,7 @@ function DashboardPage() {
           textAlign: 'center'
         }}>
           <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Active Investments</h3>
-          <p style={{ color: 'white', fontSize: '2rem' }}>3</p>
+          <p style={{ color: 'white', fontSize: '2rem' }}>{stats.activeInvestments}</p>
         </div>
         <div style={{
           backgroundColor: '#1e293b',
@@ -329,7 +516,7 @@ function DashboardPage() {
           textAlign: 'center'
         }}>
           <h3 style={{ color: '#3b82f6', marginBottom: '1rem' }}>Total Profit</h3>
-          <p style={{ color: 'white', fontSize: '2rem' }}>$124.50</p>
+          <p style={{ color: 'white', fontSize: '2rem' }}>${stats.totalProfit.toFixed(2)}</p>
         </div>
         <div style={{
           backgroundColor: '#1e293b',
@@ -339,7 +526,7 @@ function DashboardPage() {
           textAlign: 'center'
         }}>
           <h3 style={{ color: '#8b5cf6', marginBottom: '1rem' }}>Pending Withdrawals</h3>
-          <p style={{ color: 'white', fontSize: '2rem' }}>$0.00</p>
+          <p style={{ color: 'white', fontSize: '2rem' }}>${stats.pendingWithdrawals.toFixed(2)}</p>
         </div>
       </div>
       <div style={{
@@ -359,17 +546,113 @@ function DashboardPage() {
   );
 }
 
-function CalculatorPage() {
+function AIAssistantPage({ user }) {
+  const [recommendations, setRecommendations] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const loadRecommendations = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai-financial-assistant/recommendations');
+      if (response.ok) {
+        const data = await response.json();
+        setRecommendations(data);
+      }
+    } catch (error) {
+      console.error('Failed to load AI recommendations:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadRecommendations();
+  }, []);
+
+  return (
+    <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <h1 style={{
+        fontSize: '2.5rem',
+        marginBottom: '2rem',
+        color: 'white',
+        textAlign: 'center'
+      }}>
+        AI Financial Assistant
+      </h1>
+      
+      <div style={{
+        backgroundColor: '#1e293b',
+        padding: '2rem',
+        borderRadius: '0.75rem',
+        border: '1px solid #475569',
+        marginBottom: '2rem'
+      }}>
+        <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Personalized Recommendations</h2>
+        <button 
+          onClick={loadRecommendations}
+          style={{
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '0.5rem',
+            border: 'none',
+            color: 'white',
+            fontSize: '1rem',
+            fontWeight: '600',
+            cursor: 'pointer'
+          }}
+        >
+          {loading ? 'Loading...' : 'Get AI Recommendations'}
+        </button>
+      </div>
+
+      {recommendations.length > 0 && (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          gap: '2rem'
+        }}>
+          {recommendations.map((rec, index) => (
+            <div key={index} style={{
+              backgroundColor: '#1e293b',
+              padding: '2rem',
+              borderRadius: '0.75rem',
+              border: '1px solid #475569'
+            }}>
+              <h3 style={{ color: '#10b981', marginBottom: '1rem' }}>{rec.title}</h3>
+              <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>{rec.description}</p>
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center'
+              }}>
+                <span style={{ 
+                  color: rec.priority === 'high' ? '#f59e0b' : rec.priority === 'medium' ? '#3b82f6' : '#10b981',
+                  fontSize: '0.875rem',
+                  fontWeight: '600'
+                }}>
+                  {rec.priority.toUpperCase()} PRIORITY
+                </span>
+                <span style={{ color: '#8b5cf6', fontSize: '0.875rem' }}>
+                  {rec.confidence}% confidence
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CalculatorPage({ plans }) {
   const [amount, setAmount] = useState(1000);
-  const [plan, setPlan] = useState('starter');
+  const [plan, setPlan] = useState(plans[0]?.id || '1');
   
   const calculateReturns = () => {
-    const rates = {
-      starter: 0.052,
-      pro: 0.087,
-      vip: 0.124
-    };
-    const rate = rates[plan];
+    const selectedPlan = plans.find(p => p.id === parseInt(plan)) || plans[0];
+    if (!selectedPlan) return { daily: '0.00', monthly: '0.00', total: '0.00' };
+    
+    const rate = selectedPlan.apy / 100;
     const dailyReturn = (amount * rate) / 365;
     const monthlyReturn = dailyReturn * 30;
     const totalReturn = amount + monthlyReturn;
@@ -436,9 +719,11 @@ function CalculatorPage() {
               fontSize: '1rem'
             }}
           >
-            <option value="starter">Starter Plan (5.2% APY)</option>
-            <option value="pro">Pro Plan (8.7% APY)</option>
-            <option value="vip">VIP Plan (12.4% APY)</option>
+            {plans.map(p => (
+              <option key={p.id} value={p.id}>
+                {p.name} ({p.apy}% APY)
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -475,19 +760,118 @@ function CalculatorPage() {
 // Enhanced BlackCnote Platform
 function BlackCnotePlatform() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [investmentPlans, setInvestmentPlans] = useState([]);
+  const [userStats, setUserStats] = useState({
+    totalBalance: 0,
+    activeInvestments: 0,
+    totalProfit: 0,
+    pendingWithdrawals: 0
+  });
+
+  // Load investment plans and user data
+  useEffect(() => {
+    loadInvestmentPlans();
+    checkAuthStatus();
+  }, []);
+
+  const loadInvestmentPlans = async () => {
+    try {
+      const response = await fetch('/api/investment-plans');
+      const plans = await response.json();
+      setInvestmentPlans(plans);
+    } catch (error) {
+      console.error('Failed to load investment plans:', error);
+      // Fallback to demo plans
+      setInvestmentPlans([
+        { id: 1, name: 'Starter Plan', apy: 5.2, minAmount: 100, duration: 30 },
+        { id: 2, name: 'Pro Plan', apy: 8.7, minAmount: 500, duration: 60 },
+        { id: 3, name: 'VIP Plan', apy: 12.4, minAmount: 1000, duration: 90 }
+      ]);
+    }
+  };
+
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch('/api/auth/me');
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        setIsAuthenticated(true);
+        loadUserStats();
+      }
+    } catch (error) {
+      console.error('Auth check failed:', error);
+    }
+  };
+
+  const loadUserStats = async () => {
+    try {
+      const response = await fetch('/api/users/stats');
+      if (response.ok) {
+        const stats = await response.json();
+        setUserStats(stats);
+      }
+    } catch (error) {
+      console.error('Failed to load user stats:', error);
+    }
+  };
+
+  const handleLogin = async (username, password) => {
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+      });
+      
+      if (response.ok) {
+        const userData = await response.json();
+        setUser(userData);
+        setIsAuthenticated(true);
+        loadUserStats();
+        setCurrentPage('dashboard');
+      } else {
+        throw new Error('Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('Login failed. Please try again.');
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+      setUser(null);
+      setIsAuthenticated(false);
+      setCurrentPage('home');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const renderPage = () => {
     switch(currentPage) {
       case 'home':
-        return <HomePage />;
+        return <HomePage onLogin={() => setCurrentPage('login')} />;
+      case 'login':
+        return <LoginPage onLogin={handleLogin} />;
+      case 'register':
+        return <RegisterPage onLogin={handleLogin} />;
       case 'investments':
-        return <InvestmentsPage />;
+        return <InvestmentsPage plans={investmentPlans} isAuthenticated={isAuthenticated} />;
       case 'dashboard':
-        return <DashboardPage />;
+        return isAuthenticated ? <DashboardPage user={user} stats={userStats} /> : <LoginPage onLogin={handleLogin} />;
       case 'calculator':
-        return <CalculatorPage />;
+        return <CalculatorPage plans={investmentPlans} />;
+      case 'ai-assistant':
+        return isAuthenticated ? <AIAssistantPage user={user} /> : <LoginPage onLogin={handleLogin} />;
       default:
-        return <HomePage />;
+        return <HomePage onLogin={() => setCurrentPage('login')} />;
     }
   };
   return (
@@ -523,7 +907,8 @@ function BlackCnotePlatform() {
         </div>
         <nav style={{
           display: 'flex',
-          gap: '2rem'
+          gap: '2rem',
+          alignItems: 'center'
         }}>
           <button 
             onClick={() => setCurrentPage('home')}
@@ -551,19 +936,21 @@ function BlackCnotePlatform() {
           >
             Investments
           </button>
-          <button 
-            onClick={() => setCurrentPage('dashboard')}
-            style={{ 
-              color: currentPage === 'dashboard' ? '#f59e0b' : '#94a3b8', 
-              textDecoration: 'none',
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '1rem'
-            }}
-          >
-            Dashboard
-          </button>
+          {isAuthenticated && (
+            <button 
+              onClick={() => setCurrentPage('dashboard')}
+              style={{ 
+                color: currentPage === 'dashboard' ? '#f59e0b' : '#94a3b8', 
+                textDecoration: 'none',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1rem'
+              }}
+            >
+              Dashboard
+            </button>
+          )}
           <button 
             onClick={() => setCurrentPage('calculator')}
             style={{ 
@@ -577,6 +964,76 @@ function BlackCnotePlatform() {
           >
             Calculator
           </button>
+          {isAuthenticated && (
+            <button 
+              onClick={() => setCurrentPage('ai-assistant')}
+              style={{ 
+                color: currentPage === 'ai-assistant' ? '#f59e0b' : '#94a3b8', 
+                textDecoration: 'none',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                fontSize: '1rem'
+              }}
+            >
+              AI Assistant
+            </button>
+          )}
+          <div style={{ marginLeft: '1rem' }}>
+            {isAuthenticated ? (
+              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                <span style={{ color: '#94a3b8' }}>Welcome, {user?.username}</span>
+                <button 
+                  onClick={handleLogout}
+                  style={{
+                    background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.375rem',
+                    border: 'none',
+                    color: 'white',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button 
+                  onClick={() => setCurrentPage('login')}
+                  style={{
+                    backgroundColor: '#1e293b',
+                    border: '1px solid #475569',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.375rem',
+                    color: 'white',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Login
+                </button>
+                <button 
+                  onClick={() => setCurrentPage('register')}
+                  style={{
+                    background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+                    padding: '0.5rem 1rem',
+                    borderRadius: '0.375rem',
+                    border: 'none',
+                    color: 'white',
+                    fontSize: '0.875rem',
+                    fontWeight: '600',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Register
+                </button>
+              </div>
+            )}
+          </div>
         </nav>
       </header>
 
