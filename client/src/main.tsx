@@ -1,40 +1,17 @@
 import { createRoot } from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import App from "./App";
+import "./index.css";
 
-// Simple test component
-function TestComponent() {
-  return (
-    <div style={{
-      minHeight: '100vh',
-      backgroundColor: '#0f172a',
-      color: 'white',
-      padding: '20px',
-      fontFamily: 'system-ui, -apple-system, sans-serif'
-    }}>
-      <h1 style={{
-        fontSize: '3rem',
-        textAlign: 'center',
-        marginBottom: '20px',
-        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-      }}>
-        BlackCnote - React Test
-      </h1>
-      <p style={{
-        fontSize: '1.2rem',
-        textAlign: 'center',
-        color: '#94a3b8',
-        marginBottom: '40px'
-      }}>
-        If you can see this, React is working!
-      </p>
-    </div>
-  );
-}
+const queryClient = new QueryClient();
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
-  createRoot(rootElement).render(<TestComponent />);
+  createRoot(rootElement).render(
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
+  );
 } else {
   console.error("Root element not found");
 }
