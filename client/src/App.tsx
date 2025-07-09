@@ -3,6 +3,7 @@ import { Switch, Route } from "wouter";
 
 // Import working simple components first
 import SimpleHome from "./pages/simple-home";
+import EnhancedHome from "./pages/enhanced-home";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
@@ -16,6 +17,7 @@ import NotFound from "./pages/not-found";
 
 // Import additional stable pages
 import Help from "./pages/help";
+import SimpleHelp from "./pages/simple-help";
 import Profile from "./pages/profile";
 import Transactions from "./pages/transactions";
 
@@ -24,6 +26,7 @@ import SimpleDeposits from "./pages/simple-deposits";
 import SimpleWithdraw from "./pages/simple-withdraw";
 import Security from "./pages/security";
 import Referrals from "./pages/referrals";
+import SimpleReferrals from "./pages/simple-referrals";
 
 // Import advanced features
 import SimpleNews from "./pages/simple-news";
@@ -49,32 +52,51 @@ function Header() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
           <div style={{
-            width: '40px',
-            height: '40px',
-            background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
-            borderRadius: '12px',
+            width: '48px',
+            height: '48px',
+            background: 'linear-gradient(135deg, #f59e0b 0%, #ea580c 50%, #dc2626 100%)',
+            borderRadius: '16px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            boxShadow: '0 8px 25px rgba(245, 158, 11, 0.3)',
+            border: '2px solid rgba(255, 255, 255, 0.1)'
           }}>
-            <span style={{ fontSize: '18px', fontWeight: 'bold', color: 'white' }}>BC</span>
+            <span style={{ 
+              fontSize: '20px', 
+              fontWeight: 'bold', 
+              color: 'white',
+              textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+            }}>BC</span>
           </div>
-          <span style={{
-            fontSize: '24px',
-            fontWeight: 'bold',
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          }}>
-            BlackCnote
-          </span>
+          <div>
+            <div style={{
+              fontSize: '26px',
+              fontWeight: 'bold',
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              lineHeight: '1',
+              marginBottom: '2px'
+            }}>
+              BlackCnote
+            </div>
+            <div style={{
+              fontSize: '12px',
+              color: '#94a3b8',
+              fontWeight: '500',
+              letterSpacing: '0.5px'
+            }}>
+              Investment Platform
+            </div>
+          </div>
         </a>
       </div>
       
       <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-        <a href="/" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }} 
+        <a href="/about" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }} 
            onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Home</a>
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>About</a>
         <a href="/dashboard" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
            onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Dashboard</a>
@@ -130,7 +152,7 @@ function Header() {
                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
             <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Help</a>
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>❓ Help</a>
             <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }}></div>
             <a href="/deposits" style={{ display: 'block', color: '#10b981', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
@@ -172,18 +194,161 @@ function Header() {
 // Footer Component
 function Footer() {
   return (
-    <div style={{
-      height: '64px',
+    <footer style={{
       backgroundColor: '#0f172a',
       borderTop: '1px solid #334155',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
+      padding: '40px 20px 20px'
     }}>
-      <p style={{ color: '#94a3b8', margin: 0 }}>
-        © 2025 BlackCnote Investment Platform. All rights reserved.
-      </p>
-    </div>
+      <div style={{
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        {/* Main Footer Content */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '40px',
+          marginBottom: '30px'
+        }}>
+          {/* Company Info */}
+          <div>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              marginBottom: '16px'
+            }}>
+              <div style={{
+                width: '32px',
+                height: '32px',
+                background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}>
+                <span style={{ fontSize: '14px', fontWeight: 'bold', color: 'white' }}>BC</span>
+              </div>
+              <span style={{
+                fontSize: '18px',
+                fontWeight: 'bold',
+                color: '#f59e0b'
+              }}>
+                BlackCnote
+              </span>
+            </div>
+            <p style={{ color: '#94a3b8', lineHeight: '1.6', margin: '0 0 16px' }}>
+              The leading investment platform providing secure, high-yield opportunities 
+              with cutting-edge AI technology and professional portfolio management.
+            </p>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <a href="#" style={{
+                width: '32px',
+                height: '32px',
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#94a3b8',
+                textDecoration: 'none'
+              }}>📧</a>
+              <a href="#" style={{
+                width: '32px',
+                height: '32px',
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#94a3b8',
+                textDecoration: 'none'
+              }}>📱</a>
+              <a href="#" style={{
+                width: '32px',
+                height: '32px',
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '6px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#94a3b8',
+                textDecoration: 'none'
+              }}>🐦</a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', fontWeight: '600' }}>
+              Quick Links
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <a href="/about" style={{ color: '#94a3b8', textDecoration: 'none' }}>About Us</a>
+              <a href="/investments" style={{ color: '#94a3b8', textDecoration: 'none' }}>Investment Plans</a>
+              <a href="/calculator" style={{ color: '#94a3b8', textDecoration: 'none' }}>ROI Calculator</a>
+              <a href="/news" style={{ color: '#94a3b8', textDecoration: 'none' }}>News & Updates</a>
+              <a href="/help" style={{ color: '#94a3b8', textDecoration: 'none' }}>Help Center</a>
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', fontWeight: '600' }}>
+              Services
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <a href="/ai-assistant" style={{ color: '#94a3b8', textDecoration: 'none' }}>AI Investment Assistant</a>
+              <a href="/analytics" style={{ color: '#94a3b8', textDecoration: 'none' }}>Portfolio Analytics</a>
+              <a href="/referrals" style={{ color: '#94a3b8', textDecoration: 'none' }}>Referral Program</a>
+              <a href="/security" style={{ color: '#94a3b8', textDecoration: 'none' }}>Security Center</a>
+              <a href="/contact" style={{ color: '#94a3b8', textDecoration: 'none' }}>24/7 Support</a>
+            </div>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h4 style={{ color: '#fff', marginBottom: '16px', fontSize: '16px', fontWeight: '600' }}>
+              Contact Info
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>📧</span>
+                <span>support@blackcnote.com</span>
+              </div>
+              <div style={{ color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>📞</span>
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div style={{ color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>⏰</span>
+                <span>24/7 Customer Support</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div style={{
+          borderTop: '1px solid #334155',
+          paddingTop: '20px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px'
+        }}>
+          <p style={{ color: '#94a3b8', margin: 0, fontSize: '14px' }}>
+            © 2025 BlackCnote Investment Platform. All rights reserved.
+          </p>
+          <div style={{ display: 'flex', gap: '20px' }}>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px' }}>Privacy Policy</a>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px' }}>Terms of Service</a>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none', fontSize: '14px' }}>Risk Disclosure</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
 
@@ -200,7 +365,7 @@ function App() {
       
       <Switch>
         {/* Core Working Pages */}
-        <Route path="/" component={SimpleHome} />
+        <Route path="/" component={EnhancedHome} />
         <Route path="/dashboard" component={SimpleDashboard} />
         <Route path="/investments" component={SimpleInvestments} />
         <Route path="/calculator" component={SimpleCalculator} />
@@ -214,7 +379,7 @@ function App() {
         <Route path="/register" component={SimpleRegister} />
         
         {/* Additional Stable Pages */}
-        <Route path="/help" component={Help} />
+        <Route path="/help" component={SimpleHelp} />
         <Route path="/profile" component={Profile} />
         <Route path="/transactions" component={Transactions} />
         
@@ -222,7 +387,7 @@ function App() {
         <Route path="/deposits" component={SimpleDeposits} />
         <Route path="/withdraw" component={SimpleWithdraw} />
         <Route path="/security" component={Security} />
-        <Route path="/referrals" component={Referrals} />
+        <Route path="/referrals" component={SimpleReferrals} />
         
         {/* Advanced Features */}
         <Route path="/news" component={SimpleNews} />
