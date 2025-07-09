@@ -375,7 +375,7 @@ function App() {
       <Suspense fallback={<LoadingFallback />}>
         <Switch>
           {/* Core Working Pages - No lazy loading */}
-          <Route path="/" component={EnhancedHome} />
+          <Route path="/" component={MinimalHome} />
           <Route path="/dashboard" component={SimpleDashboard} />
           <Route path="/investments" component={SimpleInvestments} />
           <Route path="/calculator" component={SimpleCalculator} />
