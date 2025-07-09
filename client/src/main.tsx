@@ -68,18 +68,15 @@ function Header({ currentPage, onNavigate }) {
             cursor: 'pointer' 
           }}
         >
-          <div style={{
-            width: '48px',
-            height: '48px',
-            backgroundColor: '#f59e0b',
-            borderRadius: '8px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '24px',
-            fontWeight: 'bold',
-            color: 'white'
-          }}>BC</div>
+          <img 
+            src="/assets/img/hero-logo.png" 
+            alt="BlackCnote Investment Platform" 
+            style={{
+              height: '48px',
+              width: 'auto',
+              filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+            }}
+          />
           <div>
             <div style={{
               fontSize: '26px',
@@ -212,20 +209,16 @@ function HomePage({ onNavigate }) {
         backdropFilter: 'blur(10px)',
         border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
-        <div style={{
-          width: '80px',
-          height: '80px',
-          backgroundColor: '#f59e0b',
-          borderRadius: '16px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '48px',
-          fontWeight: 'bold',
-          color: 'white',
-          margin: '0 auto 1rem',
-          boxShadow: '0 8px 25px rgba(245, 158, 11, 0.3)'
-        }}>BC</div>
+        <img 
+          src="/assets/img/hero-logo.png" 
+          alt="BlackCnote Investment Platform" 
+          style={{
+            height: '80px',
+            width: 'auto',
+            marginBottom: '1rem',
+            filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+          }}
+        />
         <h1 style={{
           fontSize: '3rem',
           fontWeight: 'bold',
@@ -356,52 +349,7 @@ function HomePage({ onNavigate }) {
   );
 }
 
-// Simple About Page
-function AboutPage({ onNavigate }) {
-  return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '2rem',
-        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-      }}>
-        About BlackCnote
-      </h1>
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
-        padding: '2rem',
-        borderRadius: '12px',
-        border: '1px solid rgba(245, 158, 11, 0.2)',
-        marginBottom: '2rem'
-      }}>
-        <p style={{ color: '#94a3b8', fontSize: '1.1rem', lineHeight: '1.6' }}>
-          BlackCnote is a leading investment platform that provides secure, high-yield investment 
-          opportunities with cutting-edge technology and professional portfolio management.
-        </p>
-      </div>
-      <button 
-        onClick={() => onNavigate("investments")}
-        style={{
-          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-          border: 'none',
-          color: 'white',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          fontSize: '1rem',
-          fontWeight: 'bold',
-          cursor: 'pointer'
-        }}
-      >
-        View Investment Plans
-      </button>
-    </div>
-  );
-}
-
-// Simple Investments Page
+// InvestmentsPage Component
 function InvestmentsPage({ onNavigate }) {
   const plans = [
     {
@@ -424,6 +372,13 @@ function InvestmentsPage({ onNavigate }) {
       minimum: "$1,000",
       duration: "180 days",
       color: "#8b5cf6"
+    },
+    {
+      name: "Elite Plan",
+      apy: "18.2%",
+      minimum: "$5,000",
+      duration: "365 days",
+      color: "#ef4444"
     }
   ];
 
@@ -432,13 +387,16 @@ function InvestmentsPage({ onNavigate }) {
       <h1 style={{
         fontSize: '2.5rem',
         fontWeight: 'bold',
-        marginBottom: '2rem',
+        marginBottom: '1rem',
         background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
       }}>
         Investment Plans
       </h1>
+      <p style={{ color: '#94a3b8', marginBottom: '3rem', fontSize: '1.1rem' }}>
+        Choose the perfect investment plan that matches your financial goals and risk tolerance.
+      </p>
 
       <div style={{
         display: 'grid',
@@ -464,7 +422,7 @@ function InvestmentsPage({ onNavigate }) {
             </div>
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ color: '#94a3b8', marginBottom: '0.5rem' }}>
-                Minimum: <span style={{ color: 'white', fontWeight: 'bold' }}>{plan.minimum}</span>
+                Minimum Investment: <span style={{ color: 'white', fontWeight: 'bold' }}>{plan.minimum}</span>
               </div>
               <div style={{ color: '#94a3b8' }}>
                 Duration: <span style={{ color: 'white', fontWeight: 'bold' }}>{plan.duration}</span>
@@ -479,7 +437,8 @@ function InvestmentsPage({ onNavigate }) {
               fontSize: '1rem',
               fontWeight: 'bold',
               cursor: 'pointer',
-              width: '100%'
+              width: '100%',
+              marginTop: '1rem'
             }}>
               Invest Now
             </button>
@@ -490,58 +449,119 @@ function InvestmentsPage({ onNavigate }) {
   );
 }
 
-// Simple Dashboard Page
+// DashboardPage Component
 function DashboardPage({ onNavigate }) {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
       <h1 style={{
         fontSize: '2.5rem',
         fontWeight: 'bold',
-        marginBottom: '2rem',
+        marginBottom: '1rem',
         background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
       }}>
         Dashboard
       </h1>
+      <p style={{ color: '#94a3b8', marginBottom: '3rem', fontSize: '1.1rem' }}>
+        Track your investments and monitor your portfolio performance.
+      </p>
 
+      {/* Portfolio Overview */}
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-        gap: '2rem',
-        marginBottom: '3rem'
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+        padding: '2rem',
+        borderRadius: '12px',
+        marginBottom: '2rem',
+        border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
+        <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Portfolio Overview</h2>
         <div style={{
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
-          padding: '2rem',
-          borderRadius: '12px',
-          textAlign: 'center',
-          border: '1px solid rgba(245, 158, 11, 0.2)'
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1rem'
         }}>
-          <h3 style={{ fontSize: '1.8rem', color: '#10b981', marginBottom: '0.5rem' }}>$12,543</h3>
-          <p style={{ color: '#94a3b8' }}>Total Balance</p>
-        </div>
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
-          padding: '2rem',
-          borderRadius: '12px',
-          textAlign: 'center',
-          border: '1px solid rgba(245, 158, 11, 0.2)'
-        }}>
-          <h3 style={{ fontSize: '1.8rem', color: '#f59e0b', marginBottom: '0.5rem' }}>$8,250</h3>
-          <p style={{ color: '#94a3b8' }}>Active Investments</p>
-        </div>
-        <div style={{
-          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
-          padding: '2rem',
-          borderRadius: '12px',
-          textAlign: 'center',
-          border: '1px solid rgba(245, 158, 11, 0.2)'
-        }}>
-          <h3 style={{ fontSize: '1.8rem', color: '#8b5cf6', marginBottom: '0.5rem' }}>$1,293</h3>
-          <p style={{ color: '#94a3b8' }}>Total Returns</p>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981' }}>$12,543</div>
+            <div style={{ color: '#94a3b8' }}>Total Balance</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#f59e0b' }}>$8,250</div>
+            <div style={{ color: '#94a3b8' }}>Active Investments</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#8b5cf6' }}>$1,247</div>
+            <div style={{ color: '#94a3b8' }}>Total Profit</div>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#ef4444' }}>13.2%</div>
+            <div style={{ color: '#94a3b8' }}>Total ROI</div>
+          </div>
         </div>
       </div>
+
+      {/* Recent Transactions */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+        padding: '2rem',
+        borderRadius: '12px',
+        border: '1px solid rgba(245, 158, 11, 0.2)'
+      }}>
+        <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Recent Transactions</h2>
+        <div style={{ color: '#94a3b8' }}>
+          <div style={{ padding: '1rem', borderBottom: '1px solid #334155' }}>
+            <strong>Investment in Growth Plan</strong> - $500 - 2024-01-15
+          </div>
+          <div style={{ padding: '1rem', borderBottom: '1px solid #334155' }}>
+            <strong>Profit Withdrawal</strong> - $125 - 2024-01-10
+          </div>
+          <div style={{ padding: '1rem' }}>
+            <strong>Investment in Starter Plan</strong> - $200 - 2024-01-05
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// CalculatorPage Component
+function CalculatorPage({ onNavigate }) {
+  const [amount, setAmount] = useState(1000);
+  const [plan, setPlan] = useState("growth");
+  const [duration, setDuration] = useState(90);
+
+  const plans = {
+    starter: { apy: 8.5, name: "Starter Plan" },
+    growth: { apy: 12.0, name: "Growth Plan" },
+    premium: { apy: 15.8, name: "Premium Plan" },
+    elite: { apy: 18.2, name: "Elite Plan" }
+  };
+
+  const calculateReturns = () => {
+    const selectedPlan = plans[plan];
+    const dailyRate = selectedPlan.apy / 100 / 365;
+    const compoundedAmount = amount * Math.pow(1 + dailyRate, duration);
+    const profit = compoundedAmount - amount;
+    return { total: compoundedAmount, profit };
+  };
+
+  const { total, profit } = calculateReturns();
+
+  return (
+    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        marginBottom: '1rem',
+        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent'
+      }}>
+        Investment Calculator
+      </h1>
+      <p style={{ color: '#94a3b8', marginBottom: '3rem', fontSize: '1.1rem' }}>
+        Calculate potential returns on your investment with our interactive calculator.
+      </p>
 
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
@@ -549,60 +569,8 @@ function DashboardPage({ onNavigate }) {
         borderRadius: '12px',
         border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
-        <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Recent Activity</h2>
-        <div style={{ color: '#94a3b8' }}>
-          <p>• Investment of $1,000 in Growth Plan - 2 hours ago</p>
-          <p>• Profit payout of $45.50 - 1 day ago</p>
-          <p>• Investment of $500 in Starter Plan - 3 days ago</p>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// Simple Calculator Page
-function CalculatorPage({ onNavigate }) {
-  const [amount, setAmount] = useState(1000);
-  const [plan, setPlan] = useState("growth");
-  
-  const planData = {
-    starter: { apy: 8.5, duration: 30 },
-    growth: { apy: 12.0, duration: 90 },
-    premium: { apy: 15.8, duration: 180 }
-  };
-
-  const calculateReturns = () => {
-    const selectedPlan = planData[plan];
-    const dailyRate = selectedPlan.apy / 100 / 365;
-    const totalReturn = amount * (1 + dailyRate * selectedPlan.duration);
-    const profit = totalReturn - amount;
-    return { totalReturn, profit };
-  };
-
-  const { totalReturn, profit } = calculateReturns();
-
-  return (
-    <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '2rem',
-        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-      }}>
-        Investment Calculator
-      </h1>
-
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
-        padding: '2rem',
-        borderRadius: '12px',
-        border: '1px solid rgba(245, 158, 11, 0.2)',
-        marginBottom: '2rem'
-      }}>
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
+        <div style={{ marginBottom: '2rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
             Investment Amount ($)
           </label>
           <input
@@ -621,8 +589,8 @@ function CalculatorPage({ onNavigate }) {
           />
         </div>
 
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
+        <div style={{ marginBottom: '2rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
             Investment Plan
           </label>
           <select
@@ -638,369 +606,524 @@ function CalculatorPage({ onNavigate }) {
               fontSize: '1rem'
             }}
           >
-            <option value="starter">Starter Plan (8.5% APY - 30 days)</option>
-            <option value="growth">Growth Plan (12.0% APY - 90 days)</option>
-            <option value="premium">Premium Plan (15.8% APY - 180 days)</option>
+            {Object.entries(plans).map(([key, planData]) => (
+              <option key={key} value={key}>
+                {planData.name} - {planData.apy}% APY
+              </option>
+            ))}
           </select>
         </div>
 
+        <div style={{ marginBottom: '2rem' }}>
+          <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+            Duration (days)
+          </label>
+          <input
+            type="number"
+            value={duration}
+            onChange={(e) => setDuration(Number(e.target.value))}
+            style={{
+              width: '100%',
+              padding: '12px',
+              borderRadius: '8px',
+              border: '1px solid #334155',
+              backgroundColor: '#1e293b',
+              color: 'white',
+              fontSize: '1rem'
+            }}
+          />
+        </div>
+
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1rem'
+          background: 'linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%)',
+          padding: '2rem',
+          borderRadius: '8px',
+          border: '1px solid rgba(245, 158, 11, 0.3)'
         }}>
-          <div style={{
-            background: 'rgba(16, 185, 129, 0.1)',
-            padding: '1rem',
-            borderRadius: '8px',
-            border: '1px solid #10b981'
-          }}>
-            <div style={{ color: '#10b981', fontSize: '1.5rem', fontWeight: 'bold' }}>
-              ${totalReturn.toFixed(2)}
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Projected Returns</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#10b981' }}>
+                ${total.toFixed(2)}
+              </div>
+              <div style={{ color: '#94a3b8' }}>Total Amount</div>
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Total Return</div>
-          </div>
-          <div style={{
-            background: 'rgba(245, 158, 11, 0.1)',
-            padding: '1rem',
-            borderRadius: '8px',
-            border: '1px solid #f59e0b'
-          }}>
-            <div style={{ color: '#f59e0b', fontSize: '1.5rem', fontWeight: 'bold' }}>
-              ${profit.toFixed(2)}
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#f59e0b' }}>
+                ${profit.toFixed(2)}
+              </div>
+              <div style={{ color: '#94a3b8' }}>Profit</div>
             </div>
-            <div style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Profit</div>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#8b5cf6' }}>
+                {((profit / amount) * 100).toFixed(1)}%
+              </div>
+              <div style={{ color: '#94a3b8' }}>ROI</div>
+            </div>
           </div>
         </div>
       </div>
-
-      <button 
-        onClick={() => onNavigate("investments")}
-        style={{
-          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-          border: 'none',
-          color: 'white',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          fontSize: '1rem',
-          fontWeight: 'bold',
-          cursor: 'pointer'
-        }}
-      >
-        Start Investing
-      </button>
     </div>
   );
 }
 
-// Simple Contact Page
+// AboutPage Component
+function AboutPage({ onNavigate }) {
+  return (
+    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+      <h1 style={{
+        fontSize: '2.5rem',
+        fontWeight: 'bold',
+        marginBottom: '1rem',
+        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+        WebkitBackgroundClip: 'text',
+        WebkitTextFillColor: 'transparent'
+      }}>
+        About BlackCnote
+      </h1>
+      <p style={{ color: '#94a3b8', marginBottom: '3rem', fontSize: '1.1rem' }}>
+        Leading the future of digital investment with innovative solutions and exceptional service.
+      </p>
+
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+        padding: '2rem',
+        borderRadius: '12px',
+        marginBottom: '2rem',
+        border: '1px solid rgba(245, 158, 11, 0.2)'
+      }}>
+        <h2 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Our Mission</h2>
+        <p style={{ color: '#94a3b8', lineHeight: '1.6' }}>
+          At BlackCnote, we believe that everyone deserves access to professional-grade investment opportunities. 
+          Our platform combines cutting-edge technology with time-tested investment strategies to deliver 
+          consistent returns while maintaining the highest standards of security and transparency.
+        </p>
+      </div>
+
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '2rem'
+      }}>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Security First</h3>
+          <p style={{ color: '#94a3b8' }}>
+            Advanced encryption, multi-factor authentication, and cold storage security measures protect your investments.
+          </p>
+        </div>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Transparency</h3>
+          <p style={{ color: '#94a3b8' }}>
+            Real-time reporting, detailed analytics, and clear fee structures keep you informed every step of the way.
+          </p>
+        </div>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Expert Team</h3>
+          <p style={{ color: '#94a3b8' }}>
+            Our experienced team of financial experts and technology professionals work tirelessly to optimize your returns.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ContactPage Component
 function ContactPage({ onNavigate }) {
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto', padding: '2rem' }}>
       <h1 style={{
         fontSize: '2.5rem',
         fontWeight: 'bold',
-        marginBottom: '2rem',
+        marginBottom: '1rem',
         background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
       }}>
         Contact Us
       </h1>
+      <p style={{ color: '#94a3b8', marginBottom: '3rem', fontSize: '1.1rem' }}>
+        Get in touch with our support team for any questions or assistance.
+      </p>
 
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
         padding: '2rem',
         borderRadius: '12px',
-        border: '1px solid rgba(245, 158, 11, 0.2)',
-        marginBottom: '2rem'
+        border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Get in Touch</h3>
-          <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>
-            Have questions about our investment plans? Our team is here to help you 24/7.
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <div style={{ color: '#94a3b8' }}>
-              📧 Email: <span style={{ color: 'white' }}>support@blackcnote.com</span>
-            </div>
-            <div style={{ color: '#94a3b8' }}>
-              📞 Phone: <span style={{ color: 'white' }}>+1 (555) 123-4567</span>
-            </div>
-            <div style={{ color: '#94a3b8' }}>
-              ⏰ Hours: <span style={{ color: 'white' }}>24/7 Support Available</span>
-            </div>
+        <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Name
+            </label>
+            <input
+              type="text"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
           </div>
-        </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Email
+            </label>
+            <input
+              type="email"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Message
+            </label>
+            <textarea
+              rows={5}
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem',
+                resize: 'vertical'
+              }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+              border: 'none',
+              color: 'white',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              marginTop: '1rem'
+            }}
+          >
+            Send Message
+          </button>
+        </form>
       </div>
 
-      <button 
-        onClick={() => onNavigate("about")}
-        style={{
-          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-          border: 'none',
-          color: 'white',
-          padding: '12px 24px',
-          borderRadius: '8px',
-          fontSize: '1rem',
-          fontWeight: 'bold',
-          cursor: 'pointer'
-        }}
-      >
-        Learn More About Us
-      </button>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '2rem',
+        marginTop: '3rem'
+      }}>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          textAlign: 'center',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Email</h3>
+          <p style={{ color: '#94a3b8' }}>support@blackcnote.com</p>
+        </div>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          textAlign: 'center',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Phone</h3>
+          <p style={{ color: '#94a3b8' }}>+1 (555) 123-4567</p>
+        </div>
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
+          padding: '2rem',
+          borderRadius: '12px',
+          textAlign: 'center',
+          border: '1px solid rgba(245, 158, 11, 0.2)'
+        }}>
+          <h3 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Support Hours</h3>
+          <p style={{ color: '#94a3b8' }}>24/7 Available</p>
+        </div>
+      </div>
     </div>
   );
 }
 
-// Simple Login Page
+// LoginPage Component
 function LoginPage({ onNavigate }) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '2rem',
-        textAlign: 'center',
-        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-      }}>
-        Login
-      </h1>
-
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
         padding: '2rem',
         borderRadius: '12px',
         border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Username
-          </label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <img 
+            src="/assets/img/hero-logo.png" 
+            alt="BlackCnote" 
             style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
+              height: '60px',
+              width: 'auto',
+              marginBottom: '1rem',
+              filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
             }}
           />
-        </div>
-
-        <div style={{ marginBottom: '2rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Password
-          </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
-
-        <button 
-          onClick={() => onNavigate("dashboard")}
-          style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            border: 'none',
-            color: 'white',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            fontSize: '1rem',
+          <h1 style={{
+            fontSize: '2rem',
             fontWeight: 'bold',
-            cursor: 'pointer',
-            width: '100%',
-            marginBottom: '1rem'
-          }}
-        >
-          Login
-        </button>
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Welcome Back
+          </h1>
+          <p style={{ color: '#94a3b8' }}>Sign in to your account</p>
+        </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <span style={{ color: '#94a3b8' }}>Don't have an account? </span>
-          <button 
-            onClick={() => onNavigate("register")}
+        <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Email
+            </label>
+            <input
+              type="email"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Password
+            </label>
+            <input
+              type="password"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <button
+            type="submit"
             style={{
-              background: 'none',
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
               border: 'none',
-              color: '#f59e0b',
+              color: 'white',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: 'bold',
               cursor: 'pointer',
-              textDecoration: 'underline'
+              marginTop: '1rem'
             }}
           >
-            Register here
+            Sign In
           </button>
+        </form>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p style={{ color: '#94a3b8' }}>
+            Don't have an account?{' '}
+            <button 
+              onClick={() => onNavigate("register")}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#f59e0b',
+                cursor: 'pointer',
+                textDecoration: 'underline'
+              }}
+            >
+              Sign up
+            </button>
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-// Simple Register Page
+// RegisterPage Component
 function RegisterPage({ onNavigate }) {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
   return (
     <div style={{ maxWidth: '400px', margin: '0 auto', padding: '2rem' }}>
-      <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '2rem',
-        textAlign: 'center',
-        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-      }}>
-        Register
-      </h1>
-
       <div style={{
         background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%)',
         padding: '2rem',
         borderRadius: '12px',
         border: '1px solid rgba(245, 158, 11, 0.2)'
       }}>
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Username
-          </label>
-          <input
-            type="text"
-            value={formData.username}
-            onChange={(e) => handleChange('username', e.target.value)}
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <img 
+            src="/assets/img/hero-logo.png" 
+            alt="BlackCnote" 
             style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
+              height: '60px',
+              width: 'auto',
+              marginBottom: '1rem',
+              filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
             }}
           />
-        </div>
-
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Email
-          </label>
-          <input
-            type="email"
-            value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
-
-        <div style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Password
-          </label>
-          <input
-            type="password"
-            value={formData.password}
-            onChange={(e) => handleChange('password', e.target.value)}
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
-
-        <div style={{ marginBottom: '2rem' }}>
-          <label style={{ display: 'block', color: '#94a3b8', marginBottom: '0.5rem' }}>
-            Confirm Password
-          </label>
-          <input
-            type="password"
-            value={formData.confirmPassword}
-            onChange={(e) => handleChange('confirmPassword', e.target.value)}
-            style={{
-              width: '100%',
-              padding: '12px',
-              borderRadius: '8px',
-              border: '1px solid #334155',
-              backgroundColor: '#1e293b',
-              color: 'white',
-              fontSize: '1rem'
-            }}
-          />
-        </div>
-
-        <button 
-          onClick={() => onNavigate("dashboard")}
-          style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            border: 'none',
-            color: 'white',
-            padding: '12px 24px',
-            borderRadius: '8px',
-            fontSize: '1rem',
+          <h1 style={{
+            fontSize: '2rem',
             fontWeight: 'bold',
-            cursor: 'pointer',
-            width: '100%',
-            marginBottom: '1rem'
-          }}
-        >
-          Create Account
-        </button>
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            Create Account
+          </h1>
+          <p style={{ color: '#94a3b8' }}>Join thousands of investors</p>
+        </div>
 
-        <div style={{ textAlign: 'center' }}>
-          <span style={{ color: '#94a3b8' }}>Already have an account? </span>
-          <button 
-            onClick={() => onNavigate("login")}
+        <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Full Name
+            </label>
+            <input
+              type="text"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Email
+            </label>
+            <input
+              type="email"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Password
+            </label>
+            <input
+              type="password"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <div>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#94a3b8' }}>
+              Confirm Password
+            </label>
+            <input
+              type="password"
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                border: '1px solid #334155',
+                backgroundColor: '#1e293b',
+                color: 'white',
+                fontSize: '1rem'
+              }}
+            />
+          </div>
+          <button
+            type="submit"
             style={{
-              background: 'none',
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
               border: 'none',
-              color: '#f59e0b',
+              color: 'white',
+              padding: '12px 24px',
+              borderRadius: '8px',
+              fontSize: '1rem',
+              fontWeight: 'bold',
               cursor: 'pointer',
-              textDecoration: 'underline'
+              marginTop: '1rem'
             }}
           >
-            Login here
+            Create Account
           </button>
+        </form>
+
+        <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+          <p style={{ color: '#94a3b8' }}>
+            Already have an account?{' '}
+            <button 
+              onClick={() => onNavigate("login")}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#f59e0b',
+                cursor: 'pointer',
+                textDecoration: 'underline'
+              }}
+            >
+              Sign in
+            </button>
+          </p>
         </div>
       </div>
     </div>
@@ -1013,70 +1136,81 @@ function Footer() {
     <footer style={{
       backgroundColor: '#0f172a',
       borderTop: '1px solid #334155',
-      padding: '2rem',
+      padding: '2rem 0',
       marginTop: '4rem'
     }}>
       <div style={{
         maxWidth: '1200px',
         margin: '0 auto',
-        textAlign: 'center'
+        padding: '0 2rem',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gap: '2rem'
       }}>
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '12px',
-          marginBottom: '1rem'
-        }}>
+        <div>
           <div style={{
-            width: '32px',
-            height: '32px',
-            backgroundColor: '#f59e0b',
-            borderRadius: '6px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '18px',
-            fontWeight: 'bold',
-            color: 'white'
-          }}>BC</div>
-          <span style={{
-            fontSize: '18px',
-            fontWeight: 'bold',
-            color: '#f59e0b'
+            gap: '12px',
+            marginBottom: '1rem'
           }}>
-            BlackCnote
-          </span>
+            <img 
+              src="/assets/img/hero-logo.png" 
+              alt="BlackCnote" 
+              style={{
+                height: '40px',
+                width: 'auto',
+                filter: 'drop-shadow(0 4px 15px rgba(245, 158, 11, 0.3))'
+              }}
+            />
+            <span style={{
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            }}>
+              BlackCnote
+            </span>
+          </div>
+          <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+            Professional investment platform delivering consistent returns through innovative technology and expert management.
+          </p>
         </div>
-        <p style={{ color: '#94a3b8', marginBottom: '1rem' }}>
-          © 2025 BlackCnote Investment Platform. All rights reserved.
+        
+        <div>
+          <h4 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Quick Links</h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Investment Plans</a>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Calculator</a>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Dashboard</a>
+            <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Support</a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 style={{ color: '#f59e0b', marginBottom: '1rem' }}>Contact</h4>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <span style={{ color: '#94a3b8' }}>support@blackcnote.com</span>
+            <span style={{ color: '#94a3b8' }}>+1 (555) 123-4567</span>
+            <span style={{ color: '#94a3b8' }}>24/7 Support Available</span>
+          </div>
+        </div>
+      </div>
+      
+      <div style={{
+        maxWidth: '1200px',
+        margin: '2rem auto 0',
+        padding: '2rem 2rem 0',
+        borderTop: '1px solid #334155',
+        textAlign: 'center'
+      }}>
+        <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>
+          © 2024 BlackCnote Investment Platform. All rights reserved.
         </p>
-        <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', color: '#94a3b8' }}>
-          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Privacy Policy</a>
-          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Terms of Service</a>
-          <a href="#" style={{ color: '#94a3b8', textDecoration: 'none' }}>Support</a>
-        </div>
       </div>
     </footer>
   );
 }
 
-// Service Worker Registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log('SW registered: ', registration);
-      })
-      .catch((registrationError) => {
-        console.log('SW registration failed: ', registrationError);
-      });
-  });
-}
-
-// Render the app
-const container = document.getElementById("root");
-if (container) {
-  const root = createRoot(container);
-  root.render(<BlackCnotePlatform />);
-}
+createRoot(document.getElementById("root")!).render(<BlackCnotePlatform />);
