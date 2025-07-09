@@ -1,0 +1,18 @@
+run:
+  command: "npm run dev"
+  
+deployment:
+  build:
+    command: "npm run build"
+  run:
+    command: "npm start"
+    
+modules:
+  - nodejs-20
+  
+ports:
+  - port: 5000
+    visibility: public
+    
+env:
+  NODE_ENV: development
