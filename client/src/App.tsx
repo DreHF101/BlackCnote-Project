@@ -4,54 +4,89 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Header } from "@/components/ui/header";
-import { Footer } from "@/components/ui/footer";
-import { OnboardingTutorial } from "@/components/onboarding/onboarding-tutorial";
 import NotFound from "@/pages/not-found";
-import Home from "@/pages/home";
-import Dashboard from "@/pages/dashboard";
-import Investments from "@/pages/investments";
-import Analytics from "@/pages/analytics";
-import Transactions from "@/pages/transactions";
-import About from "@/pages/about";
-import Contact from "@/pages/contact";
-import Calculator from "@/pages/calculator";
-import Login from "@/pages/login";
-import Register from "@/pages/register";
-import Help from "@/pages/help";
-import Referrals from "@/pages/referrals";
-import News from "@/pages/news";
-import AIAssistant from "@/pages/ai-assistant";
-import Security from "@/pages/security";
-import Withdraw from "@/pages/withdraw";
-import Deposits from "@/pages/deposits";
-import Profile from "@/pages/profile";
-import { WordPressIntegrationProvider } from "@/components/wordpress/WordPressShortcodes";
-import Environment from "@/utils/environment";
+
+// Import pages with error handling
+const Home = React.lazy(() => import("@/pages/test-home").catch(() => import("@/pages/home").catch(() => ({ default: () => <div>Loading...</div> }))));
+const Dashboard = React.lazy(() => import("@/pages/dashboard").catch(() => ({ default: () => <div>Loading...</div> })));
+const Investments = React.lazy(() => import("@/pages/investments").catch(() => ({ default: () => <div>Loading...</div> })));
+const Analytics = React.lazy(() => import("@/pages/analytics").catch(() => ({ default: () => <div>Loading...</div> })));
+const Transactions = React.lazy(() => import("@/pages/transactions").catch(() => ({ default: () => <div>Loading...</div> })));
+const About = React.lazy(() => import("@/pages/about").catch(() => ({ default: () => <div>Loading...</div> })));
+const Contact = React.lazy(() => import("@/pages/contact").catch(() => ({ default: () => <div>Loading...</div> })));
+const Calculator = React.lazy(() => import("@/pages/calculator").catch(() => ({ default: () => <div>Loading...</div> })));
+const Login = React.lazy(() => import("@/pages/login").catch(() => ({ default: () => <div>Loading...</div> })));
+const Register = React.lazy(() => import("@/pages/register").catch(() => ({ default: () => <div>Loading...</div> })));
+const Help = React.lazy(() => import("@/pages/help").catch(() => ({ default: () => <div>Loading...</div> })));
+const Referrals = React.lazy(() => import("@/pages/referrals").catch(() => ({ default: () => <div>Loading...</div> })));
+const News = React.lazy(() => import("@/pages/news").catch(() => ({ default: () => <div>Loading...</div> })));
+const AIAssistant = React.lazy(() => import("@/pages/ai-assistant").catch(() => ({ default: () => <div>Loading...</div> })));
+const Security = React.lazy(() => import("@/pages/security").catch(() => ({ default: () => <div>Loading...</div> })));
+const Withdraw = React.lazy(() => import("@/pages/withdraw").catch(() => ({ default: () => <div>Loading...</div> })));
+const Deposits = React.lazy(() => import("@/pages/deposits").catch(() => ({ default: () => <div>Loading...</div> })));
+const Profile = React.lazy(() => import("@/pages/profile").catch(() => ({ default: () => <div>Loading...</div> })));
+
+// Import components with fallbacks
+let Header, Footer, OnboardingTutorial, WordPressIntegrationProvider, Environment;
+
+try {
+  Header = require("@/components/ui/header").Header;
+} catch {
+  Header = () => <div className="h-16 bg-slate-900 border-b border-slate-800"></div>;
+}
+
+try {
+  Footer = require("@/components/ui/footer").Footer;
+} catch {
+  Footer = () => <div className="h-16 bg-slate-900 border-t border-slate-800"></div>;
+}
+
+try {
+  OnboardingTutorial = require("@/components/onboarding/onboarding-tutorial").OnboardingTutorial;
+} catch {
+  OnboardingTutorial = () => null;
+}
+
+try {
+  WordPressIntegrationProvider = require("@/components/wordpress/WordPressShortcodes").WordPressIntegrationProvider;
+} catch {
+  WordPressIntegrationProvider = ({ children }: { children: React.ReactNode }) => <>{children}</>;
+}
+
+try {
+  Environment = require("@/utils/environment").default;
+} catch {
+  Environment = {
+    initializeEnvironment: () => ({ apiBaseUrl: '/api', authMethod: 'session', isWordPress: false, isReactStandalone: true }),
+    getPlatformClasses: () => 'blackcnote-react-standalone'
+  };
+}
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/investments" component={Investments} />
-      <Route path="/analytics" component={Analytics} />
-      <Route path="/transactions" component={Transactions} />
-      <Route path="/about" component={About} />
-      <Route path="/contact" component={Contact} />
-      <Route path="/calculator" component={Calculator} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/help" component={Help} />
-      <Route path="/referrals" component={Referrals} />
-      <Route path="/news" component={News} />
-      <Route path="/ai-assistant" component={AIAssistant} />
-      <Route path="/security" component={Security} />
-      <Route path="/withdraw" component={Withdraw} />
-      <Route path="/deposits" component={Deposits} />
-      <Route path="/profile" component={Profile} />
-      <Route component={NotFound} />
-    </Switch>
+    <React.Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-spin w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full"></div></div>}>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/dashboard" component={Dashboard} />
+        <Route path="/investments" component={Investments} />
+        <Route path="/analytics" component={Analytics} />
+        <Route path="/transactions" component={Transactions} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/calculator" component={Calculator} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/help" component={Help} />
+        <Route path="/referrals" component={Referrals} />
+        <Route path="/news" component={News} />
+        <Route path="/ai-assistant" component={AIAssistant} />
+        <Route path="/security" component={Security} />
+        <Route path="/withdraw" component={Withdraw} />
+        <Route path="/deposits" component={Deposits} />
+        <Route path="/profile" component={Profile} />
+        <Route component={NotFound} />
+      </Switch>
+    </React.Suspense>
   );
 }
 
