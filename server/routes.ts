@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertInvestmentSchema, insertTransactionSchema } from "@shared/schema";
 import { registerHYIPLabRoutes } from "./hyiplab-integration";
+import { registerAIAndSecurityRoutes } from "./ai-security-routes";
 import { paymentRoutes } from "./payment-routes";
 import { hyipLabPaymentService } from "./hyiplab-payment-service";
 import { z } from "zod";
@@ -185,9 +186,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Register HYIPLab integration routes
+  // Register all route modules
   registerHYIPLabRoutes(app);
-
+  registerAIAndSecurityRoutes(app);
+  
   // Register payment routes
   app.use("/api", paymentRoutes);
 
