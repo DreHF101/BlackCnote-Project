@@ -12,6 +12,36 @@ interface HeaderProps {
 }
 
 export function EnhancedHeader({ isAuthenticated = false, user, onLogout }: HeaderProps) {
+  // Add CSS animations
+  React.useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes dropdownSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      
+      .dropdown-container .dropdown-menu {
+        animation: dropdownSlideIn 0.3s ease-out;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -50,21 +80,23 @@ export function EnhancedHeader({ isAuthenticated = false, user, onLogout }: Head
   ];
 
   const moreNavigation = {
-    'Information': [
-      { name: 'Contact', href: '/contact', icon: '📞', description: 'Get in touch with our team' },
-      { name: 'Help & FAQ', href: '/help', icon: '❓', description: 'Support and documentation' },
-      { name: 'News & Updates', href: '/news', icon: '📰', description: 'Latest platform news' },
+    'Core Features': [
+      { name: 'AI Assistant', href: '/ai-assistant', icon: '🤖', description: 'AI-powered investment recommendations' },
+      { name: 'Smart Pools', href: '/investments', icon: '🏊', description: 'AI-managed investment pools' },
+      { name: 'Portfolio Analytics', href: '/analytics', icon: '📊', description: 'Real-time performance tracking' },
+      { name: 'ROI Calculator', href: '/calculator', icon: '🧮', description: 'Advanced compound interest calculations' },
     ],
-    'Advanced Tools': [
-      { name: 'AI Assistant', href: '/ai-assistant', icon: '🤖', description: 'AI-powered investment advice' },
-      { name: 'Analytics', href: '/analytics', icon: '📈', description: 'Advanced portfolio analytics' },
-      { name: 'Security Center', href: '/security', icon: '🔒', description: 'Manage your account security' },
+    'Financial Services': [
+      { name: 'Deposits', href: '/deposits', icon: '💰', description: 'Fund with 20+ payment gateways' },
+      { name: 'Withdrawals', href: '/withdraw', icon: '🏦', description: 'Automated payout system' },
+      { name: 'Transactions', href: '/transactions', icon: '📋', description: 'Complete transaction history' },
+      { name: 'Referrals', href: '/referrals', icon: '👥', description: 'Multi-layer commission system' },
     ],
-    'Financial': [
-      { name: 'Deposits', href: '/deposits', icon: '💳', description: 'Fund your account' },
-      { name: 'Withdrawals', href: '/withdraw', icon: '🏦', description: 'Withdraw your earnings' },
-      { name: 'Transactions', href: '/transactions', icon: '📋', description: 'View transaction history' },
-      { name: 'Referrals', href: '/referrals', icon: '👥', description: 'Earn referral commissions' },
+    'Platform & Support': [
+      { name: 'Security Center', href: '/security', icon: '🔒', description: '2FA & biometric authentication' },
+      { name: 'Help Center', href: '/help', icon: '❓', description: 'Support and documentation' },
+      { name: 'News & Updates', href: '/news', icon: '📰', description: 'Latest platform developments' },
+      { name: 'Contact', href: '/contact', icon: '📞', description: '24/7 customer support' },
     ]
   };
 
@@ -266,7 +298,7 @@ export function EnhancedHeader({ isAuthenticated = false, user, onLogout }: Head
 
               {/* Enhanced Dropdown Menu */}
               {isMoreDropdownOpen && (
-                <div style={{
+                <div className="dropdown-menu" style={{
                   position: 'absolute',
                   top: 'calc(100% + 12px)',
                   right: 0,
@@ -292,13 +324,13 @@ export function EnhancedHeader({ isAuthenticated = false, user, onLogout }: Head
                       fontWeight: 'bold',
                       marginBottom: '8px'
                     }}>
-                      Explore More Features
+                      BlackCnote Investment Platform
                     </h3>
                     <p style={{
                       color: '#94a3b8',
                       fontSize: '0.9rem'
                     }}>
-                      Access advanced tools and comprehensive platform features
+                      AI-powered investment platform with 20+ payment gateways, smart pools, and comprehensive portfolio management
                     </p>
                   </div>
 
@@ -368,34 +400,133 @@ export function EnhancedHeader({ isAuthenticated = false, user, onLogout }: Head
                     ))}
                   </div>
 
-                  {/* Call to Action */}
+                  {/* Platform Stats & Call to Action */}
                   <div style={{
                     marginTop: '25px',
                     paddingTop: '20px',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-                    textAlign: 'center'
+                    borderTop: '1px solid rgba(255, 255, 255, 0.1)'
                   }}>
-                    <a
-                      href="/register"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '12px 24px',
-                        background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-                        color: 'white',
-                        borderRadius: '12px',
-                        textDecoration: 'none',
-                        fontSize: '0.9rem',
-                        fontWeight: '600',
-                        transition: 'transform 0.2s ease'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                      onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                    >
-                      <span>🚀</span>
-                      Start Investing Today
-                    </a>
+                    {/* Key Stats */}
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(3, 1fr)',
+                      gap: '20px',
+                      marginBottom: '20px'
+                    }}>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{
+                          color: '#f59e0b',
+                          fontSize: '1.5rem',
+                          fontWeight: 'bold',
+                          marginBottom: '4px'
+                        }}>
+                          20+
+                        </div>
+                        <div style={{
+                          color: '#94a3b8',
+                          fontSize: '0.8rem'
+                        }}>
+                          Payment Gateways
+                        </div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{
+                          color: '#10b981',
+                          fontSize: '1.5rem',
+                          fontWeight: 'bold',
+                          marginBottom: '4px'
+                        }}>
+                          18.2%
+                        </div>
+                        <div style={{
+                          color: '#94a3b8',
+                          fontSize: '0.8rem'
+                        }}>
+                          Max APY
+                        </div>
+                      </div>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{
+                          color: '#8b5cf6',
+                          fontSize: '1.5rem',
+                          fontWeight: 'bold',
+                          marginBottom: '4px'
+                        }}>
+                          65+
+                        </div>
+                        <div style={{
+                          color: '#94a3b8',
+                          fontSize: '0.8rem'
+                        }}>
+                          Countries
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Call to Action Buttons */}
+                    <div style={{
+                      display: 'flex',
+                      gap: '12px',
+                      justifyContent: 'center'
+                    }}>
+                      <a
+                        href="/register"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          padding: '12px 20px',
+                          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+                          color: 'white',
+                          borderRadius: '12px',
+                          textDecoration: 'none',
+                          fontSize: '0.9rem',
+                          fontWeight: '600',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.transform = 'translateY(-2px)';
+                          e.currentTarget.style.boxShadow = '0 8px 25px rgba(245, 158, 11, 0.4)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.transform = 'translateY(0)';
+                          e.currentTarget.style.boxShadow = 'none';
+                        }}
+                      >
+                        <span>🚀</span>
+                        Start Investing
+                      </a>
+                      <a
+                        href="/calculator"
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '8px',
+                          padding: '12px 20px',
+                          background: 'transparent',
+                          color: '#94a3b8',
+                          border: '1px solid rgba(255, 255, 255, 0.2)',
+                          borderRadius: '12px',
+                          textDecoration: 'none',
+                          fontSize: '0.9rem',
+                          fontWeight: '600',
+                          transition: 'all 0.2s ease'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.borderColor = 'rgba(245, 158, 11, 0.5)';
+                          e.currentTarget.style.color = '#f59e0b';
+                          e.currentTarget.style.background = 'rgba(245, 158, 11, 0.1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                          e.currentTarget.style.color = '#94a3b8';
+                          e.currentTarget.style.background = 'transparent';
+                        }}
+                      >
+                        <span>🧮</span>
+                        Calculate Returns
+                      </a>
+                    </div>
                   </div>
                 </div>
               )}
