@@ -10,7 +10,7 @@ import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes (simplified for demo)
-  app.get("/api/user/:id", async (req, res) => {
+  app.get("/api/users/:id", async (req, res) => {
     try {
       const userId = parseInt(req.params.id);
       const user = await storage.getUser(userId);
