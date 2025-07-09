@@ -5,14 +5,14 @@ import { Switch, Route } from "wouter";
 import About from "./pages/about";
 import AIAssistant from "./pages/ai-assistant";
 import Analytics from "./pages/analytics";
-import Calculator from "./pages/calculator";
+import SimpleCalculator from "./pages/simple-calculator";
 import Checkout from "./pages/checkout";
 import Contact from "./pages/contact";
-import Dashboard from "./pages/dashboard";
+import SimpleDashboard from "./pages/simple-dashboard";
 import Deposits from "./pages/deposits";
 import Help from "./pages/help";
 import SimpleHome from "./pages/simple-home";
-import Investments from "./pages/investments";
+import SimpleInvestments from "./pages/simple-investments";
 import Login from "./pages/login";
 import News from "./pages/news";
 import NotFound from "./pages/not-found";
@@ -138,9 +138,9 @@ function App() {
         <Route path="/register" component={Register} />
         
         {/* Investment Pages */}
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/investments" component={Investments} />
-        <Route path="/calculator" component={Calculator} />
+        <Route path="/dashboard" component={SimpleDashboard} />
+        <Route path="/investments" component={SimpleInvestments} />
+        <Route path="/calculator" component={SimpleCalculator} />
         <Route path="/analytics" component={Analytics} />
         <Route path="/ai-assistant" component={AIAssistant} />
         
