@@ -1,5 +1,6 @@
 import { db } from "./db";
 import { users, investmentPlans, investments, transactions, portfolioHistory } from "@shared/schema";
+import { seedPaymentGateways } from "./seed-payments";
 
 export async function seedDatabase() {
   try {
@@ -123,6 +124,9 @@ export async function seedDatabase() {
         ...data,
       }))
     );
+
+    // Seed payment gateways
+    await seedPaymentGateways();
 
     console.log("Database seeded successfully!");
   } catch (error) {

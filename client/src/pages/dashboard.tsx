@@ -6,6 +6,7 @@ import RecentTransactions from "@/components/dashboard/recent-transactions";
 import QuickActions from "@/components/dashboard/quick-actions";
 import InvestmentCalculator from "@/components/dashboard/investment-calculator";
 import ActiveInvestmentsTable from "@/components/dashboard/active-investments-table";
+import PaymentDemo from "@/components/payment/payment-demo";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import InvestmentModal from "@/components/modals/investment-modal";
@@ -105,6 +106,11 @@ export default function Dashboard() {
             plans={investmentPlans}
           />
         )}
+
+        {/* Payment Gateway Demo */}
+        <div className="mt-8">
+          <PaymentDemo />
+        </div>
       </div>
 
       {/* Investment Modal */}
