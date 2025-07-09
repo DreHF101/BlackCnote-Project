@@ -94,13 +94,14 @@ app.use((req, res, next) => {
 });
 
 (async () => {
-  // Seed database with initial data
-  await seedDatabase();
-  
-  // Register WordPress compatibility routes
-  registerWordPressCompatibilityRoutes(app);
-  
-  const server = await registerRoutes(app);
+  try {
+    // Seed database with initial data
+    await seedDatabase();
+    
+    // Register WordPress compatibility routes
+    registerWordPressCompatibilityRoutes(app);
+    
+    const server = await registerRoutes(app);
 
   // Enhanced error handling
   app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
@@ -149,4 +150,9 @@ app.use((req, res, next) => {
     log(`🎯 Preview URL: https://5db379d8-9fc3-44b0-94e2-9a078ea6ab2c-00-2iut31ug47ekw.worf.replit.dev`);
     log(`🔗 Local development: http://localhost:${port}`);
   });
+  
+  } catch (error) {
+    console.error('Server startup failed:', error);
+    process.exit(1);
+  }
 })();
