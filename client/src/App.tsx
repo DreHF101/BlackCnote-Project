@@ -36,10 +36,24 @@ import SimpleSecurityPage from "./pages/simple-security";
 import SimpleNews from "./pages/simple-news";
 import Analytics from "./pages/analytics";
 import SimpleAIAssistant from "./pages/simple-ai-assistant";
+import AIAssistant from "./pages/ai-assistant";
+import News from "./pages/news";
 
 // Import payment completion pages
 import Checkout from "./pages/checkout";
 import PaymentSuccess from "./pages/payment-success";
+
+// Import missing standard pages
+import Home from "./pages/home";
+import TestHome from "./pages/test-home";
+import Dashboard from "./pages/dashboard";
+import Investments from "./pages/investments";
+import Calculator from "./pages/calculator";
+import Contact from "./pages/contact";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Deposits from "./pages/deposits";
+import Withdraw from "./pages/withdraw";
 
 // Header Component - Using Enhanced Header Component
 import { EnhancedHeader } from "./components/enhanced-header";
@@ -220,20 +234,34 @@ function App() {
       <Switch>
         {/* Core Working Pages */}
         <Route path="/" component={UltimateHome} />
+        <Route path="/home" component={Home} />
         <Route path="/simple-home" component={SimpleHome} />
         <Route path="/enhanced-home" component={EnhancedHome} />
         <Route path="/comprehensive-home" component={ComprehensiveHome} />
+        <Route path="/test-home" component={TestHome} />
+        
+        {/* Dashboard Pages */}
         <Route path="/dashboard" component={SimpleDashboard} />
+        <Route path="/enhanced-dashboard" component={Dashboard} />
+        
+        {/* Investment Pages */}
         <Route path="/investments" component={SimpleInvestments} />
+        <Route path="/enhanced-investments" component={Investments} />
+        
+        {/* Calculator Pages */}
         <Route path="/calculator" component={SimpleCalculator} />
+        <Route path="/enhanced-calculator" component={Calculator} />
         
         {/* Basic Information Pages */}
         <Route path="/about" component={EnhancedAbout} />
         <Route path="/contact" component={SimpleContact} />
+        <Route path="/enhanced-contact" component={Contact} />
         
         {/* Authentication Pages */}
         <Route path="/login" component={SimpleLogin} />
+        <Route path="/enhanced-login" component={Login} />
         <Route path="/register" component={SimpleRegister} />
+        <Route path="/enhanced-register" component={Register} />
         
         {/* Additional Stable Pages */}
         <Route path="/help" component={SimpleHelp} />
@@ -242,14 +270,19 @@ function App() {
         
         {/* Financial Pages */}
         <Route path="/deposits" component={SimpleDeposits} />
+        <Route path="/enhanced-deposits" component={Deposits} />
         <Route path="/withdraw" component={SimpleWithdraw} />
+        <Route path="/enhanced-withdraw" component={Withdraw} />
         <Route path="/security" component={SimpleSecurityPage} />
         <Route path="/referrals" component={SimpleReferrals} />
+        <Route path="/enhanced-referrals" component={Referrals} />
         
         {/* Advanced Features */}
         <Route path="/news" component={SimpleNews} />
+        <Route path="/enhanced-news" component={News} />
         <Route path="/analytics" component={Analytics} />
         <Route path="/ai-assistant" component={SimpleAIAssistant} />
+        <Route path="/enhanced-ai-assistant" component={AIAssistant} />
         
         {/* Payment Completion Pages */}
         <Route path="/checkout" component={Checkout} />
