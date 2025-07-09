@@ -10,6 +10,7 @@ import SimpleCalculator from "./pages/simple-calculator";
 
 // Import basic working pages
 import About from "./pages/about";
+import EnhancedAbout from "./pages/enhanced-about";
 import SimpleContact from "./pages/simple-contact";
 import SimpleLogin from "./pages/simple-login";
 import SimpleRegister from "./pages/simple-register";
@@ -27,6 +28,7 @@ import SimpleWithdraw from "./pages/simple-withdraw";
 import Security from "./pages/security";
 import Referrals from "./pages/referrals";
 import SimpleReferrals from "./pages/simple-referrals";
+import SimpleSecurityPage from "./pages/simple-security";
 
 // Import advanced features
 import SimpleNews from "./pages/simple-news";
@@ -359,7 +361,7 @@ function App() {
         <Route path="/calculator" component={SimpleCalculator} />
         
         {/* Basic Information Pages */}
-        <Route path="/about" component={About} />
+        <Route path="/about" component={EnhancedAbout} />
         <Route path="/contact" component={SimpleContact} />
         
         {/* Authentication Pages */}
@@ -374,7 +376,7 @@ function App() {
         {/* Financial Pages */}
         <Route path="/deposits" component={SimpleDeposits} />
         <Route path="/withdraw" component={SimpleWithdraw} />
-        <Route path="/security" component={Security} />
+        <Route path="/security" component={SimpleSecurityPage} />
         <Route path="/referrals" component={SimpleReferrals} />
         
         {/* Advanced Features */}
