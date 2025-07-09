@@ -1,29 +1,11 @@
 import React from "react";
 import { Switch, Route } from "wouter";
 
-// Import existing page components
-import About from "./pages/about";
-import AIAssistant from "./pages/ai-assistant";
-import Analytics from "./pages/analytics";
-import SimpleCalculator from "./pages/simple-calculator";
-import Checkout from "./pages/checkout";
-import Contact from "./pages/contact";
-import SimpleDashboard from "./pages/simple-dashboard";
-import Deposits from "./pages/deposits";
-import Help from "./pages/help";
+// Import only working simple components first
 import SimpleHome from "./pages/simple-home";
+import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
-import Login from "./pages/login";
-import News from "./pages/news";
-import NotFound from "./pages/not-found";
-import PaymentSuccess from "./pages/payment-success";
-import Profile from "./pages/profile";
-import Referrals from "./pages/referrals";
-import Register from "./pages/register";
-import Security from "./pages/security";
-import TestHome from "./pages/test-home";
-import Transactions from "./pages/transactions";
-import Withdraw from "./pages/withdraw";
+import SimpleCalculator from "./pages/simple-calculator";
 
 // Header Component
 function Header() {
@@ -126,43 +108,25 @@ function App() {
       <Header />
       
       <Switch>
-        {/* Main Pages */}
+        {/* Working Simple Pages */}
         <Route path="/" component={SimpleHome} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/help" component={Help} />
-        <Route path="/news" component={News} />
-        
-        {/* Authentication Pages */}
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
-        
-        {/* Investment Pages */}
         <Route path="/dashboard" component={SimpleDashboard} />
         <Route path="/investments" component={SimpleInvestments} />
         <Route path="/calculator" component={SimpleCalculator} />
-        <Route path="/analytics" component={Analytics} />
-        <Route path="/ai-assistant" component={AIAssistant} />
         
-        {/* Transaction Pages */}
-        <Route path="/deposits" component={Deposits} />
-        <Route path="/withdraw" component={Withdraw} />
-        <Route path="/transactions" component={Transactions} />
-        
-        {/* Payment Pages */}
-        <Route path="/checkout" component={Checkout} />
-        <Route path="/payment-success" component={PaymentSuccess} />
-        
-        {/* User Pages */}
-        <Route path="/profile" component={Profile} />
-        <Route path="/security" component={Security} />
-        <Route path="/referrals" component={Referrals} />
-        
-        {/* Test/Development Pages */}
-        <Route path="/test-home" component={TestHome} />
-        
-        {/* 404 Page */}
-        <Route component={NotFound} />
+        {/* Fallback */}
+        <Route>
+          <div style={{ padding: '40px', textAlign: 'center' }}>
+            <h2 style={{ color: '#f59e0b', marginBottom: '20px' }}>Page Under Development</h2>
+            <p style={{ color: '#94a3b8' }}>This page is being worked on. Please visit one of the main pages:</p>
+            <div style={{ marginTop: '20px' }}>
+              <a href="/" style={{ color: '#3b82f6', marginRight: '20px' }}>Home</a>
+              <a href="/dashboard" style={{ color: '#3b82f6', marginRight: '20px' }}>Dashboard</a>
+              <a href="/investments" style={{ color: '#3b82f6', marginRight: '20px' }}>Investments</a>
+              <a href="/calculator" style={{ color: '#3b82f6' }}>Calculator</a>
+            </div>
+          </div>
+        </Route>
       </Switch>
       
       <Footer />
