@@ -23,6 +23,9 @@ import Referrals from "@/pages/referrals";
 import News from "@/pages/news";
 import AIAssistant from "@/pages/ai-assistant";
 import Security from "@/pages/security";
+import Withdraw from "@/pages/withdraw";
+import Deposits from "@/pages/deposits";
+import Profile from "@/pages/profile";
 import { WordPressIntegrationProvider } from "@/components/wordpress/WordPressShortcodes";
 import Environment from "@/utils/environment";
 
@@ -44,6 +47,9 @@ function Router() {
       <Route path="/news" component={News} />
       <Route path="/ai-assistant" component={AIAssistant} />
       <Route path="/security" component={Security} />
+      <Route path="/withdraw" component={Withdraw} />
+      <Route path="/deposits" component={Deposits} />
+      <Route path="/profile" component={Profile} />
       <Route component={NotFound} />
     </Switch>
   );

@@ -5,6 +5,10 @@ import { insertInvestmentSchema, insertTransactionSchema } from "@shared/schema"
 import { registerHYIPLabRoutes } from "./hyiplab-integration";
 import { registerAIAndSecurityRoutes } from "./ai-security-routes";
 import { paymentRoutes } from "./payment-routes";
+import { registerAuthRoutes } from "./auth-routes";
+import { registerWithdrawalRoutes } from "./withdrawal-routes";
+import { registerDepositRoutes } from "./deposit-routes";
+import { registerProfileRoutes } from "./profile-routes";
 import { hyipLabPaymentService } from "./hyiplab-payment-service";
 import { z } from "zod";
 
@@ -187,6 +191,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Register all route modules
+  registerAuthRoutes(app);
+  registerWithdrawalRoutes(app);
+  registerDepositRoutes(app);
+  registerProfileRoutes(app);
   registerHYIPLabRoutes(app);
   registerAIAndSecurityRoutes(app);
   

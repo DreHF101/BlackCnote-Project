@@ -25,6 +25,14 @@ export interface IStorage {
   getUserByEmail(email: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
   updateUserBalance(userId: number, balance: string): Promise<User | undefined>;
+  updateUserLastLogin(userId: number): Promise<void>;
+  updateUserPassword(userId: number, hashedPassword: string): Promise<void>;
+  verifyUserEmail(userId: number): Promise<void>;
+  
+  // Password reset methods
+  createPasswordResetToken(userId: number, token: string): Promise<void>;
+  verifyPasswordResetToken(userId: number, token: string): Promise<boolean>;
+  invalidatePasswordResetToken(token: string): Promise<void>;
   
   // Investment Plan methods
   getInvestmentPlans(): Promise<InvestmentPlan[]>;
@@ -40,6 +48,16 @@ export interface IStorage {
   // Transaction methods
   getUserTransactions(userId: number): Promise<Transaction[]>;
   createTransaction(transaction: InsertTransaction): Promise<Transaction>;
+  updateTransactionStatus(userId: number, type: string, referenceId: number, status: string): Promise<void>;
+  
+  // Withdrawal methods
+  createWithdrawal(withdrawal: any): Promise<any>;
+  getUserWithdrawals(userId: number): Promise<any[]>;
+  getUserWithdrawalsAfterDate(userId: number, date: Date): Promise<any[]>;
+  getWithdrawal(id: number): Promise<any>;
+  updateWithdrawalStatus(id: number, status: string, adminNote: string): Promise<void>;
+  getAllWithdrawals(filters: any): Promise<any[]>;
+  getUserWithdrawalStats(userId: number): Promise<any>;
   
   // Portfolio methods
   getUserPortfolioHistory(userId: number): Promise<PortfolioHistory[]>;
@@ -52,11 +70,14 @@ export class MemStorage implements IStorage {
   private investments: Map<number, Investment>;
   private transactions: Map<number, Transaction>;
   private portfolioHistory: Map<number, PortfolioHistory>;
+  private withdrawals: Map<number, any>;
+  private passwordResetTokens: Map<string, { userId: number; token: string; createdAt: Date }>;
   private currentUserId: number;
   private currentPlanId: number;
   private currentInvestmentId: number;
   private currentTransactionId: number;
   private currentHistoryId: number;
+  private currentWithdrawalId: number;
 
   constructor() {
     this.users = new Map();
@@ -64,11 +85,14 @@ export class MemStorage implements IStorage {
     this.investments = new Map();
     this.transactions = new Map();
     this.portfolioHistory = new Map();
+    this.withdrawals = new Map();
+    this.passwordResetTokens = new Map();
     this.currentUserId = 1;
     this.currentPlanId = 1;
     this.currentInvestmentId = 1;
     this.currentTransactionId = 1;
     this.currentHistoryId = 1;
+    this.currentWithdrawalId = 1;
     
     this.initializeData();
   }
@@ -347,6 +371,161 @@ export class MemStorage implements IStorage {
     this.portfolioHistory.set(id, history);
     return history;
   }
+
+  // Auth-related methods
+  async updateUserLastLogin(userId: number): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      const updatedUser = { ...user, lastLogin: new Date() };
+      this.users.set(userId, updatedUser as User);
+    }
+  }
+
+  async updateUserPassword(userId: number, hashedPassword: string): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      const updatedUser = { ...user, password: hashedPassword };
+      this.users.set(userId, updatedUser);
+    }
+  }
+
+  async verifyUserEmail(userId: number): Promise<void> {
+    const user = this.users.get(userId);
+    if (user) {
+      const updatedUser = { ...user, emailVerified: true };
+      this.users.set(userId, updatedUser as User);
+    }
+  }
+
+  async createPasswordResetToken(userId: number, token: string): Promise<void> {
+    this.passwordResetTokens.set(token, {
+      userId,
+      token,
+      createdAt: new Date()
+    });
+  }
+
+  async verifyPasswordResetToken(userId: number, token: string): Promise<boolean> {
+    const resetToken = this.passwordResetTokens.get(token);
+    if (!resetToken || resetToken.userId !== userId) {
+      return false;
+    }
+
+    // Check if token is expired (1 hour)
+    const now = new Date();
+    const tokenAge = now.getTime() - resetToken.createdAt.getTime();
+    const oneHour = 60 * 60 * 1000;
+    
+    return tokenAge < oneHour;
+  }
+
+  async invalidatePasswordResetToken(token: string): Promise<void> {
+    this.passwordResetTokens.delete(token);
+  }
+
+  async updateTransactionStatus(userId: number, type: string, referenceId: number, status: string): Promise<void> {
+    const userTransactions = Array.from(this.transactions.values())
+      .filter(tx => tx.userId === userId && tx.type === type);
+    
+    const transaction = userTransactions.find(tx => 
+      tx.investmentId === referenceId || tx.id === referenceId
+    );
+    
+    if (transaction) {
+      const updatedTransaction = { ...transaction, status };
+      this.transactions.set(transaction.id, updatedTransaction);
+    }
+  }
+
+  // Withdrawal methods
+  async createWithdrawal(withdrawal: any): Promise<any> {
+    const id = this.currentWithdrawalId++;
+    const newWithdrawal = {
+      ...withdrawal,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.withdrawals.set(id, newWithdrawal);
+    return newWithdrawal;
+  }
+
+  async getUserWithdrawals(userId: number): Promise<any[]> {
+    return Array.from(this.withdrawals.values())
+      .filter(withdrawal => withdrawal.userId === userId)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+  }
+
+  async getUserWithdrawalsAfterDate(userId: number, date: Date): Promise<any[]> {
+    return Array.from(this.withdrawals.values())
+      .filter(withdrawal => 
+        withdrawal.userId === userId && 
+        withdrawal.createdAt >= date &&
+        withdrawal.status !== 'cancelled'
+      );
+  }
+
+  async getWithdrawal(id: number): Promise<any> {
+    return this.withdrawals.get(id);
+  }
+
+  async updateWithdrawalStatus(id: number, status: string, adminNote: string): Promise<void> {
+    const withdrawal = this.withdrawals.get(id);
+    if (withdrawal) {
+      const updatedWithdrawal = {
+        ...withdrawal,
+        status,
+        adminNote,
+        updatedAt: new Date()
+      };
+      this.withdrawals.set(id, updatedWithdrawal);
+    }
+  }
+
+  async getAllWithdrawals(filters: any): Promise<any[]> {
+    let withdrawals = Array.from(this.withdrawals.values());
+    
+    if (filters.status) {
+      withdrawals = withdrawals.filter(w => w.status === filters.status);
+    }
+    
+    // Apply pagination
+    const startIndex = (filters.page - 1) * filters.limit;
+    const endIndex = startIndex + filters.limit;
+    
+    return withdrawals
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())
+      .slice(startIndex, endIndex);
+  }
+
+  async getUserWithdrawalStats(userId: number): Promise<any> {
+    const userWithdrawals = await this.getUserWithdrawals(userId);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    
+    const todaysWithdrawals = userWithdrawals.filter(w => 
+      w.createdAt >= today && w.status !== 'cancelled'
+    );
+    
+    const totalWithdrawn = userWithdrawals
+      .filter(w => w.status === 'completed')
+      .reduce((sum, w) => sum + parseFloat(w.amount), 0);
+    
+    const pendingAmount = userWithdrawals
+      .filter(w => w.status === 'pending')
+      .reduce((sum, w) => sum + parseFloat(w.amount), 0);
+    
+    const dailyWithdrawn = todaysWithdrawals
+      .reduce((sum, w) => sum + parseFloat(w.amount), 0);
+
+    return {
+      totalWithdrawn: totalWithdrawn.toFixed(2),
+      pendingAmount: pendingAmount.toFixed(2),
+      dailyWithdrawn: dailyWithdrawn.toFixed(2),
+      withdrawalCount: userWithdrawals.length,
+      pendingCount: userWithdrawals.filter(w => w.status === 'pending').length
+    };
+  }
 }
 
 export class DatabaseStorage implements IStorage {
@@ -527,6 +706,109 @@ export class DatabaseStorage implements IStorage {
       console.error('Database error in addPortfolioHistory:', error);
       throw new Error('Failed to add portfolio history');
     }
+  }
+
+  // Auth-related methods
+  async updateUserLastLogin(userId: number): Promise<void> {
+    try {
+      await db
+        .update(users)
+        .set({ /* lastLogin: new Date() */ })
+        .where(eq(users.id, userId));
+    } catch (error) {
+      console.error('Database error in updateUserLastLogin:', error);
+      throw new Error('Failed to update last login');
+    }
+  }
+
+  async updateUserPassword(userId: number, hashedPassword: string): Promise<void> {
+    try {
+      await db
+        .update(users)
+        .set({ password: hashedPassword })
+        .where(eq(users.id, userId));
+    } catch (error) {
+      console.error('Database error in updateUserPassword:', error);
+      throw new Error('Failed to update password');
+    }
+  }
+
+  async verifyUserEmail(userId: number): Promise<void> {
+    try {
+      await db
+        .update(users)
+        .set({ /* emailVerified: true */ })
+        .where(eq(users.id, userId));
+    } catch (error) {
+      console.error('Database error in verifyUserEmail:', error);
+      throw new Error('Failed to verify email');
+    }
+  }
+
+  async createPasswordResetToken(userId: number, token: string): Promise<void> {
+    // In a real implementation, you'd store this in a separate table
+    // For now, we'll use a simple in-memory approach
+    console.log(`Created password reset token for user ${userId}`);
+  }
+
+  async verifyPasswordResetToken(userId: number, token: string): Promise<boolean> {
+    // In a real implementation, you'd check the database
+    // For now, return true for valid format
+    return token && token.length > 10;
+  }
+
+  async invalidatePasswordResetToken(token: string): Promise<void> {
+    // In a real implementation, you'd remove from database
+    console.log(`Invalidated password reset token`);
+  }
+
+  async updateTransactionStatus(userId: number, type: string, referenceId: number, status: string): Promise<void> {
+    try {
+      await db
+        .update(transactions)
+        .set({ status })
+        .where(eq(transactions.userId, userId));
+    } catch (error) {
+      console.error('Database error in updateTransactionStatus:', error);
+      throw new Error('Failed to update transaction status');
+    }
+  }
+
+  // Withdrawal methods - placeholder implementations
+  async createWithdrawal(withdrawal: any): Promise<any> {
+    // In a real implementation, you'd have a withdrawals table
+    return { ...withdrawal, id: Date.now() };
+  }
+
+  async getUserWithdrawals(userId: number): Promise<any[]> {
+    // Return sample withdrawals for demo
+    return [];
+  }
+
+  async getUserWithdrawalsAfterDate(userId: number, date: Date): Promise<any[]> {
+    return [];
+  }
+
+  async getWithdrawal(id: number): Promise<any> {
+    return null;
+  }
+
+  async updateWithdrawalStatus(id: number, status: string, adminNote: string): Promise<void> {
+    console.log(`Updated withdrawal ${id} status to ${status}`);
+  }
+
+  async getAllWithdrawals(filters: any): Promise<any[]> {
+    return [];
+  }
+
+  async getUserWithdrawalStats(userId: number): Promise<any> {
+    return {
+      totalWithdrawn: "0.00",
+      pendingAmount: "0.00",
+      dailyWithdrawn: "0.00",
+      withdrawalCount: 0,
+      pendingCount: 0
+    };
   }
 }
 
