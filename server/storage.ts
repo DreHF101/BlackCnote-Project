@@ -126,6 +126,28 @@ export class MemStorage implements IStorage {
         isActive: true,
         createdAt: new Date(),
       },
+      {
+        id: this.currentPlanId++,
+        name: "Premium Plus",
+        description: "Premium investment plan with enhanced returns and flexible terms",
+        apyRate: "15.8",
+        minimumAmount: "10000.00",
+        maximumAmount: "250000.00",
+        durationDays: 120,
+        isActive: true,
+        createdAt: new Date(),
+      },
+      {
+        id: this.currentPlanId++,
+        name: "Elite Growth",
+        description: "Elite tier investment with maximum growth potential",
+        apyRate: "18.2",
+        minimumAmount: "50000.00",
+        maximumAmount: "1000000.00",
+        durationDays: 365,
+        isActive: true,
+        createdAt: new Date(),
+      },
     ];
     plans.forEach(plan => this.investmentPlans.set(plan.id, plan));
 
