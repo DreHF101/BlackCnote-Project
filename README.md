@@ -91,8 +91,8 @@ A comprehensive AI-powered investment platform that combines cutting-edge web te
 
 ```bash
 # Clone the repository
-git clone https://github.com/DreHF101/BlackCnoteHYIP.git
-cd BlackCnoteHYIP
+git clone https://github.com/DreHF101/BlackCnote-Project.git
+cd BlackCnote-Project
 
 # Install dependencies
 npm install
@@ -236,7 +236,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Contact
 - **Email**: support@blackcnote.com
 - **Website**: https://blackcnote.com
-- **GitHub**: https://github.com/DreHF101/BlackCnoteHYIP
+- **GitHub**: https://github.com/DreHF101/BlackCnote-Project
 
 ## 🙏 Acknowledgments
 

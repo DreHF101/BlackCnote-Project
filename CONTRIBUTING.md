@@ -27,8 +27,8 @@ Thank you for your interest in contributing to BlackCnote! This document provide
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/DreHF101/BlackCnoteHYIP.git
-   cd BlackCnoteHYIP
+   git clone https://github.com/DreHF101/BlackCnote-Project.git
+   cd BlackCnote-Project
    ```
 
 2. **Set up development environment**
