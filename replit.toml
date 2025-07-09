@@ -1,0 +1,13 @@
+[nix]
+channel = "stable-23_11"
+
+[run]
+name = "Start application"
+command = "npm run dev"
+
+[deployment]
+run = ["sh", "-c", "npm run build && npm run start"]
+ignorePaths = ["node_modules", ".git"]
+
+[env]
+NODE_ENV = "development"
