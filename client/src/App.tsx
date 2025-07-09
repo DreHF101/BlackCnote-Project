@@ -4,6 +4,7 @@ import { Switch, Route } from "wouter";
 // Import working simple components first
 import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
+import ComprehensiveHome from "./pages/comprehensive-home";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
@@ -100,7 +101,7 @@ function Header() {
            onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
            onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Calculator</a>
         
-        {/* Dropdown Menu for More Pages */}
+        {/* Enhanced Dropdown Menu for More Pages */}
         <div style={{ position: 'relative', display: 'inline-block' }}>
           <button style={{
             background: 'none',
@@ -109,11 +110,18 @@ function Header() {
             cursor: 'pointer',
             padding: '8px 12px',
             borderRadius: '6px',
-            fontSize: '16px'
+            fontSize: '16px',
+            fontWeight: '500',
+            transition: 'all 0.2s ease'
           }}
           onMouseEnter={(e) => {
             e.target.style.backgroundColor = 'rgba(255,255,255,0.1)';
+            e.target.style.color = '#f59e0b';
             e.target.nextSibling.style.display = 'block';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.backgroundColor = 'transparent';
+            e.target.style.color = '#cbd5e1';
           }}>
             More ▼
           </button>
@@ -124,41 +132,84 @@ function Header() {
             left: '0',
             backgroundColor: '#1e293b',
             border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '8px',
-            padding: '8px 0',
-            minWidth: '160px',
+            borderRadius: '12px',
+            padding: '12px 0',
+            minWidth: '220px',
             zIndex: 1000,
-            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
+            boxShadow: '0 12px 35px rgba(0,0,0,0.4)',
+            backdropFilter: 'blur(10px)'
           }}
           onMouseLeave={(e) => e.target.style.display = 'none'}>
-            <a href="/about" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>About</a>
-            <a href="/contact" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Contact</a>
-            <a href="/news" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>News</a>
-            <a href="/ai-assistant" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
-            <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>❓ Help</a>
-            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }}></div>
-            <a href="/deposits" style={{ display: 'block', color: '#10b981', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💰 Deposits</a>
-            <a href="/withdraw" style={{ display: 'block', color: '#f59e0b', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💸 Withdraw</a>
-            <a href="/analytics" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>📊 Analytics</a>
-            <a href="/referrals" style={{ display: 'block', color: '#3b82f6', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🎯 Referrals</a>
+            {/* Information Section */}
+            <div style={{ padding: '8px 16px', color: '#94a3b8', fontSize: '0.8rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Information
+            </div>
+            <a href="/about" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#cbd5e1', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.target.style.color = '#f59e0b'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#cbd5e1'; }}>
+              <span>ℹ️</span> About Us
+            </a>
+            <a href="/contact" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#cbd5e1', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.target.style.color = '#f59e0b'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#cbd5e1'; }}>
+              <span>📞</span> Contact
+            </a>
+            <a href="/news" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#cbd5e1', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.target.style.color = '#f59e0b'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#cbd5e1'; }}>
+              <span>📰</span> News & Updates
+            </a>
+            <a href="/help" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#cbd5e1', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.target.style.color = '#f59e0b'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#cbd5e1'; }}>
+              <span>❓</span> Help Center
+            </a>
+            
+            {/* Divider */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '12px 0' }}></div>
+            
+            {/* Tools Section */}
+            <div style={{ padding: '8px 16px', color: '#94a3b8', fontSize: '0.8rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Advanced Tools
+            </div>
+            <a href="/ai-assistant" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#8b5cf6', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(139, 92, 246, 0.1)'; e.target.style.color = '#a855f7'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#8b5cf6'; }}>
+              <span>🤖</span> AI Assistant
+            </a>
+            <a href="/analytics" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#8b5cf6', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(139, 92, 246, 0.1)'; e.target.style.color = '#a855f7'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#8b5cf6'; }}>
+              <span>📊</span> Analytics
+            </a>
+            <a href="/referrals" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#3b82f6', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(59, 130, 246, 0.1)'; e.target.style.color = '#60a5fa'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#3b82f6'; }}>
+              <span>🎯</span> Referrals
+            </a>
+            
+            {/* Divider */}
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '12px 0' }}></div>
+            
+            {/* Financial Section */}
+            <div style={{ padding: '8px 16px', color: '#94a3b8', fontSize: '0.8rem', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              Financial
+            </div>
+            <a href="/deposits" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#10b981', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(16, 185, 129, 0.1)'; e.target.style.color = '#34d399'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#10b981'; }}>
+              <span>💰</span> Deposits
+            </a>
+            <a href="/withdraw" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#f59e0b', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(245, 158, 11, 0.1)'; e.target.style.color = '#fbbf24'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#f59e0b'; }}>
+              <span>💸</span> Withdraw
+            </a>
+            <a href="/security" style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#ef4444', textDecoration: 'none', padding: '10px 16px', transition: 'all 0.2s ease' }}
+               onMouseEnter={(e) => { e.target.style.backgroundColor = 'rgba(239, 68, 68, 0.1)'; e.target.style.color = '#f87171'; }}
+               onMouseLeave={(e) => { e.target.style.backgroundColor = 'transparent'; e.target.style.color = '#ef4444'; }}>
+              <span>🔒</span> Security
+            </a>
           </div>
         </div>
         
@@ -355,7 +406,9 @@ function App() {
       
       <Switch>
         {/* Core Working Pages */}
-        <Route path="/" component={EnhancedHome} />
+        <Route path="/" component={ComprehensiveHome} />
+        <Route path="/simple-home" component={SimpleHome} />
+        <Route path="/enhanced-home" component={EnhancedHome} />
         <Route path="/dashboard" component={SimpleDashboard} />
         <Route path="/investments" component={SimpleInvestments} />
         <Route path="/calculator" component={SimpleCalculator} />
