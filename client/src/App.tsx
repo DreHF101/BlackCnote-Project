@@ -2,6 +2,7 @@ import { Switch, Route } from "wouter";
 import { Suspense, lazy } from "react";
 
 // Core pages - import directly for better reliability
+import MinimalHome from "./pages/minimal-home";
 import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
 import SimpleDashboard from "./pages/simple-dashboard";
