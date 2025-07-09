@@ -9,9 +9,9 @@ import SimpleCalculator from "./pages/simple-calculator";
 
 // Import basic working pages
 import About from "./pages/about";
-import Contact from "./pages/contact";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import SimpleContact from "./pages/simple-contact";
+import SimpleLogin from "./pages/simple-login";
+import SimpleRegister from "./pages/simple-register";
 import NotFound from "./pages/not-found";
 
 // Import additional stable pages
@@ -20,15 +20,15 @@ import Profile from "./pages/profile";
 import Transactions from "./pages/transactions";
 
 // Import payment and other pages
-import Deposits from "./pages/deposits";
-import Withdraw from "./pages/withdraw";
+import SimpleDeposits from "./pages/simple-deposits";
+import SimpleWithdraw from "./pages/simple-withdraw";
 import Security from "./pages/security";
 import Referrals from "./pages/referrals";
 
 // Import advanced features
-import News from "./pages/news";
+import SimpleNews from "./pages/simple-news";
 import Analytics from "./pages/analytics";
-import AIAssistant from "./pages/ai-assistant";
+import SimpleAIAssistant from "./pages/simple-ai-assistant";
 
 // Import payment completion pages
 import Checkout from "./pages/checkout";
@@ -145,11 +145,11 @@ function App() {
         
         {/* Basic Information Pages */}
         <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
+        <Route path="/contact" component={SimpleContact} />
         
         {/* Authentication Pages */}
-        <Route path="/login" component={Login} />
-        <Route path="/register" component={Register} />
+        <Route path="/login" component={SimpleLogin} />
+        <Route path="/register" component={SimpleRegister} />
         
         {/* Additional Stable Pages */}
         <Route path="/help" component={Help} />
@@ -157,15 +157,15 @@ function App() {
         <Route path="/transactions" component={Transactions} />
         
         {/* Financial Pages */}
-        <Route path="/deposits" component={Deposits} />
-        <Route path="/withdraw" component={Withdraw} />
+        <Route path="/deposits" component={SimpleDeposits} />
+        <Route path="/withdraw" component={SimpleWithdraw} />
         <Route path="/security" component={Security} />
         <Route path="/referrals" component={Referrals} />
         
         {/* Advanced Features */}
-        <Route path="/news" component={News} />
+        <Route path="/news" component={SimpleNews} />
         <Route path="/analytics" component={Analytics} />
-        <Route path="/ai-assistant" component={AIAssistant} />
+        <Route path="/ai-assistant" component={SimpleAIAssistant} />
         
         {/* Payment Completion Pages */}
         <Route path="/checkout" component={Checkout} />
