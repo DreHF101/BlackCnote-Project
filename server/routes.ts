@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertInvestmentSchema, insertTransactionSchema } from "@shared/schema";
 import { registerHYIPLabRoutes } from "./hyiplab-integration";
 import { paymentRoutes } from "./payment-routes";
+import { hyipLabPaymentService } from "./hyiplab-payment-service";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -189,6 +190,95 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Register payment routes
   app.use("/api", paymentRoutes);
+
+  // HYIPLab-compatible payment gateway routes
+  app.get("/api/hyiplab/payment-gateways", async (req, res) => {
+    try {
+      const gateways = await hyipLabPaymentService.getAvailableGateways();
+      res.json({
+        success: true,
+        data: gateways,
+        message: 'Payment gateways retrieved successfully'
+      });
+    } catch (error: any) {
+      console.error('Error fetching HYIPLab gateways:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to fetch payment gateways'
+      });
+    }
+  });
+
+  app.post("/api/hyiplab/deposit", async (req, res) => {
+    try {
+      const { gateway, amount, currency = 'USD' } = req.body;
+      
+      if (!gateway || !amount) {
+        return res.status(400).json({
+          success: false,
+          message: 'Gateway and amount are required'
+        });
+      }
+
+      // Calculate fees
+      const fees = hyipLabPaymentService.calculateGatewayFees(gateway, amount);
+      
+      // Prepare HYIPLab deposit data
+      const depositData = {
+        gateway,
+        method_code: 1,
+        amount: amount,
+        charge: fees.total_charge,
+        rate: fees.gateway_rate,
+        final_amo: fees.final_amount,
+        usd_amo: fees.final_amount,
+        trx: '',
+        success_url: `${req.protocol}://${req.get('host')}/payment-success`,
+        failed_url: `${req.protocol}://${req.get('host')}/payment-failed`,
+        cancel_url: `${req.protocol}://${req.get('host')}/payment-cancelled`
+      };
+
+      const result = await hyipLabPaymentService.processDeposit(gateway, depositData);
+      
+      res.json({
+        success: result.success,
+        message: result.message,
+        data: {
+          redirect_url: result.redirect_url,
+          payment_data: result.payment_data,
+          transaction_id: result.transaction_id,
+          fees: fees
+        }
+      });
+    } catch (error: any) {
+      console.error('HYIPLab deposit error:', error);
+      res.status(500).json({
+        success: false,
+        message: error.message || 'Deposit processing failed'
+      });
+    }
+  });
+
+  app.get("/api/hyiplab/transactions", async (req, res) => {
+    try {
+      const userId = req.query.user_id ? parseInt(req.query.user_id as string) : undefined;
+      const limit = req.query.limit ? parseInt(req.query.limit as string) : 50;
+      
+      const transactions = await hyipLabPaymentService.getTransactionHistory(userId, limit);
+      
+      res.json({
+        success: true,
+        data: transactions,
+        message: 'Transaction history retrieved successfully'
+      });
+    } catch (error: any) {
+      console.error('HYIPLab transaction history error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to retrieve transaction history'
+      });
+    }
+  });
 
   const httpServer = createServer(app);
   return httpServer;
