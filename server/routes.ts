@@ -5,6 +5,7 @@ import { insertInvestmentSchema, insertTransactionSchema } from "@shared/schema"
 import { registerHYIPLabRoutes } from "./hyiplab-integration";
 import { registerAIAndSecurityRoutes } from "./ai-security-routes";
 import { registerAIFinancialRoutes } from "./ai-financial-routes";
+import { registerAdminRoutes } from "./admin-routes";
 import { paymentRoutes } from "./payment-routes";
 import { registerAuthRoutes } from "./auth-routes";
 import { registerWithdrawalRoutes } from "./withdrawal-routes";
@@ -199,6 +200,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   registerHYIPLabRoutes(app);
   registerAIAndSecurityRoutes(app);
   registerAIFinancialRoutes(app);
+  registerAdminRoutes(app);
   
   // Register payment routes
   app.use("/api", paymentRoutes);
