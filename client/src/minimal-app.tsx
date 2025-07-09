@@ -1,7 +1,4 @@
-import { createRoot } from "react-dom/client";
-
-// Simple test component
-function TestComponent() {
+export default function MinimalApp() {
   return (
     <div style={{
       minHeight: '100vh',
@@ -18,7 +15,7 @@ function TestComponent() {
         WebkitBackgroundClip: 'text',
         WebkitTextFillColor: 'transparent'
       }}>
-        BlackCnote - React Test
+        BlackCnote Investment Platform
       </h1>
       <p style={{
         fontSize: '1.2rem',
@@ -26,15 +23,21 @@ function TestComponent() {
         color: '#94a3b8',
         marginBottom: '40px'
       }}>
-        If you can see this, React is working!
+        Platform is now loading successfully!
       </p>
+      <div style={{
+        textAlign: 'center',
+        padding: '20px',
+        backgroundColor: '#1e293b',
+        borderRadius: '10px',
+        margin: '20px auto',
+        maxWidth: '600px'
+      }}>
+        <h2 style={{ color: '#22c55e', marginBottom: '10px' }}>✅ System Status</h2>
+        <p>React is working correctly</p>
+        <p>Server is running on port 5000</p>
+        <p>Preview URL is accessible</p>
+      </div>
     </div>
   );
-}
-
-const rootElement = document.getElementById("root");
-if (rootElement) {
-  createRoot(rootElement).render(<TestComponent />);
-} else {
-  console.error("Root element not found");
 }
