@@ -3,7 +3,7 @@ channel = "stable-23_11"
 
 [run]
 name = "Start application"
-command = "npm run dev"
+command = "NODE_ENV=development tsx server/index.ts"
 
 [deployment]
 run = ["sh", "-c", "npm run build && npm run start"]
