@@ -112,11 +112,11 @@ export default function PaymentDemo() {
             <CreditCard className="h-5 w-5" />
             Payment Gateway Integration Demo
           </CardTitle>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-[var(--text-secondary)]">
             Test the enhanced payment gateway system with multiple providers
           </p>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 bg-[var(--dark-card)]">
           {/* Payment Configuration */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
@@ -246,10 +246,10 @@ export default function PaymentDemo() {
           </Button>
 
           {/* API Keys Notice */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+          <div className="bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
             <div className="flex items-start gap-2">
-              <AlertCircle className="h-5 w-5 text-yellow-600 mt-0.5" />
-              <div className="text-sm text-yellow-800">
+              <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+              <div className="text-sm text-yellow-800 dark:text-yellow-200">
                 <p className="font-medium mb-1">API Keys Required</p>
                 <p>
                   To test payments with Stripe and PayPal, you'll need to provide your API keys.
