@@ -1,0 +1,79 @@
+
+      /////////////////////
+   ///////////////////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////        Curious and driven?
+  ///////////////@@@@@@@///////        Work with us!
+  ///////////////@@@@@@@///////
+  ///////////////@@@@@@@///////        https://join.replit.com/hack.with.us
+  ////////@@@@@@@//////////////
+  ////////@@@@@@@//////////////
+  ////////@@@@@@#//////////////
+   ///////////////////////////
+      /////////////////////
+      
+37Tracking Prevention blocked access to storage for <URL>.
+_app-14a1376735f8e267.js:38 [LaunchDarkly] LaunchDarkly client initialized
+6747e1e9-ce98375ca141cbf0.js:1  Uncaught (in promise) TypeError: i.enterprise.execute is not a function
+    at 6747e1e9-ce98375ca141cbf0.js:1:35441
+9Error while parsing the 'sandbox' attribute: 'allow-downloads-without-user-activation' is an invalid sandbox flag.
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'ambient-light-sensor'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'battery'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'execution-while-not-rendered'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'execution-while-out-of-viewport'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'layout-animations'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'legacy-image-formats'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'navigation-override'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'oversized-images'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'publickey-credentials'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'speaker-selection'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'unoptimized-images'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'unsized-media'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Unrecognized feature: 'pointer-lock'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Allow attribute will take precedence over 'allowfullscreen'.
+_ @ framework-636f7199b5770d6a.js:1
+framework-636f7199b5770d6a.js:1  Allow attribute will take precedence over 'allowpaymentrequest'.
+_ @ framework-636f7199b5770d6a.js:1
+BlackCnote-Project:1 Banner not shown: beforeinstallpromptevent.preventDefault() called. The page must call beforeinstallpromptevent.prompt() to show the banner.
+workspace_iframe.html:32  Unrecognized feature: 'ambient-light-sensor'.
+workspace_iframe.html:32  Unrecognized feature: 'battery'.
+workspace_iframe.html:32  Unrecognized feature: 'execution-while-not-rendered'.
+workspace_iframe.html:32  Unrecognized feature: 'execution-while-out-of-viewport'.
+workspace_iframe.html:32  Unrecognized feature: 'layout-animations'.
+workspace_iframe.html:32  Unrecognized feature: 'legacy-image-formats'.
+workspace_iframe.html:32  Unrecognized feature: 'navigation-override'.
+workspace_iframe.html:32  Unrecognized feature: 'oversized-images'.
+workspace_iframe.html:32  Unrecognized feature: 'publickey-credentials'.
+workspace_iframe.html:32  Unrecognized feature: 'speaker-selection'.
+workspace_iframe.html:32  Unrecognized feature: 'unoptimized-images'.
+workspace_iframe.html:32  Unrecognized feature: 'unsized-media'.
+workspace_iframe.html:32  Allow attribute will take precedence over 'allowfullscreen'.
+workspace_iframe.html:32  Allow attribute will take precedence over 'allowpaymentrequest'.
+client:536  WebSocket connection to 'wss://5db379d8-9fc3-44b0-94e2-9a078ea6ab2c-00-2iut31ug47ekw.worf.replit.dev/?token=k_7cEh_Aqa9c' failed: 
+setupWebSocket @ client:536
+client:536  Uncaught (in promise) SyntaxError: Failed to construct 'WebSocket': The URL 'wss://localhost:undefined/?token=k_7cEh_Aqa9c' is invalid.
+    at setupWebSocket (client:536:19)
+    at fallback (client:509:16)
+    at WebSocket.<anonymous> (client:555:7)
+(index):165 SW registered:  ServiceWorkerRegistration
+[NEW] Explain Console errors by using Copilot in Edge: click
+         
+         to explain an error. 
+        Learn more
+        Don't show again
+sw.js:356 BlackCnote Service Worker loaded successfully
+stallwart.build.js:1 stallwart: failed ping 1
