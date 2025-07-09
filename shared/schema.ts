@@ -131,3 +131,15 @@ export type Transaction = typeof transactions.$inferSelect;
 export type InsertTransaction = z.infer<typeof insertTransactionSchema>;
 export type PortfolioHistory = typeof portfolioHistory.$inferSelect;
 export type InsertPortfolioHistory = z.infer<typeof insertPortfolioHistorySchema>;
+
+// Re-export payment schema types for convenience
+export type {
+  PaymentGateway,
+  InsertPaymentGateway,
+  PaymentMethod,
+  InsertPaymentMethod,
+  PaymentTransaction,
+  InsertPaymentTransaction,
+  PaymentWebhook,
+  InsertPaymentWebhook,
+} from './payment-schema';

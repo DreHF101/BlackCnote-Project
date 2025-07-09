@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertInvestmentSchema, insertTransactionSchema } from "@shared/schema";
 import { registerHYIPLabRoutes } from "./hyiplab-integration";
+import { paymentRoutes } from "./payment-routes";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -185,6 +186,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Register HYIPLab integration routes
   registerHYIPLabRoutes(app);
+
+  // Register payment routes
+  app.use("/api", paymentRoutes);
 
   const httpServer = createServer(app);
   return httpServer;
