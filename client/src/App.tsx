@@ -4,9 +4,6 @@ import { Switch, Route } from "wouter";
 // Import working simple components first
 import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
-import ComprehensiveHome from "./pages/comprehensive-home";
-import UltimateHome from "./pages/ultimate-home";
-import UltimateHomeFixed from "./pages/ultimate-home-fixed";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
@@ -37,32 +34,163 @@ import SimpleSecurityPage from "./pages/simple-security";
 import SimpleNews from "./pages/simple-news";
 import Analytics from "./pages/analytics";
 import SimpleAIAssistant from "./pages/simple-ai-assistant";
-import AIAssistant from "./pages/ai-assistant";
-import News from "./pages/news";
+import AIFinancialAssistant from "./pages/ai-financial-assistant";
+import AdminSettings from "./pages/admin-settings";
 
 // Import payment completion pages
 import Checkout from "./pages/checkout";
 import PaymentSuccess from "./pages/payment-success";
 
-// Import missing standard pages
-import Home from "./pages/home";
-import TestHome from "./pages/test-home";
-import Dashboard from "./pages/dashboard";
-import Investments from "./pages/investments";
-import Calculator from "./pages/calculator";
-import Contact from "./pages/contact";
-import Login from "./pages/login";
-import Register from "./pages/register";
-import Deposits from "./pages/deposits";
-import Withdraw from "./pages/withdraw";
-
-// Import admin pages
-import AdminSettings from "./pages/admin-settings";
-import AISettings from "./pages/ai-settings";
-import UserManagement from "./pages/user-management";
-
-// Header Component - Using Enhanced Header Component
-import { EnhancedHeader } from "./components/enhanced-header";
+// Header Component
+function Header() {
+  return (
+    <div style={{
+      height: '64px',
+      backgroundColor: '#0f172a',
+      borderBottom: '1px solid #334155',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      padding: '0 24px'
+    }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+          <img 
+            src="/assets/img/hero-logo.png" 
+            alt="BlackCnote Investment Platform" 
+            style={{
+              height: '48px',
+              width: 'auto',
+              filter: 'drop-shadow(0 8px 25px rgba(245, 158, 11, 0.3))'
+            }}
+          />
+          <div>
+            <div style={{
+              fontSize: '26px',
+              fontWeight: 'bold',
+              background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              lineHeight: '1',
+              marginBottom: '2px'
+            }}>
+              BlackCnote
+            </div>
+            <div style={{
+              fontSize: '12px',
+              color: '#94a3b8',
+              fontWeight: '500',
+              letterSpacing: '0.5px'
+            }}>
+              Investment Platform
+            </div>
+          </div>
+        </a>
+      </div>
+      
+      <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <a href="/about" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }} 
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>About</a>
+        <a href="/dashboard" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Dashboard</a>
+        <a href="/investments" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Investments</a>
+        <a href="/calculator" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Calculator</a>
+        
+        {/* Dropdown Menu for More Pages */}
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <button style={{
+            background: 'none',
+            border: 'none',
+            color: '#cbd5e1',
+            cursor: 'pointer',
+            padding: '8px 12px',
+            borderRadius: '6px',
+            fontSize: '16px'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'rgba(255,255,255,0.1)';
+            e.target.nextSibling.style.display = 'block';
+          }}>
+            More ▼
+          </button>
+          <div style={{
+            display: 'none',
+            position: 'absolute',
+            top: '100%',
+            left: '0',
+            backgroundColor: '#1e293b',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '8px',
+            padding: '8px 0',
+            minWidth: '160px',
+            zIndex: 1000,
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
+          }}
+          onMouseLeave={(e) => e.target.style.display = 'none'}>
+            <a href="/about" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>About</a>
+            <a href="/contact" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Contact</a>
+            <a href="/news" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>News</a>
+            <a href="/ai-assistant" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
+            <a href="/ai-financial-assistant" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🧠 AI Financial Engine</a>
+            <a href="/admin-settings" style={{ display: 'block', color: '#f59e0b', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>⚙️ Admin Settings</a>
+            <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>❓ Help</a>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }}></div>
+            <a href="/deposits" style={{ display: 'block', color: '#10b981', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💰 Deposits</a>
+            <a href="/withdraw" style={{ display: 'block', color: '#f59e0b', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💸 Withdraw</a>
+            <a href="/analytics" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>📊 Analytics</a>
+            <a href="/referrals" style={{ display: 'block', color: '#3b82f6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🎯 Referrals</a>
+          </div>
+        </div>
+        
+        <a href="/login" style={{ 
+          color: 'white', 
+          textDecoration: 'none', 
+          padding: '8px 16px',
+          background: 'linear-gradient(90deg, #3b82f6, #1d4ed8)',
+          borderRadius: '6px',
+          fontWeight: '500',
+          marginLeft: '10px'
+        }}>Login</a>
+        <a href="/register" style={{ 
+          color: 'white', 
+          textDecoration: 'none', 
+          padding: '8px 16px',
+          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+          borderRadius: '6px',
+          fontWeight: '500'
+        }}>Register</a>
+      </nav>
+    </div>
+  );
+}
 
 // Footer Component
 function Footer() {
@@ -231,43 +359,22 @@ function App() {
       color: 'white',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
-      <EnhancedHeader 
-        isAuthenticated={false}
-        user={{ name: "John Investor", email: "john@example.com" }}
-        onLogout={() => console.log("Logout clicked")}
-      />
+      <Header />
       
       <Switch>
         {/* Core Working Pages */}
-        <Route path="/" component={UltimateHomeFixed} />
-        <Route path="/home" component={Home} />
-        <Route path="/simple-home" component={SimpleHome} />
-        <Route path="/enhanced-home" component={EnhancedHome} />
-        <Route path="/comprehensive-home" component={ComprehensiveHome} />
-        <Route path="/test-home" component={TestHome} />
-        
-        {/* Dashboard Pages */}
+        <Route path="/" component={EnhancedHome} />
         <Route path="/dashboard" component={SimpleDashboard} />
-        <Route path="/enhanced-dashboard" component={Dashboard} />
-        
-        {/* Investment Pages */}
         <Route path="/investments" component={SimpleInvestments} />
-        <Route path="/enhanced-investments" component={Investments} />
-        
-        {/* Calculator Pages */}
         <Route path="/calculator" component={SimpleCalculator} />
-        <Route path="/enhanced-calculator" component={Calculator} />
         
         {/* Basic Information Pages */}
         <Route path="/about" component={EnhancedAbout} />
         <Route path="/contact" component={SimpleContact} />
-        <Route path="/enhanced-contact" component={Contact} />
         
         {/* Authentication Pages */}
         <Route path="/login" component={SimpleLogin} />
-        <Route path="/enhanced-login" component={Login} />
         <Route path="/register" component={SimpleRegister} />
-        <Route path="/enhanced-register" component={Register} />
         
         {/* Additional Stable Pages */}
         <Route path="/help" component={SimpleHelp} />
@@ -276,28 +383,20 @@ function App() {
         
         {/* Financial Pages */}
         <Route path="/deposits" component={SimpleDeposits} />
-        <Route path="/enhanced-deposits" component={Deposits} />
         <Route path="/withdraw" component={SimpleWithdraw} />
-        <Route path="/enhanced-withdraw" component={Withdraw} />
         <Route path="/security" component={SimpleSecurityPage} />
         <Route path="/referrals" component={SimpleReferrals} />
-        <Route path="/enhanced-referrals" component={Referrals} />
         
         {/* Advanced Features */}
         <Route path="/news" component={SimpleNews} />
-        <Route path="/enhanced-news" component={News} />
         <Route path="/analytics" component={Analytics} />
         <Route path="/ai-assistant" component={SimpleAIAssistant} />
-        <Route path="/enhanced-ai-assistant" component={AIAssistant} />
+        <Route path="/ai-financial-assistant" component={AIFinancialAssistant} />
+        <Route path="/admin-settings" component={AdminSettings} />
         
         {/* Payment Completion Pages */}
         <Route path="/checkout" component={Checkout} />
         <Route path="/payment-success" component={PaymentSuccess} />
-        
-        {/* Admin Pages */}
-        <Route path="/admin/settings" component={AdminSettings} />
-        <Route path="/admin/ai-settings" component={AISettings} />
-        <Route path="/admin/users" component={UserManagement} />
         
         {/* 404 Page */}
         <Route component={NotFound} />
