@@ -1,11 +1,38 @@
 import React from "react";
 import { Switch, Route } from "wouter";
 
-// Import only working simple components first
+// Import working simple components first
 import SimpleHome from "./pages/simple-home";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
+
+// Import basic working pages
+import About from "./pages/about";
+import Contact from "./pages/contact";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import NotFound from "./pages/not-found";
+
+// Import additional stable pages
+import Help from "./pages/help";
+import Profile from "./pages/profile";
+import Transactions from "./pages/transactions";
+
+// Import payment and other pages
+import Deposits from "./pages/deposits";
+import Withdraw from "./pages/withdraw";
+import Security from "./pages/security";
+import Referrals from "./pages/referrals";
+
+// Import advanced features
+import News from "./pages/news";
+import Analytics from "./pages/analytics";
+import AIAssistant from "./pages/ai-assistant";
+
+// Import payment completion pages
+import Checkout from "./pages/checkout";
+import PaymentSuccess from "./pages/payment-success";
 
 // Header Component
 function Header() {
@@ -50,6 +77,8 @@ function Header() {
         <a href="/investments" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Investments</a>
         <a href="/calculator" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Calculator</a>
         <a href="/about" style={{ color: '#cbd5e1', textDecoration: 'none' }}>About</a>
+        <a href="/contact" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Contact</a>
+        <a href="/login" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '500' }}>Login</a>
         <a href="/contact" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Contact</a>
         <a href="/news" style={{ color: '#cbd5e1', textDecoration: 'none' }}>News</a>
         <a href="/analytics" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Analytics</a>
@@ -108,25 +137,42 @@ function App() {
       <Header />
       
       <Switch>
-        {/* Working Simple Pages */}
+        {/* Core Working Pages */}
         <Route path="/" component={SimpleHome} />
         <Route path="/dashboard" component={SimpleDashboard} />
         <Route path="/investments" component={SimpleInvestments} />
         <Route path="/calculator" component={SimpleCalculator} />
         
-        {/* Fallback */}
-        <Route>
-          <div style={{ padding: '40px', textAlign: 'center' }}>
-            <h2 style={{ color: '#f59e0b', marginBottom: '20px' }}>Page Under Development</h2>
-            <p style={{ color: '#94a3b8' }}>This page is being worked on. Please visit one of the main pages:</p>
-            <div style={{ marginTop: '20px' }}>
-              <a href="/" style={{ color: '#3b82f6', marginRight: '20px' }}>Home</a>
-              <a href="/dashboard" style={{ color: '#3b82f6', marginRight: '20px' }}>Dashboard</a>
-              <a href="/investments" style={{ color: '#3b82f6', marginRight: '20px' }}>Investments</a>
-              <a href="/calculator" style={{ color: '#3b82f6' }}>Calculator</a>
-            </div>
-          </div>
-        </Route>
+        {/* Basic Information Pages */}
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        
+        {/* Authentication Pages */}
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        
+        {/* Additional Stable Pages */}
+        <Route path="/help" component={Help} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/transactions" component={Transactions} />
+        
+        {/* Financial Pages */}
+        <Route path="/deposits" component={Deposits} />
+        <Route path="/withdraw" component={Withdraw} />
+        <Route path="/security" component={Security} />
+        <Route path="/referrals" component={Referrals} />
+        
+        {/* Advanced Features */}
+        <Route path="/news" component={News} />
+        <Route path="/analytics" component={Analytics} />
+        <Route path="/ai-assistant" component={AIAssistant} />
+        
+        {/* Payment Completion Pages */}
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/payment-success" component={PaymentSuccess} />
+        
+        {/* 404 Page */}
+        <Route component={NotFound} />
       </Switch>
       
       <Footer />
