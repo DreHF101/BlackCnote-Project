@@ -43,28 +43,10 @@ export default function SimpleAIAssistant() {
           <p style={{ 
             fontSize: '18px', 
             color: '#94a3b8', 
-            marginBottom: '20px' 
+            marginBottom: '30px' 
           }}>
             Personalized investment recommendations powered by artificial intelligence
           </p>
-          
-          <div style={{ marginBottom: '30px' }}>
-            <a 
-              href="/ai-financial-assistant"
-              style={{
-                backgroundColor: '#8b5cf6',
-                color: 'white',
-                padding: '12px 24px',
-                borderRadius: '8px',
-                textDecoration: 'none',
-                fontSize: '1rem',
-                fontWeight: '600',
-                display: 'inline-block'
-              }}
-            >
-              🧠 Upgrade to Advanced AI Financial Engine
-            </a>
-          </div>
         </div>
 
         {/* Dynamic APY Display */}
