@@ -107,7 +107,7 @@ export default function Dashboard() {
           />
         )}
 
-        {/* Payment Gateway Demo */}
+        {/* HYIPLab Payment Integration */}
         <div className="mt-8">
           <PaymentDemo />
         </div>
