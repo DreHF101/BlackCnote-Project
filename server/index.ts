@@ -10,26 +10,56 @@ const app = express();
 // Security and CORS middleware
 app.use(cors({
   origin: process.env.NODE_ENV === 'development' 
-    ? ['http://localhost:3000', 'http://localhost:5174', 'http://localhost:5000', /\.replit\.dev$/, /\.worf\.replit\.dev$/]
+    ? [
+        'http://localhost:3000', 
+        'http://localhost:5174', 
+        'http://localhost:5000',
+        /\.replit\.dev$/,
+        /\.worf\.replit\.dev$/,
+        /\.repl\.co$/,
+        'https://5db379d8-9fc3-44b0-94e2-9a078ea6ab2c-00-2iut31ug47ekw.worf.replit.dev'
+      ]
     : true,
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization']
 }));
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Security headers
+// Security headers optimized for Replit
 app.use((req, res, next) => {
+  // Log incoming requests for debugging
+  if (req.headers.host && req.headers.host.includes('replit.dev')) {
+    log(`Preview request: ${req.method} ${req.url} from ${req.headers.host}`);
+  }
+  
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  // Allow framing for Replit preview
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  // Remove X-Frame-Options entirely for Replit preview
   if (process.env.NODE_ENV === 'development') {
-    res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+    // Allow embedding in Replit preview
+    res.removeHeader('X-Frame-Options');
   } else {
     res.setHeader('X-Frame-Options', 'DENY');
   }
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  
+  // Ensure proper CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, HEAD');
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control');
+  res.setHeader('Access-Control-Expose-Headers', 'X-WP-Total, X-WP-TotalPages');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+  
   next();
 });
 
@@ -108,7 +138,7 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = 5000;
+  const port = process.env.PORT || 5000;
   const host = "0.0.0.0";
   
   server.listen(port, host, () => {
@@ -116,6 +146,7 @@ app.use((req, res, next) => {
     log(`📱 AI Investment Assistant: http://${host}:${port}/api/ai/recommendations`);
     log(`🔒 Security Features: http://${host}:${port}/api/security/2fa/status`);
     log(`💰 HYIPLab Integration: http://${host}:${port}/api/hyiplab/plans`);
-    log(`🎯 Preview URL: Ready for external connections`);
+    log(`🎯 Preview URL: https://5db379d8-9fc3-44b0-94e2-9a078ea6ab2c-00-2iut31ug47ekw.worf.replit.dev`);
+    log(`🔗 Local development: http://localhost:${port}`);
   });
 })();
