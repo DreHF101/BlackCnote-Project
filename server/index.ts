@@ -109,11 +109,13 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
+  const host = "0.0.0.0";
+  
+  server.listen(port, host, () => {
+    log(`🚀 BlackCnote Investment Platform serving on ${host}:${port}`);
+    log(`📱 AI Investment Assistant: http://${host}:${port}/api/ai/recommendations`);
+    log(`🔒 Security Features: http://${host}:${port}/api/security/2fa/status`);
+    log(`💰 HYIPLab Integration: http://${host}:${port}/api/hyiplab/plans`);
+    log(`🎯 Preview URL: Ready for external connections`);
   });
 })();
