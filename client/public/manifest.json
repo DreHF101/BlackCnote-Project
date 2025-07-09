@@ -13,19 +13,19 @@
   "categories": ["finance", "investment", "business"],
   "icons": [
     {
-      "src": "/icon-192x192.png",
+      "src": "/assets/img/hero-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/icon-512x512.png", 
+      "src": "/assets/img/hero-logo.png", 
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/assets/img/hero-logo.png",
       "sizes": "180x180",
       "type": "image/png"
     }
@@ -38,7 +38,7 @@
       "url": "/dashboard",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/assets/img/hero-logo.png",
           "sizes": "192x192"
         }
       ]
@@ -50,7 +50,7 @@
       "url": "/ai-assistant",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/assets/img/hero-logo.png",
           "sizes": "192x192"
         }
       ]
@@ -62,7 +62,7 @@
       "url": "/investments",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/assets/img/hero-logo.png",
           "sizes": "192x192"
         }
       ]
@@ -74,7 +74,7 @@
       "url": "/calculator",
       "icons": [
         {
-          "src": "/icon-192x192.png",
+          "src": "/assets/img/hero-logo.png",
           "sizes": "192x192"
         }
       ]

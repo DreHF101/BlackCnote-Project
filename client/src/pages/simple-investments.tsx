@@ -373,6 +373,185 @@ export default function SimpleInvestments() {
             </div>
           </div>
         )}
+
+        {/* How It Works Section */}
+        <div style={{
+          background: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '16px',
+          padding: '40px',
+          marginBottom: '40px'
+        }}>
+          <h3 style={{
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            marginBottom: '30px',
+            textAlign: 'center',
+            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+          }}>
+            How It Works
+          </h3>
+          
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: '30px',
+            marginBottom: '30px'
+          }}>
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                color: 'white'
+              }}>1</div>
+              <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '10px' }}>
+                Choose Your Plan
+              </h4>
+              <p style={{ color: '#94a3b8', lineHeight: '1.5' }}>
+                Select from our carefully crafted investment plans ranging from Starter to Elite, each designed for different risk appetites and investment goals.
+              </p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #10b981, #059669)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                color: 'white'
+              }}>2</div>
+              <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '10px' }}>
+                Make Your Investment
+              </h4>
+              <p style={{ color: '#94a3b8', lineHeight: '1.5' }}>
+                Deposit your chosen amount within the plan's minimum and maximum limits. Your investment starts earning returns immediately upon confirmation.
+              </p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #f59e0b, #ea580c)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                color: 'white'
+              }}>3</div>
+              <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '10px' }}>
+                Earn Daily Profits
+              </h4>
+              <p style={{ color: '#94a3b8', lineHeight: '1.5' }}>
+                Watch your investment grow with daily profit distributions. Track your earnings in real-time through your personalized dashboard.
+              </p>
+            </div>
+
+            <div style={{ textAlign: 'center' }}>
+              <div style={{
+                width: '80px',
+                height: '80px',
+                background: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+                borderRadius: '50%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 20px',
+                fontSize: '32px',
+                fontWeight: 'bold',
+                color: 'white'
+              }}>4</div>
+              <h4 style={{ fontSize: '1.2rem', fontWeight: '600', marginBottom: '10px' }}>
+                Withdraw Anytime
+              </h4>
+              <p style={{ color: '#94a3b8', lineHeight: '1.5' }}>
+                Request withdrawals at any time with fast processing. Choose from multiple payment methods including bank transfers and digital wallets.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Risk Disclaimer */}
+        <div style={{
+          background: 'rgba(239, 68, 68, 0.1)',
+          backdropFilter: 'blur(10px)',
+          border: '2px solid rgba(239, 68, 68, 0.3)',
+          borderRadius: '16px',
+          padding: '30px',
+          marginBottom: '40px'
+        }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            marginBottom: '20px'
+          }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              background: 'linear-gradient(135deg, #ef4444, #dc2626)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '18px'
+            }}>⚠️</div>
+            <h3 style={{
+              fontSize: '1.3rem',
+              fontWeight: 'bold',
+              color: '#ef4444'
+            }}>
+              Investment Risk Disclaimer
+            </h3>
+          </div>
+          
+          <div style={{ color: '#e5e7eb', lineHeight: '1.6', fontSize: '0.95rem' }}>
+            <p style={{ marginBottom: '15px' }}>
+              <strong>Important Notice:</strong> All investments carry inherent risks, and past performance does not guarantee future results. 
+              The value of your investment may fluctuate, and you may lose some or all of your principal investment.
+            </p>
+            
+            <p style={{ marginBottom: '15px' }}>
+              <strong>Key Risk Factors:</strong>
+            </p>
+            <ul style={{ marginLeft: '20px', marginBottom: '15px' }}>
+              <li style={{ marginBottom: '8px' }}>Market volatility may affect investment performance</li>
+              <li style={{ marginBottom: '8px' }}>Economic conditions can impact returns</li>
+              <li style={{ marginBottom: '8px' }}>Regulatory changes may affect investment strategies</li>
+              <li style={{ marginBottom: '8px' }}>Technology and operational risks are inherent to digital platforms</li>
+            </ul>
+            
+            <p style={{ marginBottom: '15px' }}>
+              <strong>Recommendation:</strong> Only invest funds you can afford to lose. Diversify your portfolio and consider consulting 
+              with a qualified financial advisor before making investment decisions.
+            </p>
+            
+            <p style={{ fontSize: '0.9rem', fontStyle: 'italic', color: '#94a3b8' }}>
+              By investing with BlackCnote, you acknowledge that you have read, understood, and accepted these risks. 
+              This disclaimer does not constitute financial advice.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
