@@ -11,7 +11,7 @@ import Contact from "./pages/contact";
 import Dashboard from "./pages/dashboard";
 import Deposits from "./pages/deposits";
 import Help from "./pages/help";
-import Home from "./pages/home";
+import SimpleHome from "./pages/simple-home";
 import Investments from "./pages/investments";
 import Login from "./pages/login";
 import News from "./pages/news";
@@ -127,7 +127,7 @@ function App() {
       
       <Switch>
         {/* Main Pages */}
-        <Route path="/" component={Home} />
+        <Route path="/" component={SimpleHome} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/help" component={Help} />
