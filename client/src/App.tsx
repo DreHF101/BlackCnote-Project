@@ -1,56 +1,43 @@
+import React from "react";
 import { Switch, Route } from "wouter";
-import { Suspense, lazy } from "react";
 
-// Core pages - import directly for better reliability
-import MinimalHome from "./pages/minimal-home";
+// Import working simple components first
 import SimpleHome from "./pages/simple-home";
 import EnhancedHome from "./pages/enhanced-home";
 import SimpleDashboard from "./pages/simple-dashboard";
 import SimpleInvestments from "./pages/simple-investments";
 import SimpleCalculator from "./pages/simple-calculator";
+
+// Import basic working pages
+import About from "./pages/about";
+import EnhancedAbout from "./pages/enhanced-about";
+import SimpleContact from "./pages/simple-contact";
+import SimpleLogin from "./pages/simple-login";
+import SimpleRegister from "./pages/simple-register";
 import NotFound from "./pages/not-found";
 
-// Lazy load other pages to prevent loading issues
-const EnhancedAbout = lazy(() => import("./pages/enhanced-about"));
-const SimpleContact = lazy(() => import("./pages/simple-contact"));
-const SimpleLogin = lazy(() => import("./pages/simple-login"));
-const SimpleRegister = lazy(() => import("./pages/simple-register"));
-const SimpleHelp = lazy(() => import("./pages/simple-help"));
-const Profile = lazy(() => import("./pages/profile"));
-const Transactions = lazy(() => import("./pages/transactions"));
-const SimpleDeposits = lazy(() => import("./pages/simple-deposits"));
-const SimpleWithdraw = lazy(() => import("./pages/simple-withdraw"));
-const SimpleSecurityPage = lazy(() => import("./pages/simple-security"));
-const SimpleReferrals = lazy(() => import("./pages/simple-referrals"));
-const SimpleNews = lazy(() => import("./pages/simple-news"));
-const Analytics = lazy(() => import("./pages/analytics"));
-const SimpleAIAssistant = lazy(() => import("./pages/simple-ai-assistant"));
-const AIFinancialAssistant = lazy(() => import("./pages/ai-financial-assistant"));
-const AdminSettings = lazy(() => import("./pages/admin-settings"));
-const Checkout = lazy(() => import("./pages/checkout"));
-const PaymentSuccess = lazy(() => import("./pages/payment-success"));
+// Import additional stable pages
+import Help from "./pages/help";
+import SimpleHelp from "./pages/simple-help";
+import Profile from "./pages/profile";
+import Transactions from "./pages/transactions";
 
-// Loading component
-function LoadingFallback() {
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      minHeight: '400px',
-      color: '#fff'
-    }}>
-      <div style={{
-        background: 'rgba(255,255,255,0.1)',
-        padding: '20px',
-        borderRadius: '8px',
-        textAlign: 'center'
-      }}>
-        Loading...
-      </div>
-    </div>
-  );
-}
+// Import payment and other pages
+import SimpleDeposits from "./pages/simple-deposits";
+import SimpleWithdraw from "./pages/simple-withdraw";
+import Security from "./pages/security";
+import Referrals from "./pages/referrals";
+import SimpleReferrals from "./pages/simple-referrals";
+import SimpleSecurityPage from "./pages/simple-security";
+
+// Import advanced features
+import SimpleNews from "./pages/simple-news";
+import Analytics from "./pages/analytics";
+import SimpleAIAssistant from "./pages/simple-ai-assistant";
+
+// Import payment completion pages
+import Checkout from "./pages/checkout";
+import PaymentSuccess from "./pages/payment-success";
 
 // Header Component
 function Header() {
@@ -156,12 +143,6 @@ function Header() {
             <a href="/ai-assistant" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
-            <a href="/ai-financial-assistant" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🧠 AI Financial Engine</a>
-            <a href="/admin-settings" style={{ display: 'block', color: '#f59e0b', textDecoration: 'none', padding: '8px 16px' }}
-               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
-               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>⚙️ Admin Settings</a>
             <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
                onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
                onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>❓ Help</a>
@@ -372,48 +353,44 @@ function App() {
     }}>
       <Header />
       
-      <Suspense fallback={<LoadingFallback />}>
-        <Switch>
-          {/* Core Working Pages - No lazy loading */}
-          <Route path="/" component={EnhancedHome} />
-          <Route path="/dashboard" component={SimpleDashboard} />
-          <Route path="/investments" component={SimpleInvestments} />
-          <Route path="/calculator" component={SimpleCalculator} />
-          
-          {/* Basic Information Pages - Lazy loaded */}
-          <Route path="/about" component={EnhancedAbout} />
-          <Route path="/contact" component={SimpleContact} />
-          
-          {/* Authentication Pages - Lazy loaded */}
-          <Route path="/login" component={SimpleLogin} />
-          <Route path="/register" component={SimpleRegister} />
-          
-          {/* Additional Stable Pages - Lazy loaded */}
-          <Route path="/help" component={SimpleHelp} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/transactions" component={Transactions} />
-          
-          {/* Financial Pages - Lazy loaded */}
-          <Route path="/deposits" component={SimpleDeposits} />
-          <Route path="/withdraw" component={SimpleWithdraw} />
-          <Route path="/security" component={SimpleSecurityPage} />
-          <Route path="/referrals" component={SimpleReferrals} />
-          
-          {/* Advanced Features - Lazy loaded */}
-          <Route path="/news" component={SimpleNews} />
-          <Route path="/analytics" component={Analytics} />
-          <Route path="/ai-assistant" component={SimpleAIAssistant} />
-          <Route path="/ai-financial-assistant" component={AIFinancialAssistant} />
-          <Route path="/admin-settings" component={AdminSettings} />
-          
-          {/* Payment Completion Pages - Lazy loaded */}
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/payment-success" component={PaymentSuccess} />
-          
-          {/* 404 Page */}
-          <Route component={NotFound} />
-        </Switch>
-      </Suspense>
+      <Switch>
+        {/* Core Working Pages */}
+        <Route path="/" component={EnhancedHome} />
+        <Route path="/dashboard" component={SimpleDashboard} />
+        <Route path="/investments" component={SimpleInvestments} />
+        <Route path="/calculator" component={SimpleCalculator} />
+        
+        {/* Basic Information Pages */}
+        <Route path="/about" component={EnhancedAbout} />
+        <Route path="/contact" component={SimpleContact} />
+        
+        {/* Authentication Pages */}
+        <Route path="/login" component={SimpleLogin} />
+        <Route path="/register" component={SimpleRegister} />
+        
+        {/* Additional Stable Pages */}
+        <Route path="/help" component={SimpleHelp} />
+        <Route path="/profile" component={Profile} />
+        <Route path="/transactions" component={Transactions} />
+        
+        {/* Financial Pages */}
+        <Route path="/deposits" component={SimpleDeposits} />
+        <Route path="/withdraw" component={SimpleWithdraw} />
+        <Route path="/security" component={SimpleSecurityPage} />
+        <Route path="/referrals" component={SimpleReferrals} />
+        
+        {/* Advanced Features */}
+        <Route path="/news" component={SimpleNews} />
+        <Route path="/analytics" component={Analytics} />
+        <Route path="/ai-assistant" component={SimpleAIAssistant} />
+        
+        {/* Payment Completion Pages */}
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/payment-success" component={PaymentSuccess} />
+        
+        {/* 404 Page */}
+        <Route component={NotFound} />
+      </Switch>
       
       <Footer />
     </div>

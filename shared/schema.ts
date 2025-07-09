@@ -60,17 +60,6 @@ export const portfolioHistory = pgTable("portfolio_history", {
   date: timestamp("date").notNull().defaultNow(),
 });
 
-export const adminSettings = pgTable("admin_settings", {
-  id: serial("id").primaryKey(),
-  category: text("category").notNull(),
-  key: text("key").notNull().unique(),
-  value: text("value").notNull(),
-  description: text("description"),
-  isEncrypted: boolean("is_encrypted").notNull().default(false),
-  createdAt: timestamp("created_at").notNull().defaultNow(),
-  updatedAt: timestamp("updated_at").notNull().defaultNow(),
-});
-
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -94,12 +83,6 @@ export const insertTransactionSchema = createInsertSchema(transactions).omit({
 
 export const insertPortfolioHistorySchema = createInsertSchema(portfolioHistory).omit({
   id: true,
-});
-
-export const insertAdminSettingsSchema = createInsertSchema(adminSettings).omit({
-  id: true,
-  createdAt: true,
-  updatedAt: true,
 });
 
 // Relations
