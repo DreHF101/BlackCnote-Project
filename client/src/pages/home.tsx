@@ -166,7 +166,7 @@ export default function Home() {
               Join thousands of successful investors building wealth with confidence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <Link href="/dashboard">
+              <Link href="/register">
                 <Button size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white px-8 py-4 text-lg">
                   Start Investing Now
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -402,7 +402,7 @@ export default function Home() {
             Your financial future starts here.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/dashboard">
+            <Link href="/register">
               <Button size="lg" variant="outline" className="bg-white text-yellow-600 border-white hover:bg-gray-100 px-8 py-4 text-lg">
                 Get Started Now
                 <ArrowRight className="ml-2 h-5 w-5" />

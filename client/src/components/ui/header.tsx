@@ -136,7 +136,7 @@ export function Header({ isAuthenticated = false, user, onLogout }: HeaderProps)
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Link href="/transactions" className="flex items-center space-x-2 text-slate-300 hover:text-white">
+                    <Link href="/security" className="flex items-center space-x-2 text-slate-300 hover:text-white">
                       <Settings className="w-4 h-4" />
                       <span>Settings</span>
                     </Link>
