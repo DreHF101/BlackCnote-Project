@@ -71,38 +71,100 @@ function Header() {
         </a>
       </div>
       
-      <nav style={{ display: 'flex', gap: '24px' }}>
-        <a href="/" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Home</a>
-        <a href="/dashboard" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Dashboard</a>
-        <a href="/investments" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Investments</a>
-        <a href="/calculator" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Calculator</a>
-        <a href="/about" style={{ color: '#cbd5e1', textDecoration: 'none' }}>About</a>
-        <a href="/contact" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Contact</a>
-        <a href="/login" style={{ color: '#3b82f6', textDecoration: 'none', fontWeight: '500' }}>Login</a>
-        <a href="/contact" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Contact</a>
-        <a href="/news" style={{ color: '#cbd5e1', textDecoration: 'none' }}>News</a>
-        <a href="/analytics" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Analytics</a>
-        <a href="/ai-assistant" style={{ color: '#cbd5e1', textDecoration: 'none' }}>AI Assistant</a>
-        <a href="/deposits" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Deposits</a>
-        <a href="/withdraw" style={{ color: '#cbd5e1', textDecoration: 'none' }}>Withdraw</a>
-      </nav>
-      
-      <div style={{ display: 'flex', gap: '12px' }}>
-        <a href="/login" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}>Login</a>
-        <a
-          href="/register"
-          style={{
-            background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
-            padding: '8px 16px',
-            borderRadius: '8px',
-            textDecoration: 'none',
-            color: 'white',
-            fontWeight: '500'
+      <nav style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+        <a href="/" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }} 
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Home</a>
+        <a href="/dashboard" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Dashboard</a>
+        <a href="/investments" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Investments</a>
+        <a href="/calculator" style={{ color: '#cbd5e1', textDecoration: 'none', padding: '8px 12px', borderRadius: '6px', transition: 'background-color 0.2s' }}
+           onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+           onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Calculator</a>
+        
+        {/* Dropdown Menu for More Pages */}
+        <div style={{ position: 'relative', display: 'inline-block' }}>
+          <button style={{
+            background: 'none',
+            border: 'none',
+            color: '#cbd5e1',
+            cursor: 'pointer',
+            padding: '8px 12px',
+            borderRadius: '6px',
+            fontSize: '16px'
           }}
-        >
-          Sign Up
-        </a>
-      </div>
+          onMouseEnter={(e) => {
+            e.target.style.backgroundColor = 'rgba(255,255,255,0.1)';
+            e.target.nextSibling.style.display = 'block';
+          }}>
+            More ▼
+          </button>
+          <div style={{
+            display: 'none',
+            position: 'absolute',
+            top: '100%',
+            left: '0',
+            backgroundColor: '#1e293b',
+            border: '1px solid rgba(255,255,255,0.2)',
+            borderRadius: '8px',
+            padding: '8px 0',
+            minWidth: '160px',
+            zIndex: 1000,
+            boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
+          }}
+          onMouseLeave={(e) => e.target.style.display = 'none'}>
+            <a href="/about" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>About</a>
+            <a href="/contact" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Contact</a>
+            <a href="/news" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>News</a>
+            <a href="/ai-assistant" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>AI Assistant</a>
+            <a href="/help" style={{ display: 'block', color: '#cbd5e1', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>Help</a>
+            <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', margin: '8px 0' }}></div>
+            <a href="/deposits" style={{ display: 'block', color: '#10b981', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💰 Deposits</a>
+            <a href="/withdraw" style={{ display: 'block', color: '#f59e0b', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>💸 Withdraw</a>
+            <a href="/analytics" style={{ display: 'block', color: '#8b5cf6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>📊 Analytics</a>
+            <a href="/referrals" style={{ display: 'block', color: '#3b82f6', textDecoration: 'none', padding: '8px 16px' }}
+               onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+               onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}>🎯 Referrals</a>
+          </div>
+        </div>
+        
+        <a href="/login" style={{ 
+          color: 'white', 
+          textDecoration: 'none', 
+          padding: '8px 16px',
+          background: 'linear-gradient(90deg, #3b82f6, #1d4ed8)',
+          borderRadius: '6px',
+          fontWeight: '500',
+          marginLeft: '10px'
+        }}>Login</a>
+        <a href="/register" style={{ 
+          color: 'white', 
+          textDecoration: 'none', 
+          padding: '8px 16px',
+          background: 'linear-gradient(90deg, #f59e0b, #ea580c)',
+          borderRadius: '6px',
+          fontWeight: '500'
+        }}>Register</a>
+      </nav>
     </div>
   );
 }
